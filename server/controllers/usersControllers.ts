@@ -9,3 +9,16 @@ export const getAllUsers: any = async (_req: express.Request, res: express.Respo
     res.send(error)
   }
 }
+
+export const createUser: any = async (req: express.Request, res: express.Response) => {
+ const user = req.body
+
+
+ const userData = {
+    userName: user.userName,
+    password: user.password,
+    email: user.email
+ }
+  const newUser = await usersServices.createUser(userData)
+ res.send(newUser)
+}
