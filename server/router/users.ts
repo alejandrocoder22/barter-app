@@ -5,3 +5,4 @@ export const router = express.Router()
 
 router.get('/', usersControllers.getAllUsers)
 router.post('/', usersControllers.createUser)
+router.put('/', usersControllers.updateUser)

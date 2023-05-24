@@ -11,14 +11,14 @@ export const getAllUsers: any = async (_req: express.Request, res: express.Respo
 }
 
 export const createUser: any = async (req: express.Request, res: express.Response) => {
- const user = req.body
+  const user = req.body
 
+  const newUser = await usersServices.createUser(user)
+  res.send(newUser)
+}
 
- const userData = {
-    userName: user.userName,
-    password: user.password,
-    email: user.email
- }
-  const newUser = await usersServices.createUser(userData)
- res.send(newUser)
+export const updateUser: any = async (req: express.Request, res: express.Response) => {
+  const user = req.body
+  const updatedUser = await usersServices.updateUser(user)
+  res.send(updatedUser)
 }
