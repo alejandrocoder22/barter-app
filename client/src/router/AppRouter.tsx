@@ -1,11 +1,13 @@
 import {BrowserRouter, Routes, Route} from 'react-router-dom'
-import PrivateChat from '../pages/PrivateChat'
+import Home from '../pages/Home';
+
+
 
 const AppRouter = () => {
     return (
         <BrowserRouter>
             <Routes>
-                <Route path="/private" element={<PrivateChat/>}></Route>
+                <Route path="/" element={<Home /> }></Route>
             </Routes>
         </BrowserRouter>
     )
