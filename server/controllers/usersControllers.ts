@@ -22,3 +22,15 @@ export const updateUser = async (req: express.Request, res: express.Response) =>
   const updatedUser = await usersServices.updateUser(user)
   res.send(updatedUser)
 }
+
+
+export const deleteUser = async (req: express.Request, res: express.Response) => {
+
+  try {
+    await usersServices.deleteUser(req.body.id)
+    res.send('User Deleted')
+  } catch (error) {
+    res.status(400).send(error)
+  }
+
+}
