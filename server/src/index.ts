@@ -2,12 +2,13 @@ import express from 'express'
 import cors from 'cors'
 import * as dotenv from 'dotenv'
 import { router as usersRouter } from './router/users'
-dotenv.config()
-
 const app = express()
 
-app.use(express.json())
+dotenv.config()
+
 app.use(cors())
+
+app.use(express.json())
 
 app.use('/api/users', usersRouter)
 
