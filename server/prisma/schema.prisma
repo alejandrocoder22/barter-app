@@ -8,10 +8,21 @@ datasource db {
 }
 
 model User {
-  id        Int      @id @default(autoincrement())
-  userName  String   @unique
+  id        Int       @id @default(autoincrement())
+  userName  String    @unique
   password  String
-  email     String   @unique
-  createdAt DateTime @default(now())
-  updatedAt DateTime @updatedAt
+  email     String    @unique
+  createdAt DateTime  @default(now())
+  updatedAt DateTime  @updatedAt
+  Product   Product[]
+}
+
+model Product {
+  id             Int      @id @default(autoincrement())
+  productName    String
+  userId         User     @relation(fields: [id], references: [id])
+  estimatedValue Float
+  status         String
+  createdAy      DateTime @default(now())
+  updatedAt      DateTime @updatedAt
 }
