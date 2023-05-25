@@ -23,7 +23,7 @@ model Product {
   userId         User     @relation(fields: [id], references: [id])
   estimatedValue Float
   status         String
-  image          String
+  imageUrl       String
   category       String
   createdAy      DateTime @default(now())
   updatedAt      DateTime @updatedAt
