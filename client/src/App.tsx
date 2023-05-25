@@ -1,8 +1,9 @@
+import AppRouter from './router/AppRouter'
 
 function App() {
 
   return (
-    <h1>Vite App</h1>
+    <AppRouter></AppRouter>
   )
 }
 
