@@ -12,4 +12,4 @@ export const updateProduct = (product: Product) => prisma.product.update({
   },
   data: product
 })
-export const deleteProduct = (productId: number) => prisma.product.delete({ where: { id: productId } })
+export const deleteProduct = async (productId: number) => await prisma.product.delete({ where: { id: productId } })
