@@ -1,7 +1,7 @@
 import * as usersServices from '../services/usersServices'
 import express from 'express'
 import generateToken from '../utils/generateToken'
-import encryptPassword from '../utils/crypto'
+import { encryptPassword, comparePasswords } from '../utils/crypto'
 
 export const getAllUsers = async (_req: express.Request, res: express.Response) => {
   try {
@@ -16,9 +16,14 @@ export const loginUser = async (req: express.Request, res: express.Response) => 
   const user = req.body
 
   try {
+    
     const currentUser = await usersServices.checkUser(user.userName)
 
-    if (currentUser?.password === user.password) {
+    const isPasswordRight = await comparePasswords(user.password, currentUser?.password)
+
+    console.log(isPasswordRight);
+
+    if (isPasswordRight) {
       generateToken(res, user, process.env.JWT_SECRET)
       res.status(200).send({ message: 'User logged in' })
     } else {
