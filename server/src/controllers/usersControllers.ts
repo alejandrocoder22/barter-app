@@ -1,6 +1,7 @@
 import * as usersServices from '../services/usersServices'
 import express from 'express'
 import generateToken from '../utils/generateToken'
+import encryptPassword from '../utils/crypto'
 
 export const getAllUsers = async (_req: express.Request, res: express.Response) => {
   try {
@@ -11,26 +12,43 @@ export const getAllUsers = async (_req: express.Request, res: express.Response) 
   }
 }
 
+export const loginUser = async (req: express.Request, res: express.Response) => {
+  const user = req.body
 
+  try {
+    const currentUser = await usersServices.checkUser(user.userName)
+
+    if (currentUser?.password === user.password) {
+      generateToken(res, user, process.env.JWT_SECRET)
+      res.status(200).send({ message: 'User logged in' })
+    } else {
+      res.status(400).send({ message: 'Invalid unsername or password' })
+    }
+  } catch (error) {
+    res.status(400).send({ message: 'Invalid unsername or password' })
+  }
+}
 
 export const createUser = async (req: express.Request, res: express.Response) => {
   const user = req.body
 
   const userExist = await usersServices.checkUser(user.userName)
-  
 
-  if (userExist) {
-     res.status(400).send({message: 'User already exist'})
-     return
+  if (userExist != null) {
+    res.status(400).send({ message: 'User already exist' })
+    return
   }
-  const newUser = await usersServices.createUser(user)
 
+  const hashedPassword = await encryptPassword(user)
+
+  user.password = hashedPassword
+
+  const newUser = await usersServices.createUser(user)
 
   if (newUser) {
     generateToken(res, newUser, process.env.JWT_SECRET)
-    res.send(newUser)
+    res.send({ message: 'User created', newUser })
   }
-
 }
 
 export const updateUser = async (req: express.Request, res: express.Response) => {
