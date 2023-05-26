@@ -8,7 +8,7 @@ export interface User {
 export interface Product {
   id?: int
   productName: string
-  userId?: int
+  userId: int
   estimatedValue: number
   status: string
   imageUrl: string
