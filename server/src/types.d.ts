@@ -4,3 +4,14 @@ export interface User {
   password: string
   email: string
 }
+
+export interface Product {
+  id?: int
+  productName: string
+  userId?: int
+  estimatedValue: number
+  status: string
+  imageUrl: string
+  category: string
+
+}
