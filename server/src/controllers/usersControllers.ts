@@ -16,21 +16,20 @@ export const loginUser = async (req: express.Request, res: express.Response) => 
   const user = req.body
 
   try {
-    
     const currentUser = await usersServices.checkUser(user.userName)
 
     const isPasswordRight = await comparePasswords(user.password, currentUser?.password)
 
-    console.log(isPasswordRight);
 
     if (isPasswordRight) {
       generateToken(res, user, process.env.JWT_SECRET)
       res.status(200).send({ message: 'User logged in' })
     } else {
-      res.status(400).send({ message: 'Invalid unsername or password' })
+      res.status(401)
+      throw new Error('Invalid username or password')
     }
-  } catch (error) {
-    res.status(400).send({ message: 'Invalid unsername or password' })
+  } catch (error: any) {
+    res.send(error.message)
   }
 }
 
