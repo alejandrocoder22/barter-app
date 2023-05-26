@@ -3,6 +3,7 @@ import cors from 'cors'
 import * as dotenv from 'dotenv'
 import { router as usersRouter } from './router/users'
 import { router as productsRouter } from './router/products'
+import { customErrorHandler } from './middlewares/customErrors'
 
 dotenv.config({ path: './process.env' })
 
@@ -10,6 +11,8 @@ const app = express()
 
 app.use(cors())
 app.use(express.json())
+
+app.use(customErrorHandler)
 
 app.use('/api/users', usersRouter)
 app.use('/api/products', productsRouter)

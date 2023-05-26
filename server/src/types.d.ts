@@ -15,3 +15,7 @@ export interface Product {
   category: string
 
 }
+
+export interface Error {
+  message: string
+}

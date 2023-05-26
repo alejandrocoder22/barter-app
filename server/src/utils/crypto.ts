@@ -10,7 +10,6 @@ export const encryptPassword = async (user: User) => {
 }
 
 export const comparePasswords = async (plainPassword: string, hashedPassword: any) => {
-
   const result = await bcrypt.compare(plainPassword, hashedPassword)
 
   if (result) {

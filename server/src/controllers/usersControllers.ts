@@ -20,7 +20,6 @@ export const loginUser = async (req: express.Request, res: express.Response) => 
 
     const isPasswordRight = await comparePasswords(user.password, currentUser?.password)
 
-
     if (isPasswordRight) {
       generateToken(res, user, process.env.JWT_SECRET)
       res.status(200).send({ message: 'User logged in' })
