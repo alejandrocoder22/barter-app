@@ -1,5 +1,6 @@
 import * as usersServices from '../services/usersServices'
 import express from 'express'
+import generateToken from '../utils/generateToken'
 
 export const getAllUsers = async (_req: express.Request, res: express.Response) => {
   try {
@@ -10,11 +11,26 @@ export const getAllUsers = async (_req: express.Request, res: express.Response) 
   }
 }
 
+
+
 export const createUser = async (req: express.Request, res: express.Response) => {
   const user = req.body
 
+  const userExist = await usersServices.checkUser(user.userName)
+  
+
+  if (userExist) {
+     res.status(400).send({message: 'User already exist'})
+     return
+  }
   const newUser = await usersServices.createUser(user)
-  res.send(newUser)
+
+
+  if (newUser) {
+    generateToken(res, newUser, process.env.JWT_SECRET)
+    res.send(newUser)
+  }
+
 }
 
 export const updateUser = async (req: express.Request, res: express.Response) => {
