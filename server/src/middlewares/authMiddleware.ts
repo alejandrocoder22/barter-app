@@ -8,8 +8,8 @@ export const protectedRoute = async (req: any, res: express.Response, next: expr
     token = req.cookies.jwt
 
     if (token) {
-       const secret: any =  process.env.JWT_SECRET
-      const decoded = jwt.verify(token, secret )
+      const secret: any = process.env.JWT_SECRET
+      const decoded = jwt.verify(token, secret)
 
       req.user = decoded
 

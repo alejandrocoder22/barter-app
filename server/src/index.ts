@@ -9,11 +9,11 @@ import cookiePArser from 'cookie-parser'
 dotenv.config({ path: './process.env' })
 
 const app = express()
+app.use('/uploads', express.static('uploads'))
 
 app.use(cors())
 app.use(express.json())
 app.use(cookiePArser())
-
 app.use(customErrorHandler)
 
 app.use('/api/users', usersRouter)

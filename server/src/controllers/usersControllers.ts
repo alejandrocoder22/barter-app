@@ -62,7 +62,7 @@ export const createUser = async (req: express.Request, res: express.Response) =>
     user.password = hashedPassword
 
     const newUser = await usersServices.createUser(user)
-    
+
     if (newUser) {
       generateToken(res, newUser, process.env.JWT_SECRET)
       res.send({ message: 'User created', newUser })

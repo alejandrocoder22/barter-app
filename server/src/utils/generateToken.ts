@@ -3,7 +3,6 @@ import express from 'express'
 import { User } from '../types'
 
 const generateToken = (res: express.Response, user: User, secret: any) => {
-
   const token = jwt.sign({ userId: user.id, userName: user.userName }, secret)
 
   res.cookie('jwt', token, {

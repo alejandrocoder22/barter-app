@@ -29,8 +29,8 @@ const AddProduct = () => {
 
   return (
     <main className="min-h-screen ">
-    <div className="flex flex-col gap-3 min-h-screen justify-center items-center item bg-cyan-50">
-        <form onSubmit={handleLogin} className="flex flex-col max-w-xs gap-2">
+    <div className="flex flex-col min-h-screen justify-center items-center item bg-cyan-50">
+        <form onSubmit={handleLogin} className="flex flex-col max-w-xs gap-1">
             <label>Product Name</label>
             <input onChange={(e) => setProductName(e.target.value) } className="border-2" type='text'></input>
             <label>Estimated Value</label>
@@ -41,7 +41,7 @@ const AddProduct = () => {
             <input onChange={(e) => setImageUrl(e.target.value) } className="border-2" type='text'></input>
             <label>Category</label>
             <input onChange={(e) => setCategory(e.target.value) } className="border-2" type='text'></input>
-            <button className="bg-indigo-500 mt-2 p-2" type="submit">Login</button>
+            <button className="bg-indigo-500 mt-2 p-2 hover:bg-indigo-400" type="submit">Login</button>
         </form>
     </div>
     </main>
