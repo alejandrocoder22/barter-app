@@ -1,9 +1,12 @@
-import React, { useState } from 'react'
+import React, { useState, useContext } from 'react'
+import { AuthContext } from '../context/authContext'
 
 const Login = () => {
   const [userName, setUserName] = useState('')
   const [password, setPassword] = useState('')
 
+
+  const {setUser} = useContext(AuthContext)
   const handleLogin = (e) => {
     e.preventDefault()
     fetch('/api/users/login', {
@@ -13,6 +16,8 @@ const Login = () => {
         userName,
         password
       })
+    }).then(res => res.json()).then(data => {
+      setUser({userName: data.userName})
     })
   }
 
