@@ -32,7 +32,7 @@ export const loginUser = async (req: express.Request, res: express.Response) => 
 
     if (isPasswordRight) {
       generateToken(res, currentUser, process.env.JWT_SECRET)
-      res.status(200).send({ message: 'User logged in' })
+      res.status(200).send({ message: 'User logged in', userName: currentUser.userName })
     } else {
       res.status(401)
       throw new Error('Invalid username or password')
@@ -95,3 +95,4 @@ export const logOutUser = (_req: express.Request, res: express.Response) => {
 
   res.status(200).send({ message: 'User logged out' })
 }
+
