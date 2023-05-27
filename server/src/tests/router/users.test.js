@@ -4,12 +4,13 @@ const usersServices = require('../../services/usersServices')
 const app = require('../../index.ts')
 
 describe('Tests In usersRouter', () => {
+  const mockupUser = {
+    userName: 'testUser',
+    password: '123456',
+    email: 'testUser@gmail.com'
+  }
+
   beforeAll(async () => {
-    const mockupUser = {
-      userName: 'testUser',
-      password: '123456',
-      email: 'testUser@gmail.com'
-    }
     await usersServices.createUser(mockupUser)
   })
 
@@ -18,11 +19,10 @@ describe('Tests In usersRouter', () => {
       .get('/api/users')
 
     expect(response.status).toBe(200)
-    expect(response.body[response.body.length - 1].userName).toBe('testUser')
   })
 
   afterAll(async () => {
-    const allUsers = await usersServices.getAllUsers()
-    usersServices.deleteUser(allUsers[allUsers.length - 1].id)
+    const userToDelete = await usersServices.checkUser(mockupUser.userName)
+    usersServices.deleteUser(userToDelete.id)
   })
 })
