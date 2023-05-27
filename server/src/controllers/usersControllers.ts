@@ -2,6 +2,7 @@ import * as usersServices from '../services/usersServices'
 import express from 'express'
 import generateToken from '../utils/generateToken'
 import { encryptPassword, comparePasswords } from '../utils/crypto'
+import { validatePassword, validateUser } from '../utils/validateUser'
 
 export const getAllUsers = async (_req: express.Request, res: express.Response) => {
   try {
@@ -18,10 +19,7 @@ export const loginUser = async (req: express.Request, res: express.Response) => 
   const { userName, password } = user
 
   try {
-    if (!userName || !password) {
-      res.status(400)
-      throw new Error('Insert username and password')
-    }
+    validateUser(res, userName, password)
 
     const currentUser = await usersServices.checkUser(userName)
 
@@ -47,22 +45,30 @@ export const loginUser = async (req: express.Request, res: express.Response) => 
 export const createUser = async (req: express.Request, res: express.Response) => {
   const user = req.body
 
-  const userExist = await usersServices.checkUser(user.userName)
+  const { userName, password } = user
 
-  if (userExist != null) {
-    res.status(400).send({ message: 'User already exist' })
-    return
-  }
+  try {
+    validatePassword(res, password)
 
-  const hashedPassword = await encryptPassword(user)
+    const userExist = await usersServices.checkUser(userName)
 
-  user.password = hashedPassword
+    if (userExist != null) {
+      res.status(400)
+      throw new Error('User already exist')
+    }
 
-  const newUser = await usersServices.createUser(user)
+    const hashedPassword = await encryptPassword(user)
 
-  if (newUser) {
-    generateToken(res, newUser, process.env.JWT_SECRET)
-    res.send({ message: 'User created', newUser })
+    user.password = hashedPassword
+
+    const newUser = await usersServices.createUser(user)
+
+    if (newUser) {
+      generateToken(res, newUser, process.env.JWT_SECRET)
+      res.send({ message: 'User created', newUser })
+    }
+  } catch (error: any) {
+    res.send(error.message)
   }
 }
 
