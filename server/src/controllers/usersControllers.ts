@@ -2,7 +2,7 @@ import * as usersServices from '../services/usersServices'
 import express from 'express'
 import generateToken from '../utils/generateToken'
 import { encryptPassword, comparePasswords } from '../utils/crypto'
-import { validatePassword, validateUser, validateUserAndEmail } from '../utils/validateUser'
+import { validateUser, validateCreateUser } from '../utils/validateUser'
 
 export const getAllUsers = async (_req: express.Request, res: express.Response) => {
   try {
@@ -31,7 +31,7 @@ export const loginUser = async (req: express.Request, res: express.Response) => 
     const isPasswordRight = await comparePasswords(password, currentUser?.password)
 
     if (isPasswordRight) {
-      generateToken(res, user, process.env.JWT_SECRET)
+      generateToken(res, currentUser, process.env.JWT_SECRET)
       res.status(200).send({ message: 'User logged in' })
     } else {
       res.status(401)
@@ -45,11 +45,10 @@ export const loginUser = async (req: express.Request, res: express.Response) => 
 export const createUser = async (req: express.Request, res: express.Response) => {
   const user = req.body
 
-  const { userName, password, email } = user
+  const { userName } = user
 
   try {
-    validateUserAndEmail(res, userName, password, email)
-    validatePassword(res, password)
+    validateCreateUser(res, user)
 
     const userExist = await usersServices.checkUser(userName)
 
@@ -63,7 +62,7 @@ export const createUser = async (req: express.Request, res: express.Response) =>
     user.password = hashedPassword
 
     const newUser = await usersServices.createUser(user)
-
+    
     if (newUser) {
       generateToken(res, newUser, process.env.JWT_SECRET)
       res.send({ message: 'User created', newUser })
@@ -86,4 +85,13 @@ export const deleteUser = async (req: express.Request, res: express.Response) =>
   } catch (error) {
     res.status(400).send(error)
   }
+}
+
+export const logOutUser = (_req: express.Request, res: express.Response) => {
+  res.cookie('jwt', '', {
+    httpOnly: true,
+    expires: new Date(0)
+  })
+
+  res.status(200).send({ message: 'User logged out' })
 }
