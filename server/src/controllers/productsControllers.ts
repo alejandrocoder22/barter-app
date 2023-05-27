@@ -9,11 +9,15 @@ export const getAllProducts = async (_req: express.Request, res: express.Respons
     res.status(400).send(error)
   }
 }
-export const createProduct = async (req: express.Request, res: express.Response) => {
+export const createProduct = async (req: any, res: express.Response) => {
   const product = req.body
 
   try {
+
+    product.userId = req.user.userId
+
     await productsServices.createProduct(product)
+
     res.status(200).send('Product created')
   } catch (error) {
     console.log(error)
