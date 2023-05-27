@@ -1,4 +1,5 @@
 import { useState, useEffect } from 'react'
+import Nav from '../components/Nav'
 
 const Products = () => {
   const [products, setProducts] = useState([])
@@ -6,11 +7,9 @@ const Products = () => {
   const [isLoading, setIsLoading] = useState(false)
   const [totalElements, setTotalElements] = useState(false)
 
-
-    useEffect(() => {
+  useEffect(() => {
     getProductsByCategory('car')
   }, [])
-
 
   const getProductsByCategory = async (category: string) => {
     try {
@@ -18,7 +17,7 @@ const Products = () => {
 
       const petition = await fetch(`/api/products/category?categoryId=${category}&cursor=${lastId}`)
       const data = await petition.json()
-     
+
       setLastId(data[data.length - 1].id)
       setProducts(prev => [...prev, ...data])
     } catch (error) {
@@ -27,10 +26,6 @@ const Products = () => {
       setIsLoading(false)
     }
   }
-
-
-
-
 
   const handleScroll = () => {
     if (window.innerHeight + document.documentElement.scrollTop !== document.documentElement.offsetHeight) {
@@ -45,19 +40,23 @@ const Products = () => {
   }, [isLoading])
 
   return (
-    <div className=''>
-      {
+
+    <>
+
+      <main className='grid grid-cols-3 gap-5 max-w-screen-2xl m-auto mt-5 p-2'>
+        {
         products.map(product => {
           return (
             <div className='' key={product.id}>
+              <img className='w-full' src={'http://localhost:3009/' + product.imageUrl} />
               <h2>{product.productName}</h2>
-              <img className='max-w-xs' src={'http://localhost:3009/' + product.imageUrl} />
             </div>
           )
         })
       }
 
-    </div>
+      </main>
+    </>
   )
 }
 
