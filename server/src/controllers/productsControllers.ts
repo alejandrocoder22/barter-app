@@ -1,5 +1,6 @@
 import * as productsServices from '../services/productsServices'
 import express from 'express'
+import fs from 'fs'
 
 export const getAllProducts = async (_req: express.Request, res: express.Response) => {
   try {
@@ -31,15 +32,21 @@ export const updateProduct = (req: express.Request, res: express.Response) => {
   try {
     productsServices.updateProduct(product)
     res.status(200).send('Product updated')
+   
   } catch (error) {
     res.status(400).send(error)
   }
 }
-export const deleteProduct = (req: express.Request, res: express.Response) => {
+export const deleteProduct = async (req: express.Request, res: express.Response) => {
   const { productId } = req.body
   try {
-    productsServices.deleteProduct(productId)
-    res.status(200).send('Product deleted')
+   const productDeleted = await productsServices.deleteProduct(productId)
+
+   fs.rm(productDeleted.imageUrl, (error) => {
+    console.log(error);
+   })
+
+    res.status(200).send({ message: 'Product deleted', productDeleted})
   } catch (error) {
     res.status(400).send(error)
   }
