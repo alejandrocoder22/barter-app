@@ -1,9 +1,8 @@
 import AppRouter from './router/AppRouter'
 
-function App() {
-
+function App () {
   return (
-    <AppRouter></AppRouter>
+    <AppRouter />
   )
 }
 
