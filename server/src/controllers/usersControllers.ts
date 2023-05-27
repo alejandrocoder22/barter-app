@@ -15,10 +15,22 @@ export const getAllUsers = async (_req: express.Request, res: express.Response) 
 export const loginUser = async (req: express.Request, res: express.Response) => {
   const user = req.body
 
-  try {
-    const currentUser = await usersServices.checkUser(user.userName)
+  const { userName, password } = user
 
-    const isPasswordRight = await comparePasswords(user.password, currentUser?.password)
+  try {
+    if (!userName || !password) {
+      res.status(400)
+      throw new Error('Insert username and password')
+    }
+
+    const currentUser = await usersServices.checkUser(userName)
+
+    if (currentUser == null) {
+      res.status(401)
+      throw new Error('User or password is not valid')
+    }
+
+    const isPasswordRight = await comparePasswords(password, currentUser?.password)
 
     if (isPasswordRight) {
       generateToken(res, user, process.env.JWT_SECRET)
