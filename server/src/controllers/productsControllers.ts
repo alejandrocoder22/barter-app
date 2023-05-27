@@ -15,7 +15,7 @@ export const createProduct = async (req: any, res: express.Response) => {
   try {
 
     product.userId = req.user.userId
-
+    product.estimatedValue = Number(product.estimatedValue)
     await productsServices.createProduct(product)
 
     res.status(200).send('Product created')
