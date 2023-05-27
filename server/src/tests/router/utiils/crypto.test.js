@@ -11,12 +11,11 @@ describe('Test in crypto.js', () => {
     expect(hashedPassword.length).toBeGreaterThan(mockupUser.password.length)
   })
 
-  test("ComparePasswords works correctly", async () => {
-      const hashedPassword = await encryptPassword(mockupUser)
-      const resultOfComparation = await comparePasswords(mockupUser.password, hashedPassword)
-      const wrongPassword = await comparePasswords('52353252353', hashedPassword)
-      expect(resultOfComparation).toBe(true)
-      expect(wrongPassword).toBe(false)
+  test('ComparePasswords works correctly', async () => {
+    const hashedPassword = await encryptPassword(mockupUser)
+    const resultOfComparation = await comparePasswords(mockupUser.password, hashedPassword)
+    const wrongPassword = await comparePasswords('52353252353', hashedPassword)
+    expect(resultOfComparation).toBe(true)
+    expect(wrongPassword).toBe(false)
   })
-
 })
