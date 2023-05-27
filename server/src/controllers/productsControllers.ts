@@ -12,13 +12,15 @@ export const getAllProducts = async (_req: express.Request, res: express.Respons
 export const createProduct = async (req: any, res: express.Response) => {
   const product = req.body
 
-  try {
+  console.log(req.file);
 
+  try {
+    product.imageUrl = 'uploads/' + req.file.filename
     product.userId = req.user.userId
     product.estimatedValue = Number(product.estimatedValue)
-    await productsServices.createProduct(product)
+   const newProduct =  await productsServices.createProduct(product)
 
-    res.status(200).send('Product created')
+    res.status(200).send({message: 'Product created', newProduct})
   } catch (error) {
     console.log(error)
     res.status(400).send(error)
@@ -42,3 +44,5 @@ export const deleteProduct = (req: express.Request, res: express.Response) => {
     res.status(400).send(error)
   }
 }
+
+
