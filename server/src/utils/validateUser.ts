@@ -7,6 +7,14 @@ export const validateUser = (res: express.Response, userName: string, password: 
   }
 }
 
+
+export const validateUserAndEmail = (res: express.Response, userName: string, password: string, email: string) => {
+  if (!userName || !password || !email) {
+    res.status(400)
+    throw new Error('Insert all required fields')
+  }
+}
+
 export const validatePassword = (res: express.Response, password: string) => {
   if (password.length < 6) {
     res.status(400)

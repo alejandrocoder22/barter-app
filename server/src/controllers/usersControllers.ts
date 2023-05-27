@@ -2,7 +2,7 @@ import * as usersServices from '../services/usersServices'
 import express from 'express'
 import generateToken from '../utils/generateToken'
 import { encryptPassword, comparePasswords } from '../utils/crypto'
-import { validatePassword, validateUser } from '../utils/validateUser'
+import { validatePassword, validateUser, validateUserAndEmail } from '../utils/validateUser'
 
 export const getAllUsers = async (_req: express.Request, res: express.Response) => {
   try {
@@ -45,9 +45,10 @@ export const loginUser = async (req: express.Request, res: express.Response) => 
 export const createUser = async (req: express.Request, res: express.Response) => {
   const user = req.body
 
-  const { userName, password } = user
+  const { userName, password, email } = user
 
   try {
+    validateUserAndEmail(res, userName, password, email)
     validatePassword(res, password)
 
     const userExist = await usersServices.checkUser(userName)
