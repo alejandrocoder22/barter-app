@@ -63,3 +63,4 @@ export const getProductsByCategory = async (req: Request, res: Response) => {
     res.send(error.message)
   }
 }
+

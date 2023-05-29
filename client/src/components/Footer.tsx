@@ -1,7 +1,7 @@
 
 const Footer = () => {
   return (
-    <footer>Footer</footer>
+    <footer  className='bg-slate-400'>Footer</footer>
   )
 }
 

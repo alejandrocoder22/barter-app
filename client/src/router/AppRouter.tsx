@@ -13,7 +13,7 @@ const AppRouter = () => {
       <header className='bg-slate-400'>
         <Nav />
       </header>
-      <main>
+      <main className='bg-red-400 min-h-[calc(100vh-4rem)]'>
         <Routes>
           <Route path='/login' element={<Login />} />
           <Route path='/product' element={<AddProduct />} />
@@ -23,7 +23,7 @@ const AppRouter = () => {
         </Routes>
       </main>
       <Footer />
-main    </BrowserRouter>
+    </BrowserRouter>
   )
 }
 
