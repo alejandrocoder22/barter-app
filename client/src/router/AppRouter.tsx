@@ -5,6 +5,7 @@ import AddProduct from '../pages/AddProduct'
 import Products from '../pages/Products'
 import Profile from '../pages/Profile'
 import Nav from '../components/Nav'
+import Footer from '../components/Footer'
 
 const AppRouter = () => {
   return (
@@ -12,14 +13,17 @@ const AppRouter = () => {
       <header className='bg-slate-400'>
         <Nav />
       </header>
-      <Routes>
-        <Route path='/login' element={<Login />} />
-        <Route path='/product' element={<AddProduct />} />
-        <Route path='/products' element={<Products />} />
-        <Route path='/profile' element={<Profile />} />
-        <Route path='/' element={<Home />} />
-      </Routes>
-    </BrowserRouter>
+      <main>
+        <Routes>
+          <Route path='/login' element={<Login />} />
+          <Route path='/product' element={<AddProduct />} />
+          <Route path='/products' element={<Products />} />
+          <Route path='/profile' element={<Profile />} />
+          <Route path='/' element={<Home />} />
+        </Routes>
+      </main>
+      <Footer />
+main    </BrowserRouter>
   )
 }
 
