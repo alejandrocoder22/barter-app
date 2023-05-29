@@ -1,5 +1,6 @@
 import { useState, useEffect } from 'react'
 import Nav from '../components/Nav'
+import Product from '../components/Product'
 
 const Products = () => {
   const [products, setProducts] = useState([])
@@ -47,10 +48,7 @@ const Products = () => {
         {
         products.map(product => {
           return (
-            <div className='' key={product.id}>
-              <img className='w-full' src={'http://localhost:3009/' + product.imageUrl} />
-              <h2>{product.productName}</h2>
-            </div>
+          <Product product={product} />
           )
         })
       }
