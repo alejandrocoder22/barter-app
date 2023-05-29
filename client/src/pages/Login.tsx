@@ -5,8 +5,7 @@ const Login = () => {
   const [userName, setUserName] = useState('')
   const [password, setPassword] = useState('')
 
-
-  const {setUser} = useContext(AuthContext)
+  const { setUser } = useContext(AuthContext)
   const handleLogin = (e) => {
     e.preventDefault()
     fetch('/api/users/login', {
@@ -16,8 +15,8 @@ const Login = () => {
         userName,
         password
       })
-    }).then(res => res.json()).then(data => {
-      setUser({userName: data.userName})
+    }).then(async res => await res.json()).then(data => {
+      setUser({ userName: data.userName })
     })
   }
 
