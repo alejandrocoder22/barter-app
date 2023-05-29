@@ -1,8 +1,8 @@
 import * as productsServices from '../services/productsServices'
-import express from 'express'
+import {Request, Response} from 'express'
 import fs from 'fs'
 
-export const getAllProducts = async (_req: express.Request, res: express.Response) => {
+export const getAllProducts = async (_req: Request, res: Response) => {
   try {
     const products = await productsServices.getAllProducts()
     res.status(200).send(products)
@@ -10,7 +10,7 @@ export const getAllProducts = async (_req: express.Request, res: express.Respons
     res.status(400).send(error)
   }
 }
-export const createProduct = async (req: any, res: express.Response) => {
+export const createProduct = async (req: any, res: Response) => {
   const product = req.body
 
   try {
@@ -25,7 +25,8 @@ export const createProduct = async (req: any, res: express.Response) => {
     res.status(400).send(error)
   }
 }
-export const updateProduct = (req: express.Request, res: express.Response) => {
+
+export const updateProduct = (req: Request, res: Response) => {
   const product = req.body
   try {
     productsServices.updateProduct(product)
@@ -34,7 +35,7 @@ export const updateProduct = (req: express.Request, res: express.Response) => {
     res.status(400).send(error)
   }
 }
-export const deleteProduct = async (req: express.Request, res: express.Response) => {
+export const deleteProduct = async (req: Request, res: Response) => {
   const { productId } = req.body
   try {
     const productDeleted = await productsServices.deleteProduct(productId)
@@ -51,7 +52,7 @@ export const deleteProduct = async (req: express.Request, res: express.Response)
   }
 }
 
-export const getProductsByCategory = async (req: express.Request, res: express.Response) => {
+export const getProductsByCategory = async (req: Request, res: Response) => {
   const { categoryId, cursor } = req.query
   try {
     if (categoryId) {
