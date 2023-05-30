@@ -13,6 +13,11 @@ export const getAllProducts = async (_req: Request, res: Response) => {
 
 export const getProductsByUser = async (req: any, res: Response) => {
 try {
+  if(Number(req.params.userId) !== Number(req.user.userId)) {
+    res.status(401)
+    throw new Error('User not authorized')
+  }
+
   const productsofUser = await productsServices.getProductsByUser(req.params.userId)
   res.send(productsofUser)
 } catch (error: any) {
