@@ -10,6 +10,16 @@ export const getAllProducts = async (_req: Request, res: Response) => {
     res.status(400).send(error)
   }
 }
+
+export const getProductsByUser = async (req: any, res: Response) => {
+try {
+  const productsofUser = await productsServices.getProductsByUser(req.params.userId)
+  res.send(productsofUser)
+} catch (error: any) {
+  res.send(error.message)
+}
+}
+
 export const createProduct = async (req: any, res: Response) => {
   const product = req.body
 
