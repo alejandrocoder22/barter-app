@@ -6,8 +6,8 @@ export const getAllProducts = async (_req: Request, res: Response) => {
   try {
     const products = await productsServices.getAllProducts()
     res.status(200).send(products)
-  } catch (error) {
-    res.status(400).send(error)
+  } catch (error:any) {
+    res.send(error.message)
   }
 }
 
@@ -28,16 +28,23 @@ try {
 export const createProduct = async (req: any, res: Response) => {
   const product = req.body
 
+  const { productImages, productName, estimatedValue, status, category } = req.body
+
   try {
+
+  if (!productImages || !productName || !estimatedValue || !status || !category) {
+    res.status(400)
+    throw new Error('All fields are required')
+  }
+
     product.imageUrl = 'uploads/' + req.file.filename
     product.userId = req.user.userId
     product.estimatedValue = Number(product.estimatedValue)
     const newProduct = await productsServices.createProduct(product)
 
     res.status(200).send({ message: 'Product created', newProduct })
-  } catch (error) {
-    console.log(error)
-    res.status(400).send(error)
+  } catch (error: any) {
+    res.send(error.message)
   }
 }
 
@@ -46,8 +53,8 @@ export const updateProduct = (req: Request, res: Response) => {
   try {
     productsServices.updateProduct(product)
     res.status(200).send('Product updated')
-  } catch (error) {
-    res.status(400).send(error)
+  } catch (error: any) {
+    res.send(error.message)
   }
 }
 export const deleteProduct = async (req: Request, res: Response) => {
