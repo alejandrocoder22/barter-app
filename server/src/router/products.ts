@@ -4,7 +4,7 @@ import { protectedRoute } from '../middlewares/authMiddleware'
 import { upload } from '../config/multer'
 export const router = express.Router()
 
-router.get('/:userId', productsControllers.getProductsByUser)
+router.get('/:userId', protectedRoute, productsControllers.getProductsByUser)
 router.get('/', productsControllers.getAllProducts)
 router.get('/category', productsControllers.getProductsByCategory)
 router.post('/', protectedRoute, upload.single('productImages'), productsControllers.createProduct)
