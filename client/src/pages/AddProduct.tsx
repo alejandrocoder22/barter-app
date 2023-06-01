@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import { useState } from 'react'
 
 const AddProduct = () => {
   const [productName, setProductName] = useState('')
@@ -26,6 +26,7 @@ const AddProduct = () => {
     <main className='min-h-screen '>
       <div className='flex flex-col min-h-screen justify-center items-center item bg-cyan-50'>
         <form onSubmit={handleLogin} className='flex flex-col max-w-xs gap-1'>
+
           <label>Product Name</label>
           <input onChange={(e) => setProductName(e.target.value)} className='border-2' type='text' />
           <label>Estimated Value</label>

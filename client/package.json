@@ -7,8 +7,7 @@
     "dev": "vite",
     "build": "tsc && vite build",
     "lint": "eslint src --ext ts,tsx --report-unused-disable-directives --max-warnings 0",
-    "preview": "vite preview",
-    "fix": "ts-standard --fix"
+    "preview": "vite preview"
   },
   "dependencies": {
     "react": "^18.2.0",
@@ -31,11 +30,5 @@
     "ts-standard": "^12.0.2",
     "typescript": "^5.0.2",
     "vite": "^4.3.2"
-  },
-  "eslintConfig": {
-    "parserOptions": {
-      "project": "./client/tsconfig.json"
-    },
-    "extends": "./node_modules/ts-standard/eslintrc.json"
   }
 }
