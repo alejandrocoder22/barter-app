@@ -28,11 +28,10 @@ try {
 export const createProduct = async (req: any, res: Response) => {
   const product = req.body
 
-  const { productImages, productName, estimatedValue, status, category } = req.body
-
+  const {  productName, estimatedValue, status, category } = req.body
   try {
 
-  if (!productImages || !productName || !estimatedValue || !status || !category) {
+  if ( !productName || !estimatedValue || !status || !category) {
     res.status(400)
     throw new Error('All fields are required')
   }
