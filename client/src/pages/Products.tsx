@@ -4,25 +4,30 @@ import CategoriesMenu from '../components/CategoriesMenu'
 
 const Products = () => {
   const [products, setProducts] = useState([])
-  const [lastId, setLastId] = useState('')
-  const [isLoading, setIsLoading] = useState(false)
-  const [category, setCategory] = useState('')
+  const [productsByCategory, setProductsByCategory] = useState([])
+  const [category, setCategory] = useState(null)
+  const [isLoading, setIsLoading] = useState(true)
+
+  const productsToMap = category === null || category === 'all' ? products : productsByCategory
 
   useEffect(() => {
-    category
-      ? getProductsByCategory(category)
-      : getAllProducts()
+    getAllProducts()
+  }, [])
+
+  let lastId = null
+
+  useEffect(() => {
+    setProductsByCategory([])
+    const lastId = null
+    getProductsByCategory()
   }, [category])
 
-  const getProductsByCategory = async (category: string) => {
+  const getAllProducts = async () => {
     try {
       setIsLoading(true)
-
-      const petition = await fetch(`/api/products/category?categoryId=${category}&cursor=${lastId}`)
-      const data = await petition.json()
-
-      setLastId(data[data.length - 1].id)
-      setProducts(prev => [...prev, ...data])
+      const petition = await fetch('/api/products')
+      const allProducts = await petition.json()
+      setProducts(allProducts)
     } catch (error) {
       console.log(error)
     } finally {
@@ -30,36 +35,38 @@ const Products = () => {
     }
   }
 
-  const getAllProducts = async () => {
-    const petition = await fetch('/api/products')
-    const allProducts = await petition.json()
-
-    setProducts(allProducts)
+  const getProductsByCategory = async () => {
+    try {
+      const petition = await fetch(`/api/products/category?categoryId=${category}&cursor=${lastId}`)
+      const productsByCategory = await petition.json()
+      setProductsByCategory(prev => [...prev, ...productsByCategory])
+      lastId = productsByCategory[productsByCategory.length - 1].id
+    } catch (error) {
+      console.log(error)
+    }
   }
-  const handleScroll = () => {
-    if (window.innerHeight + document.documentElement.scrollTop !== document.documentElement.offsetHeight) {
+
+  const isBottomReached = () => {
+    const totalHeightscrolled = window.scrollY + document.documentElement.clientHeight
+    const totalHeight = document.documentElement.scrollHeight
+    if (totalHeightscrolled !== totalHeight) {
       return
     }
-    getProductsByCategory('car')
+    getProductsByCategory()
   }
 
   useEffect(() => {
-    window.addEventListener('scroll', handleScroll)
-    return () => window.removeEventListener('scroll', handleScroll)
-  }, [isLoading])
+    window.addEventListener('scroll', isBottomReached)
+    return () => window.removeEventListener('scroll', isBottomReached)
+  }, [isLoading, category, lastId])
 
   return (
-
     <>
       <CategoriesMenu setCategory={setCategory} category={category} />
       <section className='grid grid-cols-3 gap-5 max-w-screen-2xl m-auto  p-2'>
-        {
-        products.map(product => {
-          return (
-            <Product product={product} />
-          )
-        })
-      }
+        {productsToMap.map(product => (
+          <Product product={product} key={product.id} />
+        ))}
       </section>
     </>
   )

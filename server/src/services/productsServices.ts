@@ -16,9 +16,9 @@ export const updateProduct = async (product: Product) => await prisma.product.up
 export const getProductsByUser = async (userId: number) => await prisma.product.findMany({where: {userId: Number(userId)}})
 export const deleteProduct = async (productId: number) => await prisma.product.delete({ where: { id: productId } })
 export const getProductsByCategory = async (category: any, cursor: any) => {
-  return cursor.length <= 0
+  return cursor === 'null' || cursor === 'undefined' || !cursor 
     ? await prisma.product.findMany({
-      take: 12,
+      take: 10,
       skip: 1,
       where: {
         category: {
