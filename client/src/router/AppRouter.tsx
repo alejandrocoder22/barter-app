@@ -5,6 +5,7 @@ import Products from '../pages/Products'
 import Profile from '../pages/Profile'
 import Nav from '../components/Nav'
 import Footer from '../components/Footer'
+import Register from '../pages/Register'
 
 const AppRouter = () => {
   return (
@@ -16,6 +17,7 @@ const AppRouter = () => {
         <Routes>
           <Route path='/' element={<Products />} />
           <Route path='/login' element={<Login />} />
+          <Route path='/register' element={<Register />} />
           <Route path='/product' element={<AddProduct />} />
           <Route path='/profile' element={<Profile />} />
         </Routes>
