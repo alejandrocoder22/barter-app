@@ -1,14 +1,18 @@
 import { useState, useEffect } from 'react'
 import Product from '../components/Product'
+import CategoriesMenu from '../components/CategoriesMenu'
 
 const Products = () => {
   const [products, setProducts] = useState([])
   const [lastId, setLastId] = useState('')
   const [isLoading, setIsLoading] = useState(false)
+  const [category, setCategory] = useState('')
 
   useEffect(() => {
-    getAllProducts()
-  }, [])
+    category
+      ? getProductsByCategory(category)
+      : getAllProducts()
+  }, [category])
 
   const getProductsByCategory = async (category: string) => {
     try {
@@ -47,7 +51,7 @@ const Products = () => {
   return (
 
     <>
-
+      <CategoriesMenu setCategory={setCategory} category={category} />
       <section className='grid grid-cols-3 gap-5 max-w-screen-2xl m-auto  p-2'>
         {
         products.map(product => {
@@ -56,7 +60,6 @@ const Products = () => {
           )
         })
       }
-
       </section>
     </>
   )
