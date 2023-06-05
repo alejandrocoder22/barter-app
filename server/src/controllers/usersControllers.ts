@@ -47,6 +47,7 @@ export const createUser = async (req: express.Request, res: express.Response) =>
 
   const { userName } = user
 
+
   try {
     validateCreateUser(res, user)
 
@@ -65,7 +66,7 @@ export const createUser = async (req: express.Request, res: express.Response) =>
 
     if (newUser) {
       generateToken(res, newUser, process.env.JWT_SECRET)
-      res.send({ message: 'User created', newUser })
+      res.send({ message: 'User created', userName: newUser.userName })
     }
   } catch (error: any) {
     res.send(error.message)
