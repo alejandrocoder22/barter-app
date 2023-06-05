@@ -24,14 +24,15 @@ const Login = () => {
   const onHandlePassword = (e: any) => setPassword(e.target.value)
 
   return (
-    <main>
-      <h1>Login</h1>
-      <form onSubmit={handleLogin} className='flex flex-col max-w-xs gap-2'>
-        <input onChange={onHandleUserName} className='border-2' type='text' name='username' />
-        <input onChange={onHandlePassword} className='border-2' type='text' name='password' />
-        <button type='submit'>Login</button>
+    <section className='flex flex-col  items-center justify-center min-h-[calc(100vh-4rem)]'>
+      <h1 className='mb-5 text-3xl'>Login</h1>
+      <form onSubmit={handleLogin} className='flex flex-col max-w-xs gap-4'>
+        <input className='rounded-md p-1' onChange={onHandleUserName} type='text' name='username' />
+        <input className='rounded-md p-1' onChange={onHandlePassword} type='text' name='password' />
+        <button className='bg-blue-500 hover:bg-blue-400  rounded-md p-1' type='submit'>Login</button>
+
       </form>
-    </main>
+    </section>
   )
 }
 
