@@ -7,7 +7,7 @@ const Products = () => {
   const [isLoading, setIsLoading] = useState(false)
 
   useEffect(() => {
-    getProductsByCategory('car')
+    getAllProducts()
   }, [])
 
   const getProductsByCategory = async (category: string) => {
@@ -26,6 +26,12 @@ const Products = () => {
     }
   }
 
+  const getAllProducts = async () => {
+    const petition = await fetch('/api/products')
+    const allProducts = await petition.json()
+
+    setProducts(allProducts)
+  }
   const handleScroll = () => {
     if (window.innerHeight + document.documentElement.scrollTop !== document.documentElement.offsetHeight) {
       return
