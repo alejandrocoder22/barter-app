@@ -13,7 +13,7 @@ const AppRouter = () => {
       <header className='bg-slate-400'>
         <Nav />
       </header>
-      <main className='bg-red-400 min-h-[calc(100vh-4rem)]'>
+      <main className='min-h-[calc(100vh-4rem)]'>
         <Routes>
           <Route path='/' element={<Products />} />
           <Route path='/login' element={<Login />} />
