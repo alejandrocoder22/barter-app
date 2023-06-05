@@ -14,11 +14,10 @@ const AppRouter = () => {
       </header>
       <main className='bg-red-400 min-h-[calc(100vh-4rem)]'>
         <Routes>
+          <Route path='/' element={<Products />} />
           <Route path='/login' element={<Login />} />
           <Route path='/product' element={<AddProduct />} />
-          <Route path='/products' element={<Products />} />
           <Route path='/profile' element={<Profile />} />
-          <Route path='/' element={<Home />} />
         </Routes>
       </main>
       <Footer />
