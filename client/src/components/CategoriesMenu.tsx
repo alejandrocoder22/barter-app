@@ -9,9 +9,9 @@ const CategoriesMenu = ({ setCategory, category }) => {
     <ul className='flex justify-center gap-2 mt-2'>
       {categories.map(categoryItem => {
         return (
-          <div key={categoryItem.name} className=' flex  flex-col justify-center items-center bg-slate-600 rounded-full'>
-            <categoryItem.icon />
-            <li onClick={onSetCategory} className={`capitalize cursor-pointer ${category === categoryItem.name ? 'text-blue-500' : ''}`}>{categoryItem.name}</li>
+          <div onClick={onSetCategory} key={categoryItem.name} className={`p-3 cursor-pointer flex flex-col justify-center items-center  rounded-full mt-5 mb-3 ${category === categoryItem.name ? 'bg-gray-200' : ''}`}>
+            <categoryItem.icon className='w-5 h-5 cursor-pointer block pointer-events-none' />
+            <li className='capitalize cursor-pointer pointer-events-none  text-gray-500'>{categoryItem.name}</li>
           </div>
         )
       })}
