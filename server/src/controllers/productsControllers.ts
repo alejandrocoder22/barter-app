@@ -6,7 +6,7 @@ import fs from 'fs'
 export const getSingleProduct = async (_req: Request, res: Response) => {
   const { productId } = _req.params
   try {
-    const product = await productsServices.getSingleProduct(productId)
+    const product = await productsServices.getSingleProduct(Number(productId))
     res.status(200).send(product)
   } catch (error:any) {
     throw new Error(error.message)

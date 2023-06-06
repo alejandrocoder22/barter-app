@@ -3,7 +3,7 @@ import { PrismaClient } from '@prisma/client'
 import { Product } from '../types'
 
 const prisma = new PrismaClient()
-export const getSingleProduct = async (productId) => await prisma.product.findUnique({ where: { id: productId } })
+export const getSingleProduct = async (productId: number) => await prisma.product.findUnique({ where: { id: productId } })
 export const getAllProducts = async () => await prisma.product.findMany()
 export const createProduct = async (product: Product) => await prisma.product.create({ data: product })
 export const updateProduct = async (product: Product) => await prisma.product.update({
