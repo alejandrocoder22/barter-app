@@ -2,6 +2,17 @@ import * as productsServices from '../services/productsServices'
 import {Request, Response} from 'express'
 import fs from 'fs'
 
+
+export const getSingleProduct = async (_req: Request, res: Response) => {
+  const { productId } = _req.params
+  try {
+    const product = await productsServices.getSingleProduct(productId)
+    res.status(200).send(product)
+  } catch (error:any) {
+    throw new Error(error.message)
+    res.send(error.message)
+  }
+}
 export const getAllProducts = async (_req: Request, res: Response) => {
   try {
     const products = await productsServices.getAllProducts()
