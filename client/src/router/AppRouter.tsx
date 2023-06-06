@@ -7,6 +7,7 @@ import Nav from '../components/Nav'
 import Footer from '../components/Footer'
 import Register from '../pages/Register'
 import ProductInfo from '../pages/ProductInfo'
+import PrivateChat from '../pages/PrivateChat'
 
 const AppRouter = () => {
   return (
@@ -19,6 +20,7 @@ const AppRouter = () => {
           <Route path='/' element={<Products />} />
           <Route path='/product/:productId' element={<ProductInfo />} />
           <Route path='/login' element={<Login />} />
+          <Route path='/chat' element={<PrivateChat />} />
           <Route path='/register' element={<Register />} />
           <Route path='/product' element={<AddProduct />} />
           <Route path='/profile' element={<Profile />} />
