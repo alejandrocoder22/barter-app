@@ -62,7 +62,7 @@ const Products = () => {
   useEffect(() => {
     window.addEventListener('scroll', isBottomReached)
     return () => window.removeEventListener('scroll', isBottomReached)
-  }, [isLoading, category, lastId])
+  }, [category, lastId])
 
   return (
     <>
