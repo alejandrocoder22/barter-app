@@ -5,7 +5,6 @@ import { upload } from '../config/multer'
 export const router = express.Router()
 
 router.get('/', productsControllers.getAllProducts)
-router.get('/', productsControllers.getAllProducts)
 router.get('/category', productsControllers.getProductsByCategory)
 router.get('/:userId', protectedRoute, productsControllers.getProductsByUser)
 router.post('/', protectedRoute, upload.single('productImages'), productsControllers.createProduct)
