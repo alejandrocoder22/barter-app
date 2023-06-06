@@ -18,8 +18,10 @@ const Products = () => {
 
   useEffect(() => {
     setProductsByCategory([])
-    const lastId = null
+
     getProductsByCategory()
+
+    const lastId = null
   }, [category])
 
   const getAllProducts = async () => {
@@ -37,22 +39,24 @@ const Products = () => {
 
   const getProductsByCategory = async () => {
     try {
+      setIsLoading(true)
       const petition = await fetch(`/api/products/category?categoryId=${category}&cursor=${lastId}`)
       const productsByCategory = await petition.json()
       setProductsByCategory(prev => [...prev, ...productsByCategory])
       lastId = productsByCategory[productsByCategory.length - 1].id
     } catch (error) {
       console.log(error)
+    } finally {
+      setIsLoading(false)
     }
   }
 
   const isBottomReached = () => {
     const totalHeightscrolled = window.scrollY + document.documentElement.clientHeight
     const totalHeight = document.documentElement.scrollHeight
-    if (totalHeightscrolled !== totalHeight) {
-      return
+    if (totalHeightscrolled === totalHeight && category !== 'all') {
+      getProductsByCategory()
     }
-    getProductsByCategory()
   }
 
   useEffect(() => {
@@ -64,10 +68,19 @@ const Products = () => {
     <>
       <CategoriesMenu setCategory={setCategory} category={category} />
       <section className='grid grid-cols-3 gap-5 max-w-screen-2xl m-auto  p-2'>
-        {productsToMap.map(product => (
-          <Product product={product} key={product.id} />
-        ))}
+        {productsToMap.length > 0
+          ? (
+              productsToMap.map(product => (
+                <Product key={product.id} product={product} />
+              ))
+            )
+          : (
+            <p className='text-center w-full'>No products</p>
+            )}
+
+        {isLoading && <p className='text-center w-full'>Loading...</p>}
       </section>
+
     </>
   )
 }
