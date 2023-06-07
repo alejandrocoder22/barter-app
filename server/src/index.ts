@@ -3,6 +3,7 @@ import cors from 'cors'
 import * as dotenv from 'dotenv'
 import { router as usersRouter } from './router/users'
 import { router as productsRouter } from './router/products'
+import { router as likesRouter } from './router/likes'
 import { customErrorHandler } from './middlewares/customErrors'
 import cookiePArser from 'cookie-parser'
 
@@ -16,6 +17,7 @@ app.use(express.json())
 app.use(cookiePArser())
 app.use(customErrorHandler)
 
+app.use('/api/likes',likesRouter)
 app.use('/api/users', usersRouter)
 app.use('/api/products', productsRouter)
 
