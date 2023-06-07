@@ -13,6 +13,8 @@ export interface Product {
   status: string
   imageUrl: string
   category: string
+  description: string
+  location: string
 
 }
 
