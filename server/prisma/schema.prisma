@@ -16,6 +16,7 @@ model User {
   createdAt  DateTime  @default(now())
   updatedAt  DateTime  @updatedAt
   Product    Product[]
+  Like       Like[]
 }
 
 model Product {
@@ -36,8 +37,8 @@ model Product {
 
 model Like {
   id        Int     @id @default(autoincrement())
-  productId Product @relation(fields: [id], references: [id])
-}
-
-model Rating {
+  productId Int
+  userId    Int
+  product   Product @relation(fields: [productId], references: [id])
+  user      User    @relation(fields: [userId], references: [id])
 }
