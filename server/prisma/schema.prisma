@@ -31,4 +31,13 @@ model Product {
   category       String
   createdAy      DateTime @default(now())
   updatedAt      DateTime @updatedAt
+  Like           Like[]
+}
+
+model Like {
+  id        Int     @id @default(autoincrement())
+  productId Product @relation(fields: [id], references: [id])
+}
+
+model Rating {
 }
