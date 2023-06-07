@@ -8,13 +8,14 @@ datasource db {
 }
 
 model User {
-  id        Int       @id @default(autoincrement())
-  userName  String    @unique
-  password  String
-  email     String    @unique
-  createdAt DateTime  @default(now())
-  updatedAt DateTime  @updatedAt
-  Product   Product[]
+  id         Int       @id @default(autoincrement())
+  userName   String    @unique
+  password   String
+  email      String    @unique
+  profileImg String?
+  createdAt  DateTime  @default(now())
+  updatedAt  DateTime  @updatedAt
+  Product    Product[]
 }
 
 model Product {
@@ -24,6 +25,8 @@ model Product {
   userId         Int
   estimatedValue Float
   status         String
+  description    String
+  location       String
   imageUrl       String
   category       String
   createdAy      DateTime @default(now())
