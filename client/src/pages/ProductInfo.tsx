@@ -23,8 +23,12 @@ const ProductInfo = ({}) => {
         <p>{product?.status}</p>
         <p>{product?.estimatedValue}</p>
         <img className='max-w-3xl rounded-2xl' src={`http://localhost:3009/${product?.imageUrl}`} />
+        <p className=''>Date Added</p>
+        <p className=''>Location</p>
       </div>
       <div className=''>
+        <p className=''>User rating</p>
+        <p className=''>Lorem ipsum dolor sit amet consectetur adipisicing elit. Recusandae molestias optio quisquam sequi quo quaerat perspiciatis magni similique tempora eveniet, consequatur voluptas corporis reiciendis minus ut ad exercitationem repellat illum!</p>
         <button className='text-white font-bold bg-lime-500 p-2 rounded-md'>Send Message</button>
       </div>
     </section>
