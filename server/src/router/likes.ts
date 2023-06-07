@@ -1,9 +1,9 @@
 import express from 'express'
-
+import * as likesControllers from '../controllers/likesControllers'
 export const router = express.Router()
 
 
-router.get('/', (_req, res) => {res.send('Likes')})	
+router.post ('/', likesControllers.postLike )	
 
 
 
