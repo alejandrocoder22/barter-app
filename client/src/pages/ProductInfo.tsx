@@ -13,6 +13,16 @@ const ProductInfo = ({}) => {
     setProduct(singleProduct)
   }
 
+  const handleLike = () => {
+    fetch('/api/likes', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json'
+      },
+      body: JSON.stringify({ productId })
+    })
+  }
+
   useEffect(() => {
     getProductById()
   }, [])
@@ -20,8 +30,11 @@ const ProductInfo = ({}) => {
     <section className='flex gap-5 items-center'>
       <div className=''>
         <h1 className='text-4xl font-bold mb-5 '>{product?.productName}</h1>
-        <p>{product?.status}</p>
-        <p>{product?.estimatedValue}</p>
+        <div className='flex gap-2'>
+          <p>{product?.status}</p>
+          <p>{product?.estimatedValue}</p>
+          <p onClick={handleLike} className='text-xl cursor-pointer'>Like</p>
+        </div>
         <img className='max-w-3xl rounded-2xl' src={`http://localhost:3009/${product?.imageUrl}`} />
         <p className=''>Date Added</p>
         <p className=''>Location</p>
