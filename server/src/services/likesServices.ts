@@ -8,3 +8,9 @@ export const postLike = async (userId: number, productId: number) => await prism
         productId: Number(productId)
     }
 }) 
+
+export const getLikes = async(userId: number) => prisma.like.findMany({
+    where: {
+        userId: Number(userId)
+    }
+})

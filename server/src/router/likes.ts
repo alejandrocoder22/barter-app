@@ -5,6 +5,7 @@ export const router = express.Router()
 
 
 router.post ('/', protectedRoute, likesControllers.postLike )	
+router.get ('/', protectedRoute, likesControllers.getLikes )	
 
 
 
