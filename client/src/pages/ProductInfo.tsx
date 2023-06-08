@@ -13,14 +13,29 @@ const ProductInfo = ({}) => {
     setProduct(singleProduct)
   }
 
+  const isLikedByUser = () => {
+    const allLikes = likes.map(like => like.productId)
+    return allLikes.includes(Number(productId))
+  }
+
   const handleLike = () => {
-    fetch('/api/likes', {
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/json'
-      },
-      body: JSON.stringify({ productId })
-    })
+    if (!isLikedByUser()) {
+      fetch('/api/likes', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json'
+        },
+        body: JSON.stringify({ productId })
+      })
+    } else {
+      fetch('/api/likes', {
+        method: 'DELETE',
+        headers: {
+          'Content-Type': 'application/json'
+        },
+        body: JSON.stringify({ productId })
+      })
+    }
   }
 
   const getLikes = async () => {
@@ -34,10 +49,6 @@ const ProductInfo = ({}) => {
     getLikes()
   }, [])
 
-  const arrayOFLikes = likes.map(like => {
-    return like.productId
-  })
-
   return (
     <section className='flex gap-5 items-center'>
       <div className=''>
@@ -45,7 +56,7 @@ const ProductInfo = ({}) => {
         <div className='flex gap-2'>
           <p>{product?.status}</p>
           <p>{product?.estimatedValue}</p>
-          <p onClick={handleLike} className={`text-xl cursor-pointer ${arrayOFLikes.includes(Number(productId)) ? 'text-green-500' : ''}`}>Like</p>
+          <p onClick={handleLike} className={`text-xl cursor-pointer ${isLikedByUser() ? 'text-green-500' : ''}`}>Like</p>
         </div>
         <img className='max-w-3xl rounded-2xl' src={`http://localhost:3009/${product?.imageUrl}`} />
         <p className=''>Date Added</p>
