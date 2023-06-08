@@ -2,10 +2,10 @@ import { useEffect, useState } from 'react'
 import { useParams } from 'react-router-dom'
 const ProductInfo = ({}) => {
   const [product, setProduct] = useState([])
+  const [likes, setLikes] = useState([])
 
   const { productId } = useParams()
 
-  console.log(productId)
   const getProductById = async () => {
     const petition = await fetch(`/api/products/singleProduct/${productId}`)
     const singleProduct = await petition.json()
@@ -23,9 +23,21 @@ const ProductInfo = ({}) => {
     })
   }
 
+  const getLikes = async () => {
+    const petition = await fetch('/api/likes')
+    const response = await petition.json()
+    setLikes(response)
+  }
+
   useEffect(() => {
     getProductById()
+    getLikes()
   }, [])
+
+  const arrayOFLikes = likes.map(like => {
+    return like.productId
+  })
+
   return (
     <section className='flex gap-5 items-center'>
       <div className=''>
@@ -33,7 +45,7 @@ const ProductInfo = ({}) => {
         <div className='flex gap-2'>
           <p>{product?.status}</p>
           <p>{product?.estimatedValue}</p>
-          <p onClick={handleLike} className='text-xl cursor-pointer'>Like</p>
+          <p onClick={handleLike} className={`text-xl cursor-pointer ${arrayOFLikes.includes(Number(productId)) ? 'text-green-500' : ''}`}>Like</p>
         </div>
         <img className='max-w-3xl rounded-2xl' src={`http://localhost:3009/${product?.imageUrl}`} />
         <p className=''>Date Added</p>
