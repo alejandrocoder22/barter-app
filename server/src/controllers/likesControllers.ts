@@ -18,3 +18,12 @@ try {
     res.send(error)
 }
 }
+
+export const deleteLike = async (req: any, res: Response) => {
+    try {
+        await likesServices.deleteLike(req.user.userId, req.body.productId)
+        res.status(200).send({message: 'Like Deleted'})
+    } catch (error) {
+        res.send(error)
+    }
+}

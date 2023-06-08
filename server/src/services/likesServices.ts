@@ -14,3 +14,12 @@ export const getLikes = async(userId: number) => prisma.like.findMany({
         userId: Number(userId)
     }
 })
+
+export const deleteLike = async(userId: number, productId: number) => prisma.like.deleteMany({
+  
+    where: {
+        productId: Number(productId),
+        userId: Number(userId)
+       
+    } 
+})
