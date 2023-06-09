@@ -80,7 +80,6 @@ const Products = () => {
 
         {isLoading && <p className='text-center w-full'>Loading...</p>}
       </section>
-
     </>
   )
 }
