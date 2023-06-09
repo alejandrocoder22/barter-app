@@ -45,3 +45,13 @@ export const getProductsByCategory = async (category: any, cursor: any) => {
       }
     })
 }
+
+
+export const getLikedProducts = async (userId: number) => await prisma.like.findMany({
+  where: {
+    userId: Number(userId)
+  },
+  include: {
+    product: true
+  }
+})

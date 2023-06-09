@@ -96,3 +96,14 @@ export const getProductsByCategory = async (req: Request, res: Response) => {
   }
 }
 
+export const getLikedProducts = async (req: any, res: Response) => {
+
+  try {
+    const likedProducts = await productsServices.getLikedProducts(req.user.userId)
+    res.status(200).send(likedProducts)
+  } catch (error: any) {
+    res.send(error.message)
+  }
+}
+
+
