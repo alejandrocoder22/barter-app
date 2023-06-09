@@ -8,6 +8,7 @@ import Footer from '../components/Footer'
 import Register from '../pages/Register'
 import ProductInfo from '../pages/ProductInfo'
 import PrivateChat from '../pages/PrivateChat'
+import LikedProducts from '../pages/LikedProducts'
 
 const AppRouter = () => {
   return (
@@ -24,6 +25,7 @@ const AppRouter = () => {
           <Route path='/register' element={<Register />} />
           <Route path='/product' element={<AddProduct />} />
           <Route path='/profile' element={<Profile />} />
+          <Route path='/likes' element={<LikedProducts />} />
         </Routes>
       </main>
       <Footer />
