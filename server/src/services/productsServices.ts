@@ -13,10 +13,10 @@ export const updateProduct = async (product: Product) => await prisma.product.up
   data: product
 })
 
-export const getProductsByUser = async (userId: number) => await prisma.product.findMany({where: {userId: Number(userId)}})
+export const getProductsByUser = async (userId: number) => await prisma.product.findMany({ where: { userId: Number(userId) } })
 export const deleteProduct = async (productId: number) => await prisma.product.delete({ where: { id: productId } })
 export const getProductsByCategory = async (category: any, cursor: any) => {
-  return cursor === 'null' || cursor === 'undefined' || !cursor 
+  return cursor === 'null' || cursor === 'undefined' || !cursor
     ? await prisma.product.findMany({
       take: 10,
       skip: 1,
@@ -45,7 +45,6 @@ export const getProductsByCategory = async (category: any, cursor: any) => {
       }
     })
 }
-
 
 export const getLikedProducts = async (userId: number) => await prisma.like.findMany({
   where: {

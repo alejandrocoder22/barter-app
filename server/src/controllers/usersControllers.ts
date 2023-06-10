@@ -47,7 +47,6 @@ export const createUser = async (req: express.Request, res: express.Response) =>
 
   const { userName } = user
 
-
   try {
     validateCreateUser(res, user)
 
@@ -96,4 +95,3 @@ export const logOutUser = (_req: express.Request, res: express.Response) => {
 
   res.status(200).send({ message: 'User logged out' })
 }
-

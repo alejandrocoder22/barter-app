@@ -3,7 +3,6 @@ import express from 'express'
 
 export const protectedRoute = async (req: any, res: express.Response, next: express.NextFunction) => {
   let token
-
   try {
     token = req.cookies.jwt
 
