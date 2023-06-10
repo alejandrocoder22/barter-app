@@ -1,5 +1,14 @@
+import { io } from 'socket.io-client'
+
+const URL = 'http://localhost:3009/'
 
 const PrivateChat = () => {
+  const socket = io(URL)
+
+  socket.on('connection', () => {
+    console.log('Connected')
+  })
+
   return (
     <section className='flex min-h-[calc(100vh-5rem)]'>
       <aside className='bg-gray-200 w-1/5'>
