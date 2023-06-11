@@ -58,4 +58,6 @@ model Conversation {
   senderId   Int
   receiverId Int
   Message    Message[]
+
+  @@unique([senderId, receiverId])
 }
