@@ -45,7 +45,7 @@ model Like {
   @@unique([userId, productId])
 }
 
-model Conversation {
+model Message {
   id             Int    @id @default(autoincrement())
   conversationId String
   senderId       Int
