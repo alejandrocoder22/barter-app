@@ -61,7 +61,7 @@ const PrivateChat = () => {
         </div>
 
       </aside>
-      <div className='bg-blue-200 flex flex-col justify-between w-full '>
+      <div className='flex flex-col justify-between w-full '>
         {
           messages.map(message => {
             return <Message key={message.id} message={message} />
