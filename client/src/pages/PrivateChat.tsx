@@ -1,10 +1,33 @@
 import { io } from 'socket.io-client'
 import { useEffect, useState } from 'react'
+import Conversations from '../components/Conversations'
 
 const URL = 'http://localhost:3009'
 
 const PrivateChat = () => {
   const [message, setMessage] = useState('')
+  const [_messages, setMessages] = useState([])
+  const [conversations, setConversations] = useState([])
+
+  const getConversations = async () => {
+    const petition = await fetch('/api/chat')
+    const data = await petition.json()
+    setConversations(data)
+  }
+
+  const getMessages = async () => {
+    const petition = await fetch(`/api/chat/message${conversations.id} `)
+    const data = await petition.json()
+    setMessages(data)
+  }
+
+  useEffect(() => {
+    getConversations()
+  }, [])
+
+  useEffect(() => {
+    getMessages()
+  }, [conversations])
 
   const handleMessage = (e) => setMessage(e.target.value)
 
@@ -28,10 +51,7 @@ const PrivateChat = () => {
     <section className='flex min-h-[calc(100vh-5rem)]'>
       <aside className='bg-gray-200 w-1/5'>
         <div className='h-full flex gap-2 mt-5 flex-col '>
-          <div className='flex items-center justify-center gap-3 cursor-pointer'>
-            <span className='font-bold'>Alvaro</span>
-            <img className='h-9 rounded-full' src='https://picsum.photos/200' alt='' />
-          </div>
+          <Conversations conversations={conversations} />
         </div>
 
       </aside>
