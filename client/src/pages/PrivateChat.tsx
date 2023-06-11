@@ -1,5 +1,5 @@
 import { io } from 'socket.io-client'
-import { useEffect, useState } from 'react'
+import { useEffect, useState, useRef } from 'react'
 import Conversations from '../components/Conversations'
 import Message from '../components/Message'
 
@@ -11,6 +11,7 @@ const PrivateChat = () => {
   const [conversations, setConversations] = useState([])
   const [conversationId, setConversationId] = useState(null)
 
+  const scrollRef = useRef()
   const getConversations = async () => {
     const petition = await fetch('/api/chat')
     const data = await petition.json()
@@ -22,6 +23,10 @@ const PrivateChat = () => {
     const data = await petition.json()
     setMessages(data)
   }
+
+  useEffect(() => {
+    scrollRef.current?.scrollIntoView({ behavior: 'smooth' })
+  }, [messages])
 
   useEffect(() => {
     getConversations()
@@ -45,7 +50,21 @@ const PrivateChat = () => {
     })
   }, [])
 
-  const handleSubmit = () => {
+  const handleSubmit = async () => {
+    const petition = await fetch('/api/chat/message', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json'
+      },
+      body: JSON.stringify({
+        text: message,
+        conversationId
+      })
+    })
+    const newMessage = await petition.json()
+
+    console.log(newMessage)
+    setMessages([...messages, newMessage])
     socket.emit('sendMessage', { recieverId: 1, text: message })
   }
 
@@ -61,10 +80,10 @@ const PrivateChat = () => {
         </div>
 
       </aside>
-      <div className='flex flex-col justify-between w-full '>
+      <div className='flex flex-col justify-between max-h-[calc(100vh-5rem)] w-full overflow-scroll '>
         {
           messages.map(message => {
-            return <Message key={message.id} message={message} />
+            return <Message key={message.id} message={message} scrollRef={scrollRef} />
           })
         }
         <div className='h-1/6'>
