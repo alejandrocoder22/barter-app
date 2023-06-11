@@ -16,7 +16,7 @@ const Login = () => {
         password
       })
     }).then(async res => await res.json()).then(data => {
-      setUser({ userName: data.userName })
+      setUser({ userName: data.userName, userId: data.id })
     })
   }
 
