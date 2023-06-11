@@ -44,3 +44,10 @@ model Like {
 
   @@unique([userId, productId])
 }
+
+model Conversation {
+  id             Int    @id @default(autoincrement())
+  conversationId String
+  senderId       Int
+  text           String
+}
