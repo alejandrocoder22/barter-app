@@ -15,6 +15,7 @@ const Nav = () => {
         <li><Link to='/likes' className={getClassNameOnCurrentPage('/likes')}>Likes</Link></li>
         <li><Link to='/product' className={getClassNameOnCurrentPage('/product')}>Add Product</Link></li>
         <li><Link to='/profile' className={getClassNameOnCurrentPage('/profile')}>Profile</Link></li>
+        <li><Link to='/chat' className={getClassNameOnCurrentPage('/chat')}>Chat</Link></li>
       </ul>
     </nav>
   )
