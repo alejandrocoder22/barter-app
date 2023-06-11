@@ -13,15 +13,15 @@ export const getAllUsers = async (_req: express.Request, res: express.Response) 
   }
 }
 
-export const getUserById = async (req: any, res: any ) => {
-try {
-  const user = await usersServices.getUserById(Number(req.params.userId))
-  // @ts-ignore
-  const userWithoutSensibleData =  { userName: user.userName, userId: user?.id, profileImg: user?.profileImg }
+export const getUserById = async (req: any, res: any) => {
+  try {
+    const user = await usersServices.getUserById(Number(req.params.userId))
+    // @ts-expect-error
+    const userWithoutSensibleData = { userName: user.userName, userId: user?.id, profileImg: user?.profileImg }
     res.status(200).send(userWithoutSensibleData)
-} catch (error: any) {
-  res.send(error)
-}
+  } catch (error: any) {
+    res.send(error)
+  }
 }
 
 export const loginUser = async (req: express.Request, res: express.Response) => {
@@ -43,7 +43,7 @@ export const loginUser = async (req: express.Request, res: express.Response) => 
 
     if (isPasswordRight) {
       generateToken(res, currentUser, process.env.JWT_SECRET)
-      res.status(200).send({ message: 'User logged in', userName: currentUser.userName, id: currentUser.id})
+      res.status(200).send({ message: 'User logged in', userName: currentUser.userName, id: currentUser.id })
     } else {
       res.status(401)
       throw new Error('Invalid username or password')
@@ -106,7 +106,6 @@ export const logOutUser = (_req: express.Request, res: express.Response) => {
 
   res.status(200).send({ message: 'User logged out' })
 }
-
 
 export const verifyUser = (req: any, res: any) => {
   res.status(200).send({ message: 'User verified', userData: req.user })

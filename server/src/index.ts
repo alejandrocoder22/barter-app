@@ -39,21 +39,19 @@ io.use((socket: any, next) => {
   const token = socket.handshake.headers.cookie?.split('=')[1]
 
   if (token) {
-    const userData: any =  getUserDataFromToken(token)
+    const userData: any = getUserDataFromToken(token)
     socket.userName = userData.userName
     socket.userId = userData.userId
   }
 
-    next()
-  
-
+  next()
 })
 
 let users: any = []
 
 const addUserOnConnect = (userId: number, socketId: string) => {
-  !users.some((user: any) => user.userId === userId)
-  && users.push({
+  !users.some((user: any) => user.userId === userId) &&
+  users.push({
     userId,
     socketId
 
@@ -66,28 +64,25 @@ const removeUserOnDisconnect = (socketId: string) => {
   users = users.filter((user: any) => user.socketId !== socketId)
 }
 
-io.on('connection', (socket: any)  => {
+io.on('connection', (socket: any) => {
+  console.log('User connected')
 
-  console.log('User connected');
-
- 
-    addUserOnConnect(socket.userId, socket.id)
-    io.emit('getUsers',  users)
-  // @ts-ignore
-    socket.on('sendMessage', ({recieverId, text}) => {
+  addUserOnConnect(socket.userId, socket.id)
+  io.emit('getUsers', users)
+  // @ts-expect-error
+  socket.on('sendMessage', ({ recieverId, text }) => {
     const user = getUser(recieverId)
-    io.to(user?.socketId).emit("getMessage", ({
+    io.to(user?.socketId).emit('getMessage', ({
       userId: socket.userId,
-       text
+      text
     }))
-    })
-
-  socket.on("disconnect", () => {
-    removeUserOnDisconnect(socket.id)
-    io.emit('getUsers',  users)
-    console.log('UIser disconnected');
   })
 
+  socket.on('disconnect', () => {
+    removeUserOnDisconnect(socket.id)
+    io.emit('getUsers', users)
+    console.log('UIser disconnected')
+  })
 })
 
 httpServer.listen(process.env.PORT, () => console.log(`Listening on port ${process.env.PORT}`))

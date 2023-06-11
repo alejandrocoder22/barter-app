@@ -21,4 +21,4 @@ export const deleteUser = async (userId: number) => await prisma.user.delete({
 
 export const checkUser = async (userName: string) => await prisma.user.findFirst({ where: { userName } })
 
-export const getUserById = async(userId: number) => await prisma.user.findFirst({where: { id: userId}})
+export const getUserById = async (userId: number) => await prisma.user.findFirst({ where: { id: userId } })

@@ -2,7 +2,7 @@ import express from 'express'
 import { createConversation, createMessage, getConversationById, getMessages } from '../controllers/chatControllers'
 import { protectedRoute } from '../middlewares/authMiddleware'
 
-export const router =express.Router()
+export const router = express.Router()
 
 router.post('/', protectedRoute, createConversation)
 router.post('/message', protectedRoute, createMessage)
