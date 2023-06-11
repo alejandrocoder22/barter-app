@@ -4,6 +4,7 @@ import * as dotenv from 'dotenv'
 import { router as usersRouter } from './router/users'
 import { router as productsRouter } from './router/products'
 import { router as likesRouter } from './router/likes'
+import { router as chatRouter } from './router/chat'
 import { customErrorHandler } from './middlewares/customErrors'
 import cookiePArser from 'cookie-parser'
 import { Server } from 'socket.io'
@@ -24,6 +25,7 @@ app.use(customErrorHandler)
 app.use('/api/likes', likesRouter)
 app.use('/api/users', usersRouter)
 app.use('/api/products', productsRouter)
+app.use('/api/chat', chatRouter)
 
 const io = new Server(httpServer, {
   cors: {
