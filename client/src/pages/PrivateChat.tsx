@@ -1,13 +1,28 @@
 import { io } from 'socket.io-client'
+import { useEffect, useState } from 'react'
 
-const URL = 'http://localhost:3009/'
+const URL = 'http://localhost:3009'
 
 const PrivateChat = () => {
-  const socket = io(URL)
+  const [message, setMessage] = useState('')
 
-  socket.on('connection', () => {
-    console.log('Connected')
-  })
+  const handleMessage = (e) => setMessage(e.target.value)
+
+  const socket = io(URL, { withCredentials: true })
+
+  useEffect(() => {
+    socket.on('getUsers', (users) => {
+      console.log(users)
+    })
+
+    socket.on('getMessage', (data) => {
+      console.log(data)
+    })
+  }, [])
+
+  const handleSubmit = () => {
+    socket.emit('sendMessage', { recieverId: 1, text: message })
+  }
 
   return (
     <section className='flex min-h-[calc(100vh-5rem)]'>
@@ -23,8 +38,8 @@ const PrivateChat = () => {
       <div className='bg-blue-200 flex flex-col justify-between w-full '>
         <div className='bg-orange-200  h-5/6'>Messages</div>
         <div className='h-1/6'>
-          <input className='w-2/3 h-full' type='text' />
-          <button className='bg-green-200 w-1/3  h-full'>Send Message</button>
+          <input className='w-2/3 h-full' type='text' onChange={handleMessage} />
+          <button onClick={handleSubmit} className='bg-green-200 w-1/3  h-full'>Send Message</button>
         </div>
       </div>
     </section>
