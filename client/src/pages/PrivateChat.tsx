@@ -84,7 +84,7 @@ const PrivateChat = () => {
       })
     })
     const newMessage = await petition.json()
-
+    setMessage('')
     setMessages([...messages, newMessage])
     socket.emit('sendMessage', { receiverId, text: message })
   }
@@ -112,7 +112,7 @@ const PrivateChat = () => {
         </div>
         <div className='flex justify-between h-1/6'>
 
-          <input className='w-2/3 bg-slate-200 p-5 m-2 rounded-md' type='text' onChange={handleMessage} />
+          <input className='w-2/3 bg-slate-200 p-5 m-2 rounded-md' value={message} type='text' onChange={handleMessage} />
           <button onClick={handleSubmit} className='bg-green-200 w-1/3 p-5 m-2 rounded-md '>Send Message</button>
         </div>
       </div>
