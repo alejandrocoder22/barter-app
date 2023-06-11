@@ -101,15 +101,19 @@ const PrivateChat = () => {
         </div>
 
       </aside>
-      <div className='flex flex-col justify-between max-h-[calc(100vh-5rem)] w-full overflow-scroll '>
-        {
+      <div className='flex flex-col justify-between max-h-[calc(100vh-5rem)] w-full  '>
+        <div className='h-5/6 block w-full overflow-auto'>
+
+          {
           messages.map(message => {
             return <Message key={message.id} message={message} scrollRef={scrollRef} />
           })
         }
-        <div className='h-1/6'>
-          <input className='w-2/3 h-full' type='text' onChange={handleMessage} />
-          <button onClick={handleSubmit} className='bg-green-200 w-1/3  h-full'>Send Message</button>
+        </div>
+        <div className='flex justify-between h-1/6'>
+
+          <input className='w-2/3 bg-slate-200 p-5 m-2 rounded-md' type='text' onChange={handleMessage} />
+          <button onClick={handleSubmit} className='bg-green-200 w-1/3 h-full'>Send Message</button>
         </div>
       </div>
     </section>
