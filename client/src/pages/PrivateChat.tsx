@@ -3,6 +3,7 @@ import { useEffect, useState, useRef, useContext } from 'react'
 import Conversations from '../components/Conversations'
 import Message from '../components/Message'
 import { AuthContext } from '../context/authContext'
+import { getConversations, getMessages, getReceiverId, handleSubmit } from '../services/chat'
 
 const URL = 'http://localhost:3009'
 
@@ -14,49 +15,26 @@ const PrivateChat = () => {
   const [receiverId, setReceiverId] = useState(null)
   const [arrivalMessage, setArrivalMessage] = useState(null)
 
-  const authcontext = useContext(AuthContext)
+  const authContext = useContext(AuthContext)
 
   const scrollRef = useRef()
-  const getConversations = async () => {
-    const petition = await fetch('/api/chat')
-    const data = await petition.json()
-    setConversations(data)
-  }
-
-  const getMessages = async () => {
-    const petition = await fetch(`/api/chat/message/${conversationId} `)
-    const data = await petition.json()
-    setMessages(data)
-  }
 
   useEffect(() => {
     scrollRef.current?.scrollIntoView({ behavior: 'smooth' })
   }, [messages])
 
   useEffect(() => {
-    getConversations()
+    getConversations(setConversations)
   }, [])
 
-  const getReceiverId = async () => {
-    const petition = await fetch(`/api/chat/${conversationId}`)
-    const conversationUsers = await petition.json()
-    const receiverId = conversationUsers.receiverId === authcontext.user.userId ? conversationUsers.senderId : conversationUsers.receiverId
-    console.log(receiverId)
-    setReceiverId(receiverId)
-  }
-
   useEffect(() => {
-    getMessages()
-    getReceiverId()
+    getMessages(conversationId, setMessages)
+    getReceiverId(conversationId, authContext, setReceiverId)
   }, [conversationId])
 
   useEffect(() => {
     arrivalMessage && setMessages(prev => [...prev, arrivalMessage])
   }, [arrivalMessage])
-
-  const handleMessage = (e) => setMessage(e.target.value)
-
-  const socket = io(URL, { withCredentials: true })
 
   useEffect(() => {
     socket.on('getUsers', (_users) => {
@@ -72,22 +50,9 @@ const PrivateChat = () => {
     })
   }, [])
 
-  const handleSubmit = async () => {
-    const petition = await fetch('/api/chat/message', {
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/json'
-      },
-      body: JSON.stringify({
-        text: message,
-        conversationId
-      })
-    })
-    const newMessage = await petition.json()
-    setMessage('')
-    setMessages([...messages, newMessage])
-    socket.emit('sendMessage', { receiverId, text: message })
-  }
+  const handleMessage = (e) => setMessage(e.target.value)
+
+  const socket = io(URL, { withCredentials: true })
 
   return (
     <section className='flex min-h-[calc(100vh-5rem)]'>
@@ -113,7 +78,7 @@ const PrivateChat = () => {
         <div className='flex justify-between h-1/6'>
 
           <input className='w-2/3 bg-slate-200 p-5 m-2 rounded-md' value={message} type='text' onChange={handleMessage} />
-          <button onClick={handleSubmit} className='bg-green-200 w-1/3 p-5 m-2 rounded-md '>Send Message</button>
+          <button onClick={async () => await handleSubmit(conversationId, setMessage, setMessages, receiverId, message, messages, socket)} className='bg-green-200 w-1/3 p-5 m-2 rounded-md '>Send Message</button>
         </div>
       </div>
     </section>
