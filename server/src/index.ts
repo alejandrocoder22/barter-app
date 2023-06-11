@@ -72,9 +72,10 @@ io.on('connection', (socket: any) => {
   io.emit('getUsers', users)
   
   // @ts-expect-error
-  socket.on('sendMessage', ({ recieverId, text }) => {
-    const user = getUser(recieverId)
-    io.to(user?.socketId).emit('getMessage', ({
+  socket.on('sendMessage', ({ receiverId, text }) => {
+    const user = getUser(receiverId)
+    console.log(receiverId);
+    io.to(user.socketId).emit('getMessage', ({
       userId: socket.userId,
       text
     }))

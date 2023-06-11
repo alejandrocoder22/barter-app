@@ -1,7 +1,8 @@
 import { io } from 'socket.io-client'
-import { useEffect, useState, useRef } from 'react'
+import { useEffect, useState, useRef, useContext } from 'react'
 import Conversations from '../components/Conversations'
 import Message from '../components/Message'
+import { AuthContext } from '../context/authContext'
 
 const URL = 'http://localhost:3009'
 
@@ -10,6 +11,10 @@ const PrivateChat = () => {
   const [messages, setMessages] = useState([])
   const [conversations, setConversations] = useState([])
   const [conversationId, setConversationId] = useState(null)
+  const [receiverId, setReceiverId] = useState(null)
+  const [arrivalMessage, setArrivalMessage] = useState(null)
+
+  const authcontext = useContext(AuthContext)
 
   const scrollRef = useRef()
   const getConversations = async () => {
@@ -32,21 +37,38 @@ const PrivateChat = () => {
     getConversations()
   }, [])
 
+  const getReceiverId = async () => {
+    const petition = await fetch(`/api/chat/${conversationId}`)
+    const conversationUsers = await petition.json()
+    const receiverId = conversationUsers.receiverId === authcontext.user.userId ? conversationUsers.senderId : conversationUsers.receiverId
+    console.log(receiverId)
+    setReceiverId(receiverId)
+  }
+
   useEffect(() => {
     getMessages()
+    getReceiverId()
   }, [conversationId])
+
+  useEffect(() => {
+    arrivalMessage && setMessages(prev => [...prev, arrivalMessage])
+  }, [arrivalMessage])
 
   const handleMessage = (e) => setMessage(e.target.value)
 
   const socket = io(URL, { withCredentials: true })
 
   useEffect(() => {
-    socket.on('getUsers', (users) => {
-      console.log('Users')
+    socket.on('getUsers', (_users) => {
+      // console.log(users)
     })
 
     socket.on('getMessage', (data) => {
-      console.log('MEssage')
+      setArrivalMessage({
+        userId: data.userId,
+        text: data.text,
+        createdAt: Date.now()
+      })
     })
   }, [])
 
@@ -63,9 +85,8 @@ const PrivateChat = () => {
     })
     const newMessage = await petition.json()
 
-    console.log(newMessage)
     setMessages([...messages, newMessage])
-    socket.emit('sendMessage', { recieverId: 1, text: message })
+    socket.emit('sendMessage', { receiverId, text: message })
   }
 
   return (
