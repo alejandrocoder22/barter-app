@@ -6,5 +6,5 @@ export const router =express.Router()
 
 router.post('/', protectedRoute, createConversation)
 router.post('/message', protectedRoute, createMessage)
-router.get('/:id', getConversationById)
+router.get('/', protectedRoute, getConversationById)
 router.get('/message/:conversationId', getMessages)

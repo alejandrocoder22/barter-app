@@ -10,7 +10,7 @@ export const createConversation = async (req: any, res: any) => {
 
 export const getConversationById = async (req: any, res: any) => {
     try {
-        const conversation = await chatServices.getConversationById(Number(req.params.id))
+        const conversation = await chatServices.getConversationById(Number(req.user.userId))
         res.status(200).send(conversation)
     } catch (error: any) {
         res.status(400).send(error.message)

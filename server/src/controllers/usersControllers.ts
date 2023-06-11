@@ -13,6 +13,17 @@ export const getAllUsers = async (_req: express.Request, res: express.Response) 
   }
 }
 
+export const getUserById = async (req: any, res: any ) => {
+try {
+  const user = await usersServices.getUserById(Number(req.params.userId))
+  // @ts-ignore
+  const userWithoutSensibleData =  { userName: user.userName, userId: user?.id, profileImg: user?.profileImg }
+    res.status(200).send(userWithoutSensibleData)
+} catch (error: any) {
+  res.send(error)
+}
+}
+
 export const loginUser = async (req: express.Request, res: express.Response) => {
   const user = req.body
 
