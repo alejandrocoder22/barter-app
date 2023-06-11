@@ -113,7 +113,7 @@ const PrivateChat = () => {
         <div className='flex justify-between h-1/6'>
 
           <input className='w-2/3 bg-slate-200 p-5 m-2 rounded-md' type='text' onChange={handleMessage} />
-          <button onClick={handleSubmit} className='bg-green-200 w-1/3 h-full'>Send Message</button>
+          <button onClick={handleSubmit} className='bg-green-200 w-1/3 p-5 m-2 rounded-md '>Send Message</button>
         </div>
       </div>
     </section>
