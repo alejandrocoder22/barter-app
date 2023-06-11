@@ -54,7 +54,9 @@ model Message {
 }
 
 model Conversation {
-  id        Int     @id @default(autoincrement())
-  messages  Message @relation(fields: [messageId], references: [id])
-  messageId Int
+  id         Int     @id @default(autoincrement())
+  senderId   Int
+  receiverId Int
+  messages   Message @relation(fields: [messageId], references: [id])
+  messageId  Int
 }
