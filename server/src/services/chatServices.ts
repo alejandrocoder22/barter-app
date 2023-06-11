@@ -13,7 +13,7 @@ export const createConversation = async (senderId: number, receiverId: number) =
 
 export const getConversationById = async (userId: number) => await prisma.conversation.findMany({
     where: {
-        id: userId
+        senderId: userId
     }
 })
 
