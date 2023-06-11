@@ -46,8 +46,15 @@ model Like {
 }
 
 model Message {
-  id             Int    @id @default(autoincrement())
+  id             Int            @id @default(autoincrement())
   conversationId String
   senderId       Int
   text           String
+  Conversation   Conversation[]
+}
+
+model Conversation {
+  id        Int     @id @default(autoincrement())
+  messages  Message @relation(fields: [messageId], references: [id])
+  messageId Int
 }
