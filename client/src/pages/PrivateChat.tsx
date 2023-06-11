@@ -1,13 +1,15 @@
 import { io } from 'socket.io-client'
 import { useEffect, useState } from 'react'
 import Conversations from '../components/Conversations'
+import Message from '../components/Message'
 
 const URL = 'http://localhost:3009'
 
 const PrivateChat = () => {
   const [message, setMessage] = useState('')
-  const [_messages, setMessages] = useState([])
+  const [messages, setMessages] = useState([])
   const [conversations, setConversations] = useState([])
+  const [conversationId, setConversationId] = useState(null)
 
   const getConversations = async () => {
     const petition = await fetch('/api/chat')
@@ -16,7 +18,7 @@ const PrivateChat = () => {
   }
 
   const getMessages = async () => {
-    const petition = await fetch(`/api/chat/message${conversations.id} `)
+    const petition = await fetch(`/api/chat/message/${conversationId} `)
     const data = await petition.json()
     setMessages(data)
   }
@@ -27,7 +29,7 @@ const PrivateChat = () => {
 
   useEffect(() => {
     getMessages()
-  }, [conversations])
+  }, [conversationId])
 
   const handleMessage = (e) => setMessage(e.target.value)
 
@@ -35,11 +37,11 @@ const PrivateChat = () => {
 
   useEffect(() => {
     socket.on('getUsers', (users) => {
-      console.log(users)
+      console.log('Users')
     })
 
     socket.on('getMessage', (data) => {
-      console.log(data)
+      console.log('MEssage')
     })
   }, [])
 
@@ -51,12 +53,20 @@ const PrivateChat = () => {
     <section className='flex min-h-[calc(100vh-5rem)]'>
       <aside className='bg-gray-200 w-1/5'>
         <div className='h-full flex gap-2 mt-5 flex-col '>
-          <Conversations conversations={conversations} />
+          {
+            conversations.map(conver => {
+              return <Conversations key={conver.id} setConversationId={setConversationId} conver={conver} />
+            })
+          }
         </div>
 
       </aside>
       <div className='bg-blue-200 flex flex-col justify-between w-full '>
-        <div className='bg-orange-200  h-5/6'>Messages</div>
+        {
+          messages.map(message => {
+            return <Message key={message.id} message={message} />
+          })
+        }
         <div className='h-1/6'>
           <input className='w-2/3 h-full' type='text' onChange={handleMessage} />
           <button onClick={handleSubmit} className='bg-green-200 w-1/3  h-full'>Send Message</button>
