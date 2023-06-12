@@ -30,7 +30,7 @@ export const getProductsByUser = async (req: any, res: Response) => {
     }
 
     const productsofUser = await productsServices.getProductsByUser(req.params.userId)
-    res.send(productsofUser)
+    res.status(200).send(productsofUser)
   } catch (error: any) {
     res.send(error.message)
   }
