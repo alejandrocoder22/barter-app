@@ -38,12 +38,20 @@ export const getProductsByUser = async (req: any, res: Response) => {
 export const createProduct = async (req: any, res: Response) => {
   const product = req.body
 
+  console.log(product);
+
   const { productName, estimatedValue, status, category, location, description } = req.body
   try {
-    if (!productName || !estimatedValue || !status || !category || !description || !location) {
+    if (!productName || !estimatedValue || !status || !category || !description || !location || !req.file)  {
       res.status(400)
       throw new Error('All fields are required')
     }
+
+     if (isNaN(estimatedValue))  {
+      res.status(400)
+      throw new Error('Estimated value must be a number')
+    }
+
 
     product.imageUrl = 'uploads/' + req.file.filename
     product.userId = req.user.userId
