@@ -37,7 +37,6 @@ export const getMessages = async (conversationId: number) => await prisma.messag
   }
 })
 
-
 export const getConversationByconversationId = async (conversationId: number) => await prisma.conversation.findUnique({
   where: {
     id: conversationId

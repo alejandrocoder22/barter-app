@@ -70,12 +70,12 @@ io.on('connection', (socket: any) => {
   addUserOnConnect(socket.userId, socket.id)
 
   io.emit('getUsers', users)
-  
+
   // @ts-expect-error
   socket.on('sendMessage', ({ receiverId, text }) => {
     const user = getUser(receiverId)
-    console.log(receiverId);
-    io.to(user.socketId).emit('getMessage', ({
+    console.log(receiverId)
+    io.to(user?.socketId).emit('getMessage', ({
       userId: socket.userId,
       text
     }))
