@@ -1,6 +1,7 @@
 import * as productsServices from '../services/productsServices'
 import { Request, Response } from 'express'
 import fs from 'fs'
+import { validateProduct } from '../utils/validateProduct'
 
 export const getSingleProduct = async (_req: Request, res: Response) => {
   const { productId } = _req.params
@@ -38,21 +39,8 @@ export const getProductsByUser = async (req: any, res: Response) => {
 export const createProduct = async (req: any, res: Response) => {
   const product = req.body
 
-  console.log(product);
-
-  const { productName, estimatedValue, status, category, location, description } = req.body
   try {
-    if (!productName || !estimatedValue || !status || !category || !description || !location || !req.file)  {
-      res.status(400)
-      throw new Error('All fields are required')
-    }
-
-     if (isNaN(estimatedValue))  {
-      res.status(400)
-      throw new Error('Estimated value must be a number')
-    }
-
-
+    validateProduct(req.body, res, req)
     product.imageUrl = 'uploads/' + req.file.filename
     product.userId = req.user.userId
     product.estimatedValue = Number(product.estimatedValue)
