@@ -49,7 +49,7 @@ export const loginUser = async (req: express.Request, res: express.Response) => 
       throw new Error('Invalid username or password')
     }
   } catch (error: any) {
-    res.send(error.message)
+    res.json(error.message)
   }
 }
 

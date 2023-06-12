@@ -4,7 +4,5 @@ export const customErrorHandler = (err: any, _req: express.Request, res: express
   const statusCode = res.statusCode === 200 ? 500 : res.statusCode
   const message = err.message
 
-  res.status(statusCode).json({
-    message
-  })
+  res.status(statusCode).json({ message })
 }

@@ -20,7 +20,6 @@ app.use('/uploads', express.static('uploads'))
 app.use(cors())
 app.use(express.json())
 app.use(cookiePArser())
-app.use(customErrorHandler)
 
 app.use('/api/likes', likesRouter)
 app.use('/api/users', usersRouter)
@@ -87,6 +86,8 @@ io.on('connection', (socket: any) => {
     console.log('UIser disconnected')
   })
 })
+
+app.use(customErrorHandler)
 
 httpServer.listen(process.env.PORT, () => console.log(`Listening on port ${process.env.PORT}`))
 
