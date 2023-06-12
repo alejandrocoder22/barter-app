@@ -1,4 +1,6 @@
 /server/.env
 /server/node_modules
+/server/uploads
+/server/prisma/migrations
 /client/.env
 /client/node_modules
