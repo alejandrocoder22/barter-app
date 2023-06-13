@@ -1,7 +1,11 @@
 import { Link, useLocation } from 'react-router-dom'
+import { useContext } from 'react'
+import { AuthContext } from '../context/authContext'
+
 const Nav = () => {
   const location = useLocation()
 
+  const authContext = useContext(AuthContext)
   const getClassNameOnCurrentPage = (pathName: string) => {
     if (location.pathname === pathName) {
       return 'text-lime-500'
@@ -16,6 +20,7 @@ const Nav = () => {
         <li><Link to='/product' className={getClassNameOnCurrentPage('/product')}>Add Product</Link></li>
         <li><Link to='/profile' className={getClassNameOnCurrentPage('/profile')}>Profile</Link></li>
         <li><Link to='/chat' className={getClassNameOnCurrentPage('/chat')}>Chat</Link></li>
+        <li>Logged as: {authContext.user.userName}</li>
       </ul>
     </nav>
   )
