@@ -1,15 +1,13 @@
-import { useState, useContext } from 'react'
-import { AuthContext } from '../context/authContext'
+import { useState } from 'react'
+
 import { Link } from 'react-router-dom'
 import ResponsePopup from '../components/ResponsePopup'
-import { handleLogin } from '../services/auth'
+import useAuth from '../hooks/useAuth'
 const Login = () => {
   const [userName, setUserName] = useState('')
   const [password, setPassword] = useState('')
-  const [responseMessage, setResponseMessage] = useState('')
-  const [responseStatus, setResponseStatus] = useState('')
 
-  const { setUser } = useContext(AuthContext)
+  const { handleLogin, responseMessage, responseStatus } = useAuth({ userName, password })
 
   const onHandleUserName = (e: any) => setUserName(e.target.value)
   const onHandlePassword = (e: any) => setPassword(e.target.value)
@@ -17,7 +15,7 @@ const Login = () => {
   return (
     <section className='flex flex-col  items-center justify-center min-h-[calc(100vh-4rem)]'>
       <ResponsePopup message={responseMessage} status={responseStatus} />
-      <form onSubmit={async (e) => await handleLogin(e, userName, password, setResponseMessage, setResponseStatus, setUser)} className='flex flex-col max-w-xs gap-2'>
+      <form onSubmit={async (e) => await handleLogin(e, userName, password)} className='flex flex-col max-w-xs gap-2'>
         <label>Username</label>
         <input className='rounded-md p-1 border-2' onChange={onHandleUserName} type='text' name='username' />
         <label>Password</label>
