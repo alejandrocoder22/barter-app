@@ -9,8 +9,8 @@ function App () {
     const petition = await fetch('/api/users/verify')
     const data = await petition.json()
     authContext.setUser({
-      userName: data.userData.userName,
-      userId: data.userData.userId
+      userName: data.userData?.userName,
+      userId: data.userData?.userId
     })
   }
 
