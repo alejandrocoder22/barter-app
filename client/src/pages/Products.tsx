@@ -1,6 +1,7 @@
 import { useState, useEffect } from 'react'
 import Product from '../components/Product'
 import CategoriesMenu from '../components/CategoriesMenu'
+import { categories } from '../data/categories'
 
 const Products = () => {
   const [products, setProducts] = useState([])
@@ -66,11 +67,18 @@ const Products = () => {
 
   return (
     <>
-      <CategoriesMenu setCategory={setCategory} category={category} />
+      <ul className='flex justify-center gap-2 mt-2'>
+        {
+      categories?.map((singleCategory) => {
+        return <CategoriesMenu key={singleCategory.name} setCategory={setCategory} singleCategory={singleCategory} />
+      })
+    }
+      </ul>
+
       <section className='grid grid-cols-3 gap-5 max-w-screen-2xl m-auto  p-2'>
         {productsToMap.length > 0
           ? (
-              productsToMap.map(product => (
+              productsToMap?.map(product => (
                 <Product key={product.id} product={product} />
               ))
             )
