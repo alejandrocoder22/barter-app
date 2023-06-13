@@ -8,3 +8,14 @@ export const loginUser = async (userName, password) => {
     })
   })
 }
+
+export const logOutUser = (setUserContext) => {
+  fetch('/api/users/logout', {
+    method: 'POST',
+    headers: {
+      'Content-Type': 'application/json'
+    }
+  }).then(() => {
+    setUserContext(null)
+  })
+}

@@ -1,6 +1,7 @@
 import { Link, useLocation } from 'react-router-dom'
 import { useContext } from 'react'
 import { AuthContext } from '../context/authContext'
+import { logOutUser } from '../services/auth'
 
 const Nav = () => {
   const location = useLocation()
@@ -20,7 +21,16 @@ const Nav = () => {
         <li><Link to='/product' className={getClassNameOnCurrentPage('/product')}>Add Product</Link></li>
         <li><Link to='/profile' className={getClassNameOnCurrentPage('/profile')}>Profile</Link></li>
         <li><Link to='/chat' className={getClassNameOnCurrentPage('/chat')}>Chat</Link></li>
-        <li>Logged as: {authContext.user.userName}</li>
+        {
+          authContext.user?.userName && (
+            <>
+              <li onClick={() => logOutUser(authContext.setUser)}>Logout</li>
+              <li>Logged as: {authContext.user?.userName}</li>
+            </>
+
+          )
+        }
+
       </ul>
     </nav>
   )
