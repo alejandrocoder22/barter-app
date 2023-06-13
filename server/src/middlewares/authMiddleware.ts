@@ -18,6 +18,6 @@ export const protectedRoute = async (req: any, res: express.Response, next: expr
       throw new Error('Unauthorized')
     }
   } catch (error: any) {
-    res.send(error.message)
+    res.json(error.message)
   }
 }
