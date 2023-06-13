@@ -19,7 +19,7 @@ const Login = () => {
         <label>Username</label>
         <input className='rounded-md p-1 border-2' onChange={onHandleUserName} type='text' name='username' />
         <label>Password</label>
-        <input className='rounded-md p-1 border-2' onChange={onHandlePassword} type='text' name='password' />
+        <input className='rounded-md p-1 border-2' onChange={onHandlePassword} type='password' name='password' />
         <p>Don't have an account?  <Link to='/register' className='text-blue-500'> Register here</Link></p>
         <button className='text-white font-bold bg-blue-500 hover:bg-blue-400  rounded-md p-2 mt-3' type='submit'>Login</button>
       </form>

@@ -34,7 +34,7 @@ const Register = () => {
         <label>Username</label>
         <input className='rounded-md p-1 border-2' onChange={onHandleUserName} type='text' name='username' />
         <label>Password</label>
-        <input className='rounded-md p-1 border-2' onChange={onHandlePassword} type='text' name='password' />
+        <input className='rounded-md p-1 border-2' onChange={onHandlePassword} type='password' name='password' />
         <button className='text-white font-bold bg-blue-500 hover:bg-blue-400 mt-3 rounded-md p-2 color' type='submit'>Login</button>
       </form>
     </section>
