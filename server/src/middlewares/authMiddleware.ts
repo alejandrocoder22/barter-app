@@ -13,6 +13,7 @@ export const protectedRoute = async (req: any, res: express.Response, next: expr
       req.user = decoded
 
       next()
+      
     } else {
       res.status(401)
       throw new Error('Unauthorized')
