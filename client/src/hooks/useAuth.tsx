@@ -7,10 +7,10 @@ const useAuth = ({ userName, password }) => {
 
   const { setUser } = useContext(AuthContext)
 
-  const handleLogin = async (e, userName, password) => {
+  const handleLogin = async (e, formData) => {
     e.preventDefault()
 
-    const petition = await loginUser(userName, password)
+    const petition = await loginUser(formData.userName, formData.password)
 
     const response = await petition.json()
 
