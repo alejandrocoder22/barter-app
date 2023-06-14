@@ -1,7 +1,7 @@
 import { useState, useContext } from 'react'
 import { handleLogin, loginUser } from '../services/auth'
 import { AuthContext } from '../context/authContext'
-const useAuth = ({ userName, password }) => {
+const useAuth = ({ userName, password, email }) => {
   const [responseMessage, setResponseMessage] = useState('')
   const [responseStatus, setResponseStatus] = useState('')
 
@@ -26,12 +26,29 @@ const useAuth = ({ userName, password }) => {
     }
   }
 
+  const handleRegister = async (e) => {
+    e.preventDefault()
+    const petition = await fetch('/api/users/register', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({
+        userName,
+        password,
+        email
+      })
+    })
+    const response = await petition.json()
+
+    setUser({ userName: response.userName })
+  }
+
   return {
     responseMessage,
     responseStatus,
     setResponseMessage,
     setResponseStatus,
-    handleLogin
+    handleLogin,
+    handleRegister
   }
 }
 
