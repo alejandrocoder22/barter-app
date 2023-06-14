@@ -1,9 +1,12 @@
 import { useState, useContext } from 'react'
-import { handleLogin, loginUser } from '../services/auth'
+import { loginUser } from '../services/auth'
 import { AuthContext } from '../context/authContext'
+import { useNavigate } from 'react-router-dom'
 const useAuth = ({ userName, password, email }) => {
   const [responseMessage, setResponseMessage] = useState('')
   const [responseStatus, setResponseStatus] = useState('')
+
+  const navigate = useNavigate()
 
   const { setUser } = useContext(AuthContext)
 
@@ -23,6 +26,7 @@ const useAuth = ({ userName, password, email }) => {
       }, 2500)
     } else {
       setUser({ userName: response.userName, userId: response.id })
+      navigate('/')
     }
   }
 
@@ -39,7 +43,17 @@ const useAuth = ({ userName, password, email }) => {
     })
     const response = await petition.json()
 
-    setUser({ userName: response.userName })
+    if (!petition.ok) {
+      setResponseMessage(response)
+      setResponseStatus(petition.ok)
+      setTimeout(() => {
+        setResponseStatus(false)
+        setResponseMessage('')
+      }, 2500)
+    } else {
+      setUser({ userName: response.userName, userId: response.id })
+      navigate('/')
+    }
   }
 
   return {
