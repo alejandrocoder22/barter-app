@@ -1,3 +1,5 @@
-- Sistema de autenticación de usuarios
-- Mensajes privados entre usuarios
-- Alojamiento de imágenes junto a los productos
+@Chat 
+
+ - [ ] Añadir funcionalidad de iniciar conversación desde cada producto
+ - [ ] 
+ 
