@@ -59,7 +59,7 @@ export const createUser = async (req: express.Request, res: express.Response) =>
   const { userName } = user
 
   try {
-    
+
     validateCreateUser(res, user)
 
     const userExist = await usersServices.checkUser(userName)
@@ -80,7 +80,7 @@ export const createUser = async (req: express.Request, res: express.Response) =>
       res.send({ message: 'User created', userName: newUser.userName })
     }
   } catch (error: any) {
-    res.send(error.message)
+    res.json(error.message)
   }
 }
 
