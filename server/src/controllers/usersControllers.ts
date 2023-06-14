@@ -59,6 +59,7 @@ export const createUser = async (req: express.Request, res: express.Response) =>
   const { userName } = user
 
   try {
+    
     validateCreateUser(res, user)
 
     const userExist = await usersServices.checkUser(userName)
