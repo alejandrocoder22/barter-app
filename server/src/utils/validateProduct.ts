@@ -9,4 +9,9 @@ export const validateProduct = (body: any, res: any, req: any) => {
     res.status(400)
     throw new Error('Estimated value must be a number')
   }
+
+  if (!req.user) {
+    res.status(401)
+    throw new Error('Must be logged in')
+  }
 }
