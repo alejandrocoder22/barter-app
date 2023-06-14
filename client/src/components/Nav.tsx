@@ -17,15 +17,15 @@ const Nav = () => {
       <div className='logo'><Link to='/'>Logo</Link></div>
       <ul className='flex gap-3'>
         <li><Link to='/' className={getClassNameOnCurrentPage('/')}>Products</Link></li>
-        <li><Link to='/likes' className={getClassNameOnCurrentPage('/likes')}>Likes</Link></li>
         <li><Link to='/product' className={getClassNameOnCurrentPage('/product')}>Add Product</Link></li>
         <li><Link to='/profile' className={getClassNameOnCurrentPage('/profile')}>Profile</Link></li>
-        <li><Link to='/chat' className={getClassNameOnCurrentPage('/chat')}>Chat</Link></li>
 
         {
           authContext.user?.userName
             ? (
               <>
+                <li><Link to='/chat' className={getClassNameOnCurrentPage('/chat')}>Chat</Link></li>
+                <li><Link to='/likes' className={getClassNameOnCurrentPage('/likes')}>Likes</Link></li>
                 <li onClick={() => logOutUser(authContext.setUser)}>Logout</li>
                 <li>Logged as: {authContext.user?.userName}</li>
               </>
