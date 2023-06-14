@@ -21,14 +21,17 @@ const Nav = () => {
         <li><Link to='/product' className={getClassNameOnCurrentPage('/product')}>Add Product</Link></li>
         <li><Link to='/profile' className={getClassNameOnCurrentPage('/profile')}>Profile</Link></li>
         <li><Link to='/chat' className={getClassNameOnCurrentPage('/chat')}>Chat</Link></li>
-        {
-          authContext.user?.userName && (
-            <>
-              <li onClick={() => logOutUser(authContext.setUser)}>Logout</li>
-              <li>Logged as: {authContext.user?.userName}</li>
-            </>
 
-          )
+        {
+          authContext.user?.userName
+            ? (
+              <>
+                <li onClick={() => logOutUser(authContext.setUser)}>Logout</li>
+                <li>Logged as: {authContext.user?.userName}</li>
+              </>
+
+              )
+            : <li><Link to='/login' className={getClassNameOnCurrentPage('/login')}>Login</Link></li>
         }
 
       </ul>
