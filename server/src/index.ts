@@ -10,7 +10,8 @@ import cookiePArser from 'cookie-parser'
 import { Server } from 'socket.io'
 import { createServer } from 'http'
 import { getUserDataFromToken } from './utils/getUserDataFromToken'
-dotenv.config({ path: './process.env' })
+
+dotenv.config()
 
 const app = express()
 const httpServer = createServer(app)
@@ -88,7 +89,6 @@ io.on('connection', (socket: any) => {
 })
 
 app.use(customErrorHandler)
-
 httpServer.listen(process.env.PORT, () => console.log(`Listening on port ${process.env.PORT}`))
 
 module.exports = app
