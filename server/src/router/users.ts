@@ -7,7 +7,7 @@ export const router = express.Router()
 
 router.get('/verify', protectedRoute, usersControllers.verifyUser)
 router.get('/', usersControllers.getAllUsers)
-router.get('/:userId', protectedRoute,  usersControllers.getUserById)
+router.get('/:userId',   usersControllers.getUserById)
 router.post('/login', usersControllers.loginUser)
 router.post('/logout', usersControllers.logOutUser)
 router.post('/register', usersControllers.createUser)
