@@ -15,6 +15,11 @@ export const getAllUsers = async (_req: express.Request, res: express.Response) 
 
 export const getUserById = async (req: any, res: any) => {
   try {
+    
+    if (Number(req.user.userId) !== Number(req.params.userId)) {
+      res.status(401)
+      throw new Error('You cant update others information')
+    }
     const user = await usersServices.getUserById(Number(req.params.userId))
     // @ts-expect-error
     const userWithoutSensibleData = { userName: user.userName, userId: user?.id, profileImg: user?.profileImg }
