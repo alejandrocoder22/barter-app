@@ -2,28 +2,42 @@ import { useState, useEffect } from 'react'
 import Product from '../components/Product'
 import CategoriesMenu from '../components/CategoriesMenu'
 import { categories } from '../data/categories'
+import useIsBottom from '../hooks/useIsBottom'
 
 const Products = () => {
   const [products, setProducts] = useState([])
   const [productsByCategory, setProductsByCategory] = useState([])
   const [category, setCategory] = useState(null)
   const [isLoading, setIsLoading] = useState(true)
+  const [lastId, setLastId] = useState(null)
 
   const productsToMap = category === null || category === 'all' ? products : productsByCategory
+
+  const { currentRef, isBottom } = useIsBottom()
 
   useEffect(() => {
     getAllProducts()
   }, [])
 
-  let lastId = null
-
   useEffect(() => {
     setProductsByCategory([])
-
     getProductsByCategory()
-
-    const lastId = null
   }, [category])
+
+  const getProductsByCategory = async () => {
+    try {
+      setIsLoading(true)
+      const petition = await fetch(`/api/products/category?categoryId=${category}&cursor=${lastId}`)
+      const productsByCategory = await petition.json()
+      setLastId(productsByCategory[productsByCategory.length - 1].id)
+      setProductsByCategory(prev => [...prev, ...productsByCategory])
+      console.log(lastId)
+    } catch (error) {
+      console.log(error)
+    } finally {
+      setIsLoading(false)
+    }
+  }
 
   const getAllProducts = async () => {
     try {
@@ -38,32 +52,9 @@ const Products = () => {
     }
   }
 
-  const getProductsByCategory = async () => {
-    try {
-      setIsLoading(true)
-      const petition = await fetch(`/api/products/category?categoryId=${category}&cursor=${lastId}`)
-      const productsByCategory = await petition.json()
-      setProductsByCategory(prev => [...prev, ...productsByCategory])
-      lastId = productsByCategory[productsByCategory.length - 1].id
-    } catch (error) {
-      console.log(error)
-    } finally {
-      setIsLoading(false)
-    }
-  }
-
-  const isBottomReached = () => {
-    const totalHeightscrolled = window.scrollY + document.documentElement.clientHeight
-    const totalHeight = document.documentElement.scrollHeight
-    if (totalHeightscrolled === totalHeight && category !== 'all') {
-      getProductsByCategory()
-    }
-  }
-
   useEffect(() => {
-    window.addEventListener('scroll', isBottomReached)
-    return () => window.removeEventListener('scroll', isBottomReached)
-  }, [category, lastId])
+    if (isBottom) getProductsByCategory()
+  }, [isBottom])
 
   return (
     <>
@@ -88,6 +79,7 @@ const Products = () => {
 
         {isLoading && <p className='text-center w-full'>Loading...</p>}
       </section>
+      <div ref={currentRef} />
     </>
   )
 }
