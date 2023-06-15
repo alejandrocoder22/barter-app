@@ -108,6 +108,24 @@ export const logOutUser = (_req: express.Request, res: express.Response) => {
   res.status(200).send({ message: 'User logged out' })
 }
 
+
+export const uploadProfileImage = async (req:any, res:any) => {
+
+
+  const profileImg = 'uploads/' + req.file.filename
+
+  try {
+    await usersServices.uploadProfileImage(req.user.userId, profileImg)
+    res.status(200).send({message: 'Image Uploaded'})
+  } catch (error: any) {
+    res.status(400)
+    throw new Error(error.message)
+  }
+  
+}
+
 export const verifyUser = (req: any, res: any) => {
   res.status(200).send({ message: 'User verified', userData: req.user })
 }
+
+
