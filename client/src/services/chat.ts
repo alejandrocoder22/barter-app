@@ -18,7 +18,8 @@ export const getConversations = async (setConversations) => {
   setConversations(data)
 }
 
-export const handleSubmit = async (conversationId, setMessage, setMessages, receiverId, message, messages, socket) => {
+export const handleSubmit = async (e, conversationId, setMessage, setMessages, receiverId, message, messages, socket) => {
+  e.preventDefault()
   const petition = await fetch('/api/chat/message', {
     method: 'POST',
     headers: {

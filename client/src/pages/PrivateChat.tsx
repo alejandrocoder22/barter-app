@@ -75,11 +75,10 @@ const PrivateChat = () => {
           })
         }
         </div>
-        <div className='flex justify-between h-1/6'>
-
+        <form onSubmit={async (e) => await handleSubmit(e, conversationId, setMessage, setMessages, receiverId, message, messages, socket)} className='flex justify-between h-1/6'>
           <input className='w-2/3 bg-slate-200 p-5 m-2 rounded-md' value={message} type='text' onChange={handleMessage} />
-          <button onClick={async () => await handleSubmit(conversationId, setMessage, setMessages, receiverId, message, messages, socket)} className='bg-green-200 w-1/3 p-5 m-2 rounded-md '>Send Message</button>
-        </div>
+          <button type='submit' className='bg-green-200 w-1/3 p-5 m-2 rounded-md '>Send Message</button>
+        </form>
       </div>
     </section>
   )
