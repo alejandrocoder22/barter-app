@@ -7,7 +7,10 @@ module.exports = {
     'plugin:react-hooks/recommended'
   ],
   parser: '@typescript-eslint/parser',
-  parserOptions: { ecmaVersion: 'latest', sourceType: 'module', project: './client/tsconfig.json' },
+  parserOptions: { ecmaVersion: 'latest', 
+  sourceType: 'module',
+  tsconfigRootDir: __dirname,
+  project: 'tsconfig.json' },
   plugins: ['react-refresh'],
   rules: {
     'react-refresh/only-export-components': 'warn'
