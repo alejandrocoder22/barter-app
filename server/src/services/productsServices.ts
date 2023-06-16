@@ -18,7 +18,7 @@ export const deleteProduct = async (productId: number) => await prisma.product.d
 export const getProductsByCategory = async (category: any, cursor: any) => {
   return cursor === 'null' || cursor === 'undefined' || !cursor
     ? await prisma.product.findMany({
-      take: 10,
+      take: 15,
       skip: 1,
       where: {
         category: {
@@ -30,7 +30,7 @@ export const getProductsByCategory = async (category: any, cursor: any) => {
       }
     })
     : await prisma.product.findMany({
-      take: 10,
+      take: 15,
       skip: 1,
       cursor: {
         id: Number(cursor)

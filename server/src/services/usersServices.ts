@@ -22,6 +22,6 @@ export const deleteUser = async (userId: number) => await prisma.user.delete({
 export const checkUser = async (userName: string) => await prisma.user.findFirst({ where: { userName } })
 
 export const getUserById = async (userId: number) => await prisma.user.findFirst({ where: { id: userId } })
-export const uploadProfileImage = async(userId: number, imgUrl: string) => {
-  await prisma.user.update({ where: {id: userId}, data: {profileImg: imgUrl} })
+export const uploadProfileImage = async (userId: number, imgUrl: string) => {
+  await prisma.user.update({ where: { id: userId }, data: { profileImg: imgUrl } })
 }
