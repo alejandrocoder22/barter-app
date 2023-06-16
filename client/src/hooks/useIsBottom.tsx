@@ -6,8 +6,15 @@ const useIsBottom = () => {
   const [isBottom, setIsBottom] = useState(false)
 
   const observerCallback = (entries) => {
+    console.log(entries)
     setIsBottom(entries[0].isIntersecting)
   }
+
+  // const options = {
+  //   root: null,
+  //   rootMargin: '0px',
+  //   threshold: 1.0
+  // }
 
   useEffect(() => {
     const observer = new IntersectionObserver(observerCallback)
@@ -17,7 +24,7 @@ const useIsBottom = () => {
     return () => {
       if (currentRef.current) observer.unobserve(currentRef.current)
     }
-  }, [currentRef])
+  }, [currentRef, isBottom])
 
   return { currentRef, isBottom }
 }

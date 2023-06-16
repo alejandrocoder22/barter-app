@@ -15,15 +15,6 @@ const Products = () => {
 
   const { currentRef, isBottom } = useIsBottom()
 
-  useEffect(() => {
-    getAllProducts()
-  }, [])
-
-  useEffect(() => {
-    setProductsByCategory([])
-    getProductsByCategory()
-  }, [category])
-
   const getProductsByCategory = async () => {
     try {
       setIsLoading(true)
@@ -39,6 +30,16 @@ const Products = () => {
     }
   }
 
+  useEffect(() => {
+    getAllProducts()
+  }, [])
+
+  useEffect(() => {
+    setProductsByCategory([])
+    setLastId(null)
+    getProductsByCategory()
+  }, [category])
+
   const getAllProducts = async () => {
     try {
       setIsLoading(true)
@@ -53,7 +54,7 @@ const Products = () => {
   }
 
   useEffect(() => {
-    if (isBottom) getProductsByCategory()
+    getProductsByCategory()
   }, [isBottom])
 
   return (
@@ -66,20 +67,27 @@ const Products = () => {
     }
       </ul>
 
-      <section className='grid grid-cols-3 gap-5 max-w-screen-2xl m-auto  p-2'>
-        {productsToMap.length > 0
-          ? (
-              productsToMap?.map(product => (
-                <Product key={product.id} product={product} />
-              ))
-            )
+      {
+        isLoading
+          ? <p className='text-center w-full'>Loading...</p>
           : (
-            <p className='text-center w-full'>No products</p>
-            )}
+            <>
+              <section className='grid grid-cols-3 gap-5 max-w-screen-2xl m-auto  p-2'>
+                {productsToMap.length > 0
+                  ? productsToMap?.map(product => (
+                    <Product key={product.id} product={product} />
+                  ))
 
-        {isLoading && <p className='text-center w-full'>Loading...</p>}
-      </section>
-      <div ref={currentRef} />
+                  : (
+                    <p className='text-center w-full'>No products</p>
+                    )}
+                <div ref={currentRef} className=''>Prueba</div>
+              </section>
+
+            </>
+            )
+          }
+
     </>
   )
 }
