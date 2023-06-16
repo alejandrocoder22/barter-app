@@ -15,8 +15,6 @@ export const getAllUsers = async (_req: express.Request, res: express.Response) 
 
 export const getUserById = async (req: any, res: any) => {
   try {
-    
-   
     const user = await usersServices.getUserById(Number(req.params.userId))
     // @ts-expect-error
     const userWithoutSensibleData = { userName: user.userName, userId: user?.id, profileImg: user?.profileImg }
@@ -61,7 +59,6 @@ export const createUser = async (req: express.Request, res: express.Response) =>
   const { userName } = user
 
   try {
-
     validateCreateUser(res, user)
 
     const userExist = await usersServices.checkUser(userName)
@@ -110,24 +107,18 @@ export const logOutUser = (_req: express.Request, res: express.Response) => {
   res.status(200).send({ message: 'User logged out' })
 }
 
-
-export const uploadProfileImage = async (req:any, res:any) => {
-
-
+export const uploadProfileImage = async (req: any, res: any) => {
   const profileImg = 'uploads/' + req.file.filename
 
   try {
     await usersServices.uploadProfileImage(req.user.userId, profileImg)
-    res.status(200).send({message: 'Image Uploaded'})
+    res.status(200).send({ message: 'Image Uploaded' })
   } catch (error: any) {
     res.status(400)
     throw new Error(error.message)
   }
-  
 }
 
 export const verifyUser = (req: any, res: any) => {
   res.status(200).send({ message: 'User verified', userData: req.user })
 }
-
-
