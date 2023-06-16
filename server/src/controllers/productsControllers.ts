@@ -13,10 +13,15 @@ export const getSingleProduct = async (_req: Request, res: Response) => {
     res.send(error.message)
   }
 }
-export const getAllProducts = async (_req: Request, res: Response) => {
+export const getAllProducts = async (req: any, res: Response) => {
+  const { categoryId, cursor } = req.query
   try {
-    const products = await productsServices.getAllProducts()
-    res.status(200).send(products)
+
+      const productsByCategory = await productsServices.getAllProducts(categoryId, cursor)
+
+      const isLastItem = productsByCategory.length < 15 ? true : false
+      res.status(200).send({products: productsByCategory, isLastItem})
+    
   } catch (error: any) {
     res.send(error.message)
   }
@@ -75,18 +80,6 @@ export const deleteProduct = async (req: Request, res: Response) => {
     res.status(200).send({ message: 'Product deleted', productDeleted })
   } catch (error) {
     res.status(400).send(error)
-  }
-}
-
-export const getProductsByCategory = async (req: Request, res: Response) => {
-  const { categoryId, cursor } = req.query
-  try {
-    if (categoryId) {
-      const productsByCategory = await productsServices.getProductsByCategory(categoryId, cursor)
-      res.status(200).send(productsByCategory)
-    }
-  } catch (error: any) {
-    res.send(error.message)
   }
 }
 

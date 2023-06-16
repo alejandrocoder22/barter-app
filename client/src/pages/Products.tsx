@@ -6,56 +6,47 @@ import useIsBottom from '../hooks/useIsBottom'
 
 const Products = () => {
   const [products, setProducts] = useState([])
-  const [productsByCategory, setProductsByCategory] = useState([])
   const [category, setCategory] = useState(null)
   const [isLoading, setIsLoading] = useState(true)
   const [lastId, setLastId] = useState(null)
+  const [isLastItem, setIsLastItem] = useState(false)
 
-  const productsToMap = category === null || category === 'all' ? products : productsByCategory
-
-  const { currentRef, isBottom } = useIsBottom()
-
-  const getProductsByCategory = async () => {
-    try {
-      setIsLoading(true)
-      const petition = await fetch(`/api/products/category?categoryId=${category}&cursor=${lastId}`)
-      const productsByCategory = await petition.json()
-      setLastId(productsByCategory[productsByCategory.length - 1].id)
-      setProductsByCategory(prev => [...prev, ...productsByCategory])
-      console.log(lastId)
-    } catch (error) {
-      console.log(error)
-    } finally {
-      setIsLoading(false)
+  const { containerRef, isVisible } = useIsBottom(
+    {
+      root: null,
+      rootMargin: '0px',
+      threshold: 1.0
     }
-  }
+  )
 
   useEffect(() => {
-    getAllProducts()
-  }, [])
-
-  useEffect(() => {
-    setProductsByCategory([])
     setLastId(null)
-    getProductsByCategory()
+    setProducts([])
+    getAllProducts()
   }, [category])
 
-  const getAllProducts = async () => {
-    try {
+  const getAllProducts = () => {
+    setLastId((lastValue) => {
       setIsLoading(true)
-      const petition = await fetch('/api/products')
-      const allProducts = await petition.json()
-      setProducts(allProducts)
-    } catch (error) {
-      console.log(error)
-    } finally {
-      setIsLoading(false)
-    }
+      fetch(`/api/products?categoryId=${category}&cursor=${lastValue}`)
+        .then(async response => await response.json())
+        .then(data => {
+          setProducts(prev => [...prev, ...data.products])
+          setIsLastItem(data.isLastItem)
+          if (data.products.length === 0) {
+            setLastId(lastValue)
+          } else {
+            setLastId(data.products[data.products.length - 1].id)
+          }
+        })
+        .catch(error => console.log(error))
+        .finally(() => setIsLoading(false))
+    })
   }
 
   useEffect(() => {
-    getProductsByCategory()
-  }, [isBottom])
+    if (isVisible && !isLastItem) getAllProducts()
+  }, [isVisible])
 
   return (
     <>
@@ -67,26 +58,15 @@ const Products = () => {
     }
       </ul>
 
-      {
-        isLoading
-          ? <p className='text-center w-full'>Loading...</p>
-          : (
-            <>
-              <section className='grid grid-cols-3 gap-5 max-w-screen-2xl m-auto  p-2'>
-                {productsToMap.length > 0
-                  ? productsToMap?.map(product => (
-                    <Product key={product.id} product={product} />
-                  ))
+      <section className='grid grid-cols-3 gap-5 max-w-screen-2xl m-auto  p-2'>
 
-                  : (
-                    <p className='text-center w-full'>No products</p>
-                    )}
-                <div ref={currentRef} className=''>Prueba</div>
-              </section>
-
-            </>
-            )
-          }
+        {
+                    products?.map(product => (
+                      <Product key={product.id} product={product} />
+                    ))
+}
+        {!isLoading && <div ref={containerRef} />}
+      </section>
 
     </>
   )

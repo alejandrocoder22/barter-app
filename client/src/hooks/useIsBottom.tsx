@@ -1,32 +1,26 @@
 import { useEffect, useState, useRef } from 'react'
 
-const useIsBottom = () => {
-  const currentRef = useRef()
+const useIsBottom = (options) => {
+  const containerRef = useRef()
 
-  const [isBottom, setIsBottom] = useState(false)
+  const [isVisible, setIsVisible] = useState(false)
 
-  const observerCallback = (entries) => {
-    console.log(entries)
-    setIsBottom(entries[0].isIntersecting)
+  const callBackFunction = (entries) => {
+    const [entry] = entries
+    setIsVisible(entry.isIntersecting)
   }
 
-  // const options = {
-  //   root: null,
-  //   rootMargin: '0px',
-  //   threshold: 1.0
-  // }
-
   useEffect(() => {
-    const observer = new IntersectionObserver(observerCallback)
+    const observer = new IntersectionObserver(callBackFunction, options)
 
-    if (currentRef.current) observer.observe(currentRef.current)
+    if (containerRef.current) observer.observe(containerRef.current)
 
     return () => {
-      if (currentRef.current) observer.unobserve(currentRef.current)
+      if (containerRef.current) observer.unobserve(containerRef.current)
     }
-  }, [currentRef, isBottom])
+  }, [containerRef, options])
 
-  return { currentRef, isBottom }
+  return { containerRef, isVisible }
 }
 
 export default useIsBottom
