@@ -3,12 +3,13 @@ import Product from '../components/Product'
 import CategoriesMenu from '../components/CategoriesMenu'
 import { categories } from '../data/categories'
 import useIsBottom from '../hooks/useIsBottom'
+import { getAllProducts } from '../services/products'
 
 const Products = () => {
   const [products, setProducts] = useState([])
   const [category, setCategory] = useState(null)
   const [isLoading, setIsLoading] = useState(true)
-  const [lastId, setLastId] = useState(null)
+  const [_lastId, setLastId] = useState(null)
   const [isLastItem, setIsLastItem] = useState(false)
 
   const { containerRef, isVisible } = useIsBottom(
@@ -22,30 +23,11 @@ const Products = () => {
   useEffect(() => {
     setLastId(null)
     setProducts([])
-    getAllProducts()
+    getAllProducts(setProducts, setIsLastItem, setLastId, setIsLoading, category)
   }, [category])
 
-  const getAllProducts = () => {
-    setLastId((lastValue) => {
-      setIsLoading(true)
-      fetch(`/api/products?categoryId=${category}&cursor=${lastValue}`)
-        .then(async response => await response.json())
-        .then(data => {
-          setProducts(prev => [...prev, ...data.products])
-          setIsLastItem(data.isLastItem)
-          if (data.products.length === 0) {
-            setLastId(lastValue)
-          } else {
-            setLastId(data.products[data.products.length - 1].id)
-          }
-        })
-        .catch(error => console.log(error))
-        .finally(() => setIsLoading(false))
-    })
-  }
-
   useEffect(() => {
-    if (isVisible && !isLastItem) getAllProducts()
+    if (isVisible && !isLastItem) getAllProducts(setProducts, setIsLastItem, setLastId, setIsLoading, category)
   }, [isVisible])
 
   return (
