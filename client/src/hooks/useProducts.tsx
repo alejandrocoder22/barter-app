@@ -2,7 +2,7 @@
 import { useState, useEffect } from 'react'
 import { getAllProducts } from '../services/products'
 
-const useProducts = (isVisible) => {
+const useProducts = (isVisible: boolean) => {
   const [products, setProducts] = useState([])
   const [category, setCategory] = useState(null)
   const [isLoading, setIsLoading] = useState(true)
