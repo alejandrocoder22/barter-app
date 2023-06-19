@@ -1,4 +1,3 @@
-import { react } from 'react'
 export const getAllProducts = (setProducts, setIsLastItem, setLastId, setIsLoading, category: string | null) => {
   setLastId((lastValue: number) => {
     setIsLoading(true)

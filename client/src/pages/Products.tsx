@@ -1,17 +1,10 @@
-import { useState, useEffect } from 'react'
 import Product from '../components/Product'
 import CategoriesMenu from '../components/CategoriesMenu'
 import { categories } from '../data/categories'
 import useIsBottom from '../hooks/useIsBottom'
-import { getAllProducts } from '../services/products'
+import useProducts from '../hooks/useProducts'
 
 const Products = () => {
-  const [products, setProducts] = useState([])
-  const [category, setCategory] = useState(null)
-  const [isLoading, setIsLoading] = useState(true)
-  const [_lastId, setLastId] = useState(null)
-  const [isLastItem, setIsLastItem] = useState(false)
-
   const { containerRef, isVisible } = useIsBottom(
     {
       root: null,
@@ -19,16 +12,7 @@ const Products = () => {
       threshold: 1.0
     }
   )
-
-  useEffect(() => {
-    setLastId(null)
-    setProducts([])
-    getAllProducts(setProducts, setIsLastItem, setLastId, setIsLoading, category)
-  }, [category])
-
-  useEffect(() => {
-    if (isVisible && !isLastItem) getAllProducts(setProducts, setIsLastItem, setLastId, setIsLoading, category)
-  }, [isVisible])
+  const { products, isLoading, setCategory } = useProducts(isVisible)
 
   return (
     <>
