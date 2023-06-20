@@ -2,6 +2,7 @@ import { Link, useLocation } from 'react-router-dom'
 import { useContext } from 'react'
 import { AuthContext } from '../context/authContext'
 import { logOutUser } from '../services/auth'
+import { AiOutlineLogout } from 'react-icons/ai'
 
 const Nav = () => {
   const location = useLocation()
@@ -15,7 +16,7 @@ const Nav = () => {
   return (
     <nav className='flex justify-between max-w-screen-2xl m-auto  p-2'>
       <div className='logo'><Link to='/'>Logo</Link></div>
-      <ul className='flex gap-3'>
+      <ul className='flex gap-5'>
         <li><Link to='/' className={getClassNameOnCurrentPage('/')}>Products</Link></li>
 
         {
@@ -26,8 +27,8 @@ const Nav = () => {
                 <li><Link to='/profile' className={getClassNameOnCurrentPage('/profile')}>Profile</Link></li>
                 <li><Link to='/chat' className={getClassNameOnCurrentPage('/chat')}>Chat</Link></li>
                 <li><Link to='/likes' className={getClassNameOnCurrentPage('/likes')}>Likes</Link></li>
-                <li onClick={() => logOutUser(authContext.setUser)}>Logout</li>
-                <li className='capitalize'>{authContext.user?.userName}</li>
+                <li className='capitalize font-bold'>{authContext.user?.userName}</li>
+                <li className='flex items-center cursor-pointer' onClick={() => logOutUser(authContext.setUser)}><AiOutlineLogout className='text-lg' /></li>
               </>
 
               )
