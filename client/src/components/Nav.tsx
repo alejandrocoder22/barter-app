@@ -27,7 +27,7 @@ const Nav = () => {
                 <li><Link to='/chat' className={getClassNameOnCurrentPage('/chat')}>Chat</Link></li>
                 <li><Link to='/likes' className={getClassNameOnCurrentPage('/likes')}>Likes</Link></li>
                 <li onClick={() => logOutUser(authContext.setUser)}>Logout</li>
-                <li>Logged as: {authContext.user?.userName}</li>
+                <li className='capitalize'>{authContext.user?.userName}</li>
               </>
 
               )
