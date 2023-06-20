@@ -31,7 +31,10 @@ const Nav = () => {
               </>
 
               )
-            : <li><Link to='/login' className={getClassNameOnCurrentPage('/login')}>Login</Link></li>
+            : <>
+              <li><Link to='/login' className={getClassNameOnCurrentPage('/login')}>Login</Link></li>
+              <li><Link to='/register' className={getClassNameOnCurrentPage('/register')}>Register</Link></li>
+            </>
         }
 
       </ul>
