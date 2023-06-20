@@ -56,7 +56,7 @@ const PrivateChat = () => {
 
   return (
     <section className='flex min-h-[calc(100vh-5rem)]'>
-      <aside className='bg-gray-200 w-1/5'>
+      <aside className='bg-gray-200 w-1/5 rounded-md mb-2'>
         <div className='h-full flex gap-2 mt-5 flex-col '>
           {
             conversations.map(conver => {
