@@ -31,6 +31,7 @@ const Products = () => {
                       <Product key={product.id} product={product} />
                     ))
 }
+        {products.length === 0 && <p className='text-center '>There are not products</p>}
         {!isLoading && <div ref={containerRef} />}
       </section>
 
