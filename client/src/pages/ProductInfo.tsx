@@ -46,6 +46,18 @@ const ProductInfo = ({}) => {
     const response = await petition.json()
     setLikes(response)
   }
+
+  const createConversation = () => {
+    fetch('/api/chat',
+      {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json'
+        },
+        body: JSON.stringify({ receiverId: product.userId })
+      })
+  }
+
   useEffect(() => {
     getProductById()
     getLikes()
@@ -71,7 +83,7 @@ const ProductInfo = ({}) => {
       <div className=''>
         <p className=''>User rating</p>
         <p className=''>Lorem ipsum dolor sit amet consectetur adipisicing elit. Recusandae molestias optio quisquam sequi quo quaerat perspiciatis magni similique tempora eveniet, consequatur voluptas corporis reiciendis minus ut ad exercitationem repellat illum!</p>
-        <button className='text-white font-bold bg-lime-500 p-2 rounded-md'>Send Message</button>
+        <button onClick={createConversation} className='text-white font-bold bg-lime-500 p-2 rounded-md'>Send Message</button>
       </div>
     </section>
   )
