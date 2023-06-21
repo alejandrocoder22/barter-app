@@ -37,7 +37,6 @@ const Profile = () => {
         <img src={`http://localhost:3009/${user?.profileImg}`} className='w-full h-full object-cover rounded-full ' />
         <RiUploadCloudFill className='absolute bottom-5 right-12 block h-10 w-10  text-gray-200' />
         <input onChange={uploadImage} type='file' />
-
       </div>
     </section>
   )
