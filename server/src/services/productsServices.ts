@@ -4,7 +4,7 @@ import { Product } from '../types'
 
 const prisma = new PrismaClient()
 export const getSingleProduct = async (productId: number) => await prisma.product.findUnique({ where: { id: productId } })
-export const getAllProducts = async (category: any, cursor: any) =>  {
+export const getAllProducts = async (category: any, cursor: any) => {
   return cursor === 'null' || cursor === 'undefined' || !cursor
     ? await prisma.product.findMany({
       take: 15,
@@ -33,7 +33,7 @@ export const getAllProducts = async (category: any, cursor: any) =>  {
         id: 'asc'
       }
     })
-    }
+}
 
 export const createProduct = async (product: Product) => await prisma.product.create({ data: product })
 export const updateProduct = async (product: Product) => await prisma.product.update({
@@ -45,7 +45,6 @@ export const updateProduct = async (product: Product) => await prisma.product.up
 
 export const getProductsByUser = async (userId: number) => await prisma.product.findMany({ where: { userId: Number(userId) } })
 export const deleteProduct = async (productId: number) => await prisma.product.delete({ where: { id: productId } })
-
 
 export const getLikedProducts = async (userId: number) => await prisma.like.findMany({
   where: {

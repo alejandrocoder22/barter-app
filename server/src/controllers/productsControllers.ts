@@ -16,12 +16,10 @@ export const getSingleProduct = async (_req: Request, res: Response) => {
 export const getAllProducts = async (req: any, res: Response) => {
   const { categoryId, cursor } = req.query
   try {
+    const productsByCategory = await productsServices.getAllProducts(categoryId, cursor)
 
-      const productsByCategory = await productsServices.getAllProducts(categoryId, cursor)
-
-      const isLastItem = productsByCategory.length < 15 ? true : false
-      res.status(200).send({products: productsByCategory, isLastItem})
-    
+    const isLastItem = productsByCategory.length < 15
+    res.status(200).send({ products: productsByCategory, isLastItem })
   } catch (error: any) {
     res.send(error.message)
   }
