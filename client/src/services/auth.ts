@@ -1,3 +1,4 @@
+
 export const loginUser = async (userName, password) => {
   return await fetch('/api/users/login', {
     method: 'POST',
@@ -9,7 +10,7 @@ export const loginUser = async (userName, password) => {
   })
 }
 
-export const logOutUser = (setUserContext) => {
+export const logOutUser = (setUserContext, navigate) => {
   fetch('/api/users/logout', {
     method: 'POST',
     headers: {
@@ -17,5 +18,8 @@ export const logOutUser = (setUserContext) => {
     }
   }).then(() => {
     setUserContext(null)
-  })
+  }).catch(error => console.log(error)).finally(
+    navigate('/')
+
+  )
 }
