@@ -1,11 +1,13 @@
 import { useEffect, useState } from 'react'
-import { useParams } from 'react-router-dom'
+import { useParams, useNavigate } from 'react-router-dom'
 const ProductInfo = ({}) => {
   const [product, setProduct] = useState([])
   const [likes, setLikes] = useState([])
   const [isLiked, setIsLiked] = useState(false)
 
   const { productId } = useParams()
+
+  const navigate = useNavigate()
 
   const getProductById = async () => {
     const petition = await fetch(`/api/products/singleProduct/${productId}`)
@@ -15,7 +17,7 @@ const ProductInfo = ({}) => {
   }
 
   const isLikedByUser = () => {
-    const allLikes = likes.map(like => like.productId)
+    const allLikes = likes?.map(like => like.productId)
     return allLikes.includes(Number(productId))
   }
 
@@ -47,15 +49,21 @@ const ProductInfo = ({}) => {
     setLikes(response)
   }
 
-  const createConversation = () => {
-    fetch('/api/chat',
-      {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json'
-        },
-        body: JSON.stringify({ receiverId: product.userId })
-      })
+  const createConversation = async () => {
+    try {
+      await fetch('/api/chat',
+        {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json'
+          },
+          body: JSON.stringify({ receiverId: product.userId })
+        })
+    } catch (error) {
+      console.log(error)
+    } finally {
+      navigate('/chat')
+    }
   }
 
   useEffect(() => {
