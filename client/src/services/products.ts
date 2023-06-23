@@ -16,3 +16,20 @@ export const getAllProducts = (setProducts, setIsLastItem, setLastId, setIsLoadi
       .finally(() => setIsLoading(false))
   })
 }
+
+export const addProduct = async (form, file) => {
+  e.preventDefault()
+
+  const formData = new FormData()
+
+  Object.keys(form).forEach((key) => {
+    formData.append(key, form[key])
+  })
+  formData.append('productImages', file)
+
+  const petition = await fetch('/api/products', {
+    method: 'POST',
+    body: formData
+  })
+  const response = await petition.json()
+}
