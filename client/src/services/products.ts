@@ -33,3 +33,10 @@ export const addProduct = async (form, file) => {
   })
   const response = await petition.json()
 }
+
+export const getProductById = async (productId, setProduct) => {
+  const petition = await fetch(`/api/products/singleProduct/${productId}`)
+  const singleProduct = await petition.json()
+
+  setProduct(singleProduct)
+}

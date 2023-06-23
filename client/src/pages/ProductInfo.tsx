@@ -1,5 +1,6 @@
 import { useEffect, useState } from 'react'
 import { useParams, useNavigate } from 'react-router-dom'
+import { getProductById } from '../services/products'
 const ProductInfo = ({}) => {
   const [product, setProduct] = useState([])
   const [likes, setLikes] = useState([])
@@ -8,13 +9,6 @@ const ProductInfo = ({}) => {
   const { productId } = useParams()
 
   const navigate = useNavigate()
-
-  const getProductById = async () => {
-    const petition = await fetch(`/api/products/singleProduct/${productId}`)
-    const singleProduct = await petition.json()
-
-    setProduct(singleProduct)
-  }
 
   const isLikedByUser = () => {
     const allLikes = likes?.map(like => like.productId)
@@ -67,7 +61,7 @@ const ProductInfo = ({}) => {
   }
 
   useEffect(() => {
-    getProductById()
+    getProductById(productId, setProduct)
     getLikes()
   }, [])
 
