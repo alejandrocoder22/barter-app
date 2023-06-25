@@ -40,3 +40,30 @@ export const getProductById = async (productId, setProduct) => {
 
   setProduct(singleProduct)
 }
+
+const isLikedByUser = () => {
+  const allLikes = likes?.map(like => like.productId)
+  return allLikes.includes(Number(productId))
+}
+
+export const handleLike = async (isLiked, setIsLiked, isLikedByUser, productId) => {
+  setIsLiked(!isLiked)
+  if (!isLikedByUser()) {
+    return await fetch('/api/likes', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json'
+      },
+      body: JSON.stringify({ productId })
+    })
+  } else {
+    setIsLiked(!isLiked)
+    return await fetch('/api/likes', {
+      method: 'DELETE',
+      headers: {
+        'Content-Type': 'application/json'
+      },
+      body: JSON.stringify({ productId })
+    })
+  }
+}

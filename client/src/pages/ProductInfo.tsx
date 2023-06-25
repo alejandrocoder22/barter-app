@@ -1,6 +1,6 @@
 import { useEffect, useState } from 'react'
 import { useParams, useNavigate } from 'react-router-dom'
-import { getProductById } from '../services/products'
+import { getProductById, handleLike } from '../services/products'
 const ProductInfo = ({}) => {
   const [product, setProduct] = useState([])
   const [likes, setLikes] = useState([])
@@ -9,33 +9,6 @@ const ProductInfo = ({}) => {
   const { productId } = useParams()
 
   const navigate = useNavigate()
-
-  const isLikedByUser = () => {
-    const allLikes = likes?.map(like => like.productId)
-    return allLikes.includes(Number(productId))
-  }
-
-  const handleLike = async () => {
-    setIsLiked(!isLiked)
-    if (!isLikedByUser()) {
-      return await fetch('/api/likes', {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json'
-        },
-        body: JSON.stringify({ productId })
-      })
-    } else {
-      setIsLiked(!isLiked)
-      return await fetch('/api/likes', {
-        method: 'DELETE',
-        headers: {
-          'Content-Type': 'application/json'
-        },
-        body: JSON.stringify({ productId })
-      })
-    }
-  }
 
   const getLikes = async () => {
     const petition = await fetch('/api/likes')
@@ -76,7 +49,7 @@ const ProductInfo = ({}) => {
         <div className='flex gap-2'>
           <p>{product?.status}</p>
           <p>{product?.estimatedValue}</p>
-          <p onClick={handleLike} className={`text-xl cursor-pointer ${isLiked ? 'text-green-500' : ''}`}>Like</p>
+          <p onClick={async () => await handleLike(isLiked, setIsLiked, isLikedByUser, productId)} className={`text-xl cursor-pointer ${isLiked ? 'text-green-500' : ''}`}>Like</p>
         </div>
         <img className='max-w-3xl rounded-2xl' src={`http://localhost:3009/${product?.imageUrl}`} />
         <p className=''>Date Added</p>
