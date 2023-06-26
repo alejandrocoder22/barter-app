@@ -83,10 +83,16 @@ export const createUser = async (req: express.Request, res: express.Response) =>
   }
 }
 
-export const updateUser = async (req: express.Request, res: express.Response) => {
+export const updateUser = async (req: any, res: express.Response) => {
   const user = req.body
-  const updatedUser = await usersServices.updateUser(user)
-  res.send(updatedUser)
+  try {
+      await usersServices.updateUser(user, req.user.userId)
+     res.status(200).send({message: 'User updated'})
+  } catch (error: any) {
+    res.json(error.message)
+  }
+
+ 
 }
 
 export const deleteUser = async (req: express.Request, res: express.Response) => {
