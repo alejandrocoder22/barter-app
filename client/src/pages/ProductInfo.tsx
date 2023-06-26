@@ -33,6 +33,11 @@ const ProductInfo = ({}) => {
     }
   }
 
+  const isLikedByUser = () => {
+    const allLikes = likes?.map(like => like.productId)
+    return allLikes.includes(Number(productId))
+  }
+
   useEffect(() => {
     getProductById(productId, setProduct)
     getLikes()

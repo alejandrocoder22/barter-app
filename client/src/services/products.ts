@@ -40,11 +40,6 @@ export const getProductById = async (productId, setProduct) => {
   setProduct(singleProduct)
 }
 
-const isLikedByUser = () => {
-  const allLikes = likes?.map(like => like.productId)
-  return allLikes.includes(Number(productId))
-}
-
 export const handleLike = async (isLiked, setIsLiked, isLikedByUser, productId) => {
   setIsLiked(!isLiked)
   if (!isLikedByUser()) {
