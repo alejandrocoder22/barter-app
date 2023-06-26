@@ -26,12 +26,12 @@ const AddProduct = () => {
           <label>Category</label>
           <select onChange={handleForm} name='category'>
             <option defaultChecked>Choose an category</option>
-            <option value='car'>Nuevo</option>
-            <option value='other'>Segunda mano</option>
-            <option value='furnitures'>Nuevo</option>
-            <option value='electronics'>Nuevo</option>
-            <option value='clothes'>Nuevo</option>
-            <option value='crafts'>Nuevo</option>
+            <option value='car'>Car</option>
+            <option value='furnitures'>Furnitures</option>
+            <option value='electronics'>Electronics</option>
+            <option value='clothes'>Clothes</option>
+            <option value='crafts'>Crafts</option>
+            <option value='other'>Other</option>
           </select>
           <label>Location</label>
           <input onChange={handleForm} className='border-2' type='text' name='location' />
