@@ -17,7 +17,7 @@ export const getAllProducts = (setProducts, setIsLastItem, setLastId, setIsLoadi
   })
 }
 
-export const addProduct = async (form, file) => {
+export const addProduct = async (e, form, file) => {
   e.preventDefault()
 
   const formData = new FormData()
@@ -31,7 +31,6 @@ export const addProduct = async (form, file) => {
     method: 'POST',
     body: formData
   })
-  const response = await petition.json()
 }
 
 export const getProductById = async (productId, setProduct) => {
