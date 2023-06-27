@@ -61,3 +61,8 @@ model Conversation {
 
   @@unique([senderId, receiverId])
 }
+
+model Categories {
+  id           Int    @id @default(autoincrement())
+  categoryName String
+}
