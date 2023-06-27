@@ -1,6 +1,7 @@
 import { useState } from 'react'
 import useForm from '../hooks/useForm'
 import { addProduct } from '../services/products'
+import SelectCategory from '../components/SelectCategory'
 
 const AddProduct = () => {
   const [file, setFile] = useState(null)
@@ -24,15 +25,7 @@ const AddProduct = () => {
           <label>Image</label>
           <input onChange={(e) => setFile(e.target.files[0])} className='border-2' type='file' accept='image/*' />
           <label>Category</label>
-          <select onChange={handleForm} name='category'>
-            <option defaultChecked>Choose an category</option>
-            <option value='car'>Car</option>
-            <option value='furnitures'>Furnitures</option>
-            <option value='electronics'>Electronics</option>
-            <option value='clothes'>Clothes</option>
-            <option value='crafts'>Crafts</option>
-            <option value='other'>Other</option>
-          </select>
+          <SelectCategory handleForm={handleForm} />
           <label>Location</label>
           <input onChange={handleForm} className='border-2' type='text' name='location' />
           <label>Description</label>
