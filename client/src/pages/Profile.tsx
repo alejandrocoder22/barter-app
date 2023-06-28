@@ -20,8 +20,6 @@ const Profile = () => {
   const uploadImage = (e: any) => {
     const formData = new FormData()
 
-    console.log(e.target.files[0])
-
     formData.append('profileImage', e.target.files[0])
 
     fetch('/api/users/image', {
