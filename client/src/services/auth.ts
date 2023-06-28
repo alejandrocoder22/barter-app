@@ -23,3 +23,17 @@ export const logOutUser = (setUserContext, navigate) => {
 
   )
 }
+
+export const updateUserInfo = async (e, form) => {
+  e.preventDefault()
+  const petition = await fetch('/api/users', {
+    method: 'PUT',
+    headers: {
+      'Content-Type': 'application/json'
+    },
+    body: JSON.stringify(form)
+  }
+  )
+  const response = await petition.json()
+  console.log(response)
+}

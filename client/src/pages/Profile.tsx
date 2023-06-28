@@ -28,20 +28,6 @@ const Profile = () => {
     })
   }
 
-  const updateUserInfo = async (e) => {
-    e.preventDefault()
-    const petition = await fetch('/api/users', {
-      method: 'PUT',
-      headers: {
-        'Content-Type': 'application/json'
-      },
-      body: JSON.stringify(form)
-    }
-    )
-    const response = await petition.json()
-    console.log(response)
-  }
-
   useEffect(() => {
     getUserInfo()
   }, [authContext])
@@ -55,7 +41,7 @@ const Profile = () => {
           <RiUploadCloudFill className='absolute bottom-5 right-12 block h-10 w-10 cursor-pointer text-gray-200' />
         </label>
       </div>
-      <form className='flex flex-col gap-1 bg-' onSubmit={updateUserInfo}>
+      <form className='flex flex-col gap-1 bg-' onSubmit={(e) => updateUserInfo(e, form)}>
         <label>Username</label>
         <input onChange={handleForm} className='bg-slate-100' required type='text' name='userName' />
         <label>Email</label>
