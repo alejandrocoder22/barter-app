@@ -3,7 +3,7 @@ import { useEffect, useState, useContext } from 'react'
 import { AuthContext } from '../context/authContext'
 import useForm from '../hooks/useForm'
 import { updateUserInfo } from '../services/auth'
-import { uploadProfileImage } from '../services/users'
+import { getUserInfo, uploadProfileImage } from '../services/users'
 
 const Profile = () => {
   const authContext = useContext(AuthContext)
@@ -12,15 +12,8 @@ const Profile = () => {
 
   const { handleForm, form } = useForm()
 
-  const getUserInfo = async () => {
-    const petition = await fetch(`/api/users/${authContext.user.userId}`)
-    const response = await petition.json()
-
-    setUser(response)
-  }
-
   useEffect(() => {
-    getUserInfo()
+    getUserInfo(setUser)
   }, [authContext])
 
   return (

@@ -8,3 +8,10 @@ export const uploadProfileImage = (e: any) => {
     body: formData
   })
 }
+
+export const getUserInfo = async (setUser) => {
+  const petition = await fetch(`/api/users/${authContext.user.userId}`)
+  const response = await petition.json()
+
+  setUser(response)
+}
