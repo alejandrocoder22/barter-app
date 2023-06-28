@@ -13,11 +13,11 @@ const Profile = () => {
   const { handleForm, form } = useForm()
 
   useEffect(() => {
-    getUserInfo(setUser)
+    getUserInfo(setUser, authContext)
   }, [authContext])
 
   return (
-    <section className='flex flex-col items-center gap-5 mt-5 min-h-[calc(100vh-5rem)] '>
+    <section className='flex flex-col items-center gap-5 mt-5 min-h-[calc(100vh-6.3rem)] '>
       <div className='relative bg-slate-500 h-80 w-80 rounded-full'>
         <img src={`http://localhost:3009/${user?.profileImg}`} className='w-full h-full object-cover rounded-full ' />
         <input className='hidden' onChange={uploadProfileImage} type='file' id='file' name='file' />

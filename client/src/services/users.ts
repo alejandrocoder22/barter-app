@@ -9,7 +9,7 @@ export const uploadProfileImage = (e: any) => {
   })
 }
 
-export const getUserInfo = async (setUser) => {
+export const getUserInfo = async (setUser, authContext) => {
   const petition = await fetch(`/api/users/${authContext.user.userId}`)
   const response = await petition.json()
 
