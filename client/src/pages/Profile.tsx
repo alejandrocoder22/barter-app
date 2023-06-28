@@ -49,7 +49,7 @@ const Profile = () => {
   }, [authContext])
 
   return (
-    <section className='flex min-h-[calc(100vh-5rem)] bg-slate-600'>
+    <section className='flex flex-col items-center gap-5 mt-5 min-h-[calc(100vh-5rem)] '>
       <div className='relative bg-slate-500 h-80 w-80 rounded-full'>
         <img src={`http://localhost:3009/${user?.profileImg}`} className='w-full h-full object-cover rounded-full ' />
         <input className='hidden' onChange={uploadImage} type='file' id='file' name='file' />
@@ -57,14 +57,14 @@ const Profile = () => {
           <RiUploadCloudFill className='absolute bottom-5 right-12 block h-10 w-10 cursor-pointer text-gray-200' />
         </label>
       </div>
-      <form className='flex flex-col gap-1 bg-cyan-50' onSubmit={updateUserInfo}>
+      <form className='flex flex-col gap-1 bg-' onSubmit={updateUserInfo}>
         <label>Username</label>
-        <input onChange={handleForm} type='text' name='userName' />
+        <input onChange={handleForm} className='bg-slate-100' required type='text' name='userName' />
         <label>Email</label>
-        <input onChange={handleForm} type='text' name='email' />
+        <input onChange={handleForm} className='bg-slate-100' required type='text' name='email' />
         <label>Password</label>
-        <input onChange={handleForm} type='password' name='password' />
-        <button>Update</button>
+        <input onChange={handleForm} className='bg-slate-100' required type='password' name='password' />
+        <button className='bg-orange-300 mt-4 p-2 cursor-pointer rounded-md'>Update</button>
       </form>
     </section>
   )
