@@ -35,3 +35,20 @@ export const handleSubmit = async (e, conversationId, setMessage, setMessages, r
   setMessages([...messages, newMessage])
   socket.emit('sendMessage', { receiverId, text: message })
 }
+
+export const createConversation = async (product, navigate) => {
+  try {
+    await fetch('/api/chat',
+      {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json'
+        },
+        body: JSON.stringify({ receiverId: product.userId })
+      })
+  } catch (error) {
+    console.log(error)
+  } finally {
+    navigate('/chat')
+  }
+}

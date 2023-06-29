@@ -1,6 +1,7 @@
 import { useEffect, useState } from 'react'
 import { useParams, useNavigate } from 'react-router-dom'
 import { getLikes, getProductById, handleLike } from '../services/products'
+import { createConversation } from '../services/chat'
 const ProductInfo = ({}) => {
   const [product, setProduct] = useState([])
   const [likes, setLikes] = useState([])
@@ -9,23 +10,6 @@ const ProductInfo = ({}) => {
   const { productId } = useParams()
 
   const navigate = useNavigate()
-
-  const createConversation = async () => {
-    try {
-      await fetch('/api/chat',
-        {
-          method: 'POST',
-          headers: {
-            'Content-Type': 'application/json'
-          },
-          body: JSON.stringify({ receiverId: product.userId })
-        })
-    } catch (error) {
-      console.log(error)
-    } finally {
-      navigate('/chat')
-    }
-  }
 
   const isLikedByUser = () => {
     const allLikes = likes?.map(like => like.productId)
@@ -57,7 +41,7 @@ const ProductInfo = ({}) => {
       <div className=''>
         <p className=''>User rating</p>
         <p className=''>Lorem ipsum dolor sit amet consectetur adipisicing elit. Recusandae molestias optio quisquam sequi quo quaerat perspiciatis magni similique tempora eveniet, consequatur voluptas corporis reiciendis minus ut ad exercitationem repellat illum!</p>
-        <button onClick={createConversation} className='text-white font-bold bg-lime-500 p-2 rounded-md'>Send Message</button>
+        <button onClick={async () => await createConversation(createConversation)} className='text-white font-bold bg-lime-500 p-2 rounded-md'>Send Message</button>
       </div>
     </section>
   )
