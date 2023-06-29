@@ -30,7 +30,7 @@ const AddProduct = () => {
           <input onChange={handleForm} className='border-2' type='text' name='location' />
           <label>Description</label>
           <textarea onChange={handleForm} className='border-2' name='description' />
-          <button className='bg-indigo-500 mt-2 p-2 hover:bg-indigo-400' type='submit'>Login</button>
+          <button className='bg-indigo-500 mt-2 p-2 hover:bg-indigo-400' type='submit'>Add product</button>
         </form>
       </div>
     </main>
