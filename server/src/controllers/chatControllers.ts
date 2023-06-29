@@ -4,6 +4,12 @@ export const createConversation = async (req: any, res: any) => {
 
     if (req.user.userId === req.body.receiverId) throw new Error('You cant create a conversation with yourself')
 
+    const conversation = await chatServices.getConversationById(Number(req.user.userId))
+
+    if (conversation.length > 0) throw new Error('This pair of users already exist')
+
+    console.log(conversation);
+
     await chatServices.createConversation(req.user.userId, req.body.receiverId)
     res.status(200).send('Conversation created')
   } catch (error: any) {
