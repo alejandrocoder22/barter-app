@@ -38,7 +38,7 @@ export const handleSubmit = async (e, conversationId, setMessage, setMessages, r
 
 export const createConversation = async (product, navigate) => {
   try {
-    await fetch('/api/chat',
+    const petition = await fetch('/api/chat',
       {
         method: 'POST',
         headers: {
@@ -49,6 +49,8 @@ export const createConversation = async (product, navigate) => {
   } catch (error) {
     console.log(error)
   } finally {
-    navigate('/chat')
+    if (petition.ok) {
+      navigate('/chat')
+    }
   }
 }
