@@ -1,10 +1,13 @@
 import * as chatServices from '../services/chatServices'
 export const createConversation = async (req: any, res: any) => {
   try {
+
+    if (req.user.userId === req.body.receiverId) throw new Error('You cant create a conversation with yourself')
+
     await chatServices.createConversation(req.user.userId, req.body.receiverId)
     res.status(200).send('Conversation created')
   } catch (error: any) {
-    res.status(400).send(error.message)
+    res.status(400).json(error.message)
   }
 }
 
