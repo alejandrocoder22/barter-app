@@ -61,3 +61,9 @@ export const handleLike = async (isLiked, setIsLiked, isLikedByUser, productId) 
     })
   }
 }
+
+export const getLikes = async (setLikes) => {
+  const petition = await fetch('/api/likes')
+  const response = await petition.json()
+  setLikes(response)
+}
