@@ -46,11 +46,10 @@ export const createConversation = async (product, navigate) => {
         },
         body: JSON.stringify({ receiverId: product.userId })
       })
-  } catch (error) {
-    console.log(error)
-  } finally {
     if (petition.ok) {
       navigate('/chat')
     }
+  } catch (error) {
+    console.log(error)
   }
 }
