@@ -13,7 +13,7 @@ const Register = () => {
       <form onSubmit={handleRegister} className='flex flex-col max-w-xs gap-2'>
         <AuthField handleForm={handleForm} labelName='Username' inputName='userName' />
         <AuthField handleForm={handleForm} labelName='Email' inputName='email' />
-        <AuthField handleForm={handleForm} labelName='Password' inputName='password' />
+        <AuthField handleForm={handleForm} labelName='Password' inputName='password' inputType='password' />
         <button className='text-white font-bold bg-blue-500 hover:bg-blue-400 mt-3 rounded-md p-2 color' type='submit'>Create account</button>
       </form>
     </section>
