@@ -4,6 +4,7 @@ import { AuthContext } from '../context/authContext'
 import useForm from '../hooks/useForm'
 import { updateUserInfo } from '../services/auth'
 import { getUserInfo, uploadProfileImage } from '../services/users'
+import AuthField from '../components/AuthField'
 
 const Profile = () => {
   const authContext = useContext(AuthContext)
@@ -26,12 +27,9 @@ const Profile = () => {
         </label>
       </div>
       <form className='flex flex-col gap-1 bg-' onSubmit={async (e) => await updateUserInfo(e, form)}>
-        <label>Username</label>
-        <input onChange={handleForm} className='bg-slate-100' required type='text' name='userName' />
-        <label>Email</label>
-        <input onChange={handleForm} className='bg-slate-100' required type='text' name='email' />
-        <label>Password</label>
-        <input onChange={handleForm} className='bg-slate-100' required type='password' name='password' />
+        <AuthField handleForm={handleForm} labelName='Username' inputName='userName' />
+        <AuthField handleForm={handleForm} labelName='Email' inputName='email' />
+        <AuthField handleForm={handleForm} labelName='Password' inputName='password' inputType='password' />
         <button className='bg-orange-300 mt-4 p-2 cursor-pointer rounded-md'>Update</button>
       </form>
     </section>
