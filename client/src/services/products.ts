@@ -67,3 +67,10 @@ export const getLikes = async (setLikes) => {
   const response = await petition.json()
   setLikes(response)
 }
+
+export const getProductsLiked = async (setLikedProducts) => {
+  const petition = await fetch('/api/products/likedProducts')
+  const response = await petition.json()
+
+  setLikedProducts(response)
+}

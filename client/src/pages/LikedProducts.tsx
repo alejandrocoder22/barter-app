@@ -1,17 +1,12 @@
 import { useEffect, useState } from 'react'
 import Product from '../components/Product'
+import { getProductsLiked } from '../services/products'
 
 const LikedProducts = () => {
   const [likedProducts, setLikedProducts] = useState([])
-  const getProductsLiked = async () => {
-    const petition = await fetch('/api/products/likedProducts')
-    const response = await petition.json()
-
-    setLikedProducts(response)
-  }
 
   useEffect(() => {
-    getProductsLiked()
+    getProductsLiked(setLikedProducts)
   }, [])
   return (
     <>
