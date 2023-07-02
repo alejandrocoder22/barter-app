@@ -1,10 +1,4 @@
 - [ ]  Improve logo
 - [ ]  Finish Footer
 - [ ]  Choose a color pallete
-- [ ]  Create getAllCategories route @GET
-- [ ]  Create createCategory route @POST
-- [ ]  Create deleteCategory route @DELETE
-- [ ]  Create updateCategory route @PUT
-- [ ]  Fetch categories in products from database instead hardcoded
-- [ ]  Fetch categories in addProduct from database instead hardcoded
-- [ ]  
+- [ ]  Center "There are no products"
