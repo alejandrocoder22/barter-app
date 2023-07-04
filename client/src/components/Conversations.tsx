@@ -14,6 +14,7 @@ const Conversations = ({ conver, setConversationId }) => {
 
   useEffect(() => {
     getUserData()
+      .catch(error => console.log(error))
   }, [])
   return (
     <div onClick={() => setConversationId(conver.id)} className='flex items-center justify-center gap-3 cursor-pointer'>
