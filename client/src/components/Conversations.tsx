@@ -5,8 +5,8 @@ const Conversations = ({ conver, setConversationId }) => {
   const authContext = useContext(AuthContext)
   const [user, setUSer] = useState({})
 
-  const getUserData = async () => {
-    const remainingId = conver.receiverId === authContext?.user?.userId ? conver.senderId : conver.receiverId
+  const getUserData = async (): Promise<void> => {
+    const remainingId: number = conver.receiverId === authContext?.user?.userId ? conver.senderId : conver.receiverId
     const petition = await fetch(`/api/users/${remainingId}`)
     const data = await petition.json()
     setUSer(data)
