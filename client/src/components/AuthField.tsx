@@ -1,5 +1,6 @@
+import React from 'react'
 
-const AuthField = ({ handleForm, labelName, inputName, inputType = 'text' }) => {
+const AuthField = ({ handleForm, labelName, inputName, inputType = 'text' }: { handleForm: React.ChangeEvent<HTMLInputElement>, labelName: string, inputName: string, inputType: string }): React.ReactNode => {
   return (
     <>
       <label>{labelName}</label>
