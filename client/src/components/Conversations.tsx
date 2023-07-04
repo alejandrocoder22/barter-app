@@ -1,7 +1,7 @@
 import { useEffect, useState, useContext } from 'react'
 import { AuthContext } from '../context/authContext'
 
-const Conversations = ({ conver, setConversationId }) => {
+const Conversations: React.FC = ({ conver, setConversationId }): React.ReactElement => {
   const authContext = useContext(AuthContext)
   const [user, setUSer] = useState({})
 
@@ -16,6 +16,7 @@ const Conversations = ({ conver, setConversationId }) => {
     getUserData()
       .catch(error => console.log(error))
   }, [])
+
   return (
     <div onClick={() => setConversationId(conver.id)} className='flex items-center justify-center gap-3 cursor-pointer'>
       <span className='font-bold'>{user.userName}</span>
