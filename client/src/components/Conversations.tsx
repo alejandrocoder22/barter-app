@@ -1,4 +1,4 @@
-import { useEffect, useState, useContext } from 'react'
+import React, { useEffect, useState, useContext } from 'react'
 import { AuthContext } from '../context/authContext'
 
 interface Conver {
@@ -7,12 +7,23 @@ interface Conver {
   receiverId: number
 }
 
+interface User {
+  userName: string
+  userId: number
+}
+
+interface IAuthContext {
+  user: User
+  setUser: React.SetStateAction<User>
+}
 const Conversations = ({ conver, setConversationId }: { conver: Conver, setConversationId: number }): React.ReactElement => {
-  const authContext = useContext(AuthContext)
+  const authContext: IAuthContext | null = useContext(AuthContext)
   const [user, setUSer] = useState({})
 
   const getUserData = async (): Promise<void> => {
-    const remainingId: number = conver.receiverId === authContext?.user?.userId ? conver.senderId : conver.receiverId
+    if (authContext === null) return
+
+    const remainingId: number = conver.receiverId === authContext.user.userId ? conver.senderId : conver.receiverId
     const petition = await fetch(`/api/users/${remainingId}`)
     const data = await petition.json()
     setUSer(data)
