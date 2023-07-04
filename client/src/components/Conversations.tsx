@@ -1,7 +1,13 @@
 import { useEffect, useState, useContext } from 'react'
 import { AuthContext } from '../context/authContext'
 
-const Conversations: React.FC = ({ conver, setConversationId }): React.ReactElement => {
+interface Conver {
+  id: number
+  senderId: number
+  receiverId: number
+}
+
+const Conversations = ({ conver, setConversationId }: { conver: Conver, setConversationId: number }): React.ReactElement => {
   const authContext = useContext(AuthContext)
   const [user, setUSer] = useState({})
 
