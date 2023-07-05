@@ -1,22 +1,22 @@
 import React, { useEffect, useState, useContext } from 'react'
 import { AuthContext } from '../context/authContext'
-
 interface Conver {
   id: number
   senderId: number
   receiverId: number
 }
 
-interface User {
-  userName: string
-  userId: number
-}
+const Conversations = ({ conver, setConversationId }: { conver: Conver, setConversationId: (converId: number) => void }): React.ReactElement => {
+  interface User {
+    userName: string
+    userId: number
+  }
 
-interface IAuthContext {
-  user: User
-  setUser: React.SetStateAction<User>
-}
-const Conversations = ({ conver, setConversationId }: { conver: Conver, setConversationId: number }): React.ReactElement => {
+  interface IAuthContext {
+    user: User
+    setUser: React.SetStateAction<User>
+  }
+
   const authContext: IAuthContext | null = useContext(AuthContext)
   const [user, setUSer] = useState({})
 
