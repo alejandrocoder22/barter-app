@@ -1,7 +1,8 @@
+import React from 'react'
 
-const Footer = () => {
+const Footer = (): React.ReactElement => {
   return (
-    <footer  className='bg-slate-400'>Footer</footer>
+    <footer className='bg-slate-400'>Footer</footer>
   )
 }
 
