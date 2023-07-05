@@ -1,10 +1,11 @@
 
+import React from 'react'
 import Conversations from '../components/Conversations'
 import Message from '../components/Message'
 import useChat from '../hooks/useChat'
 import { handleSubmit } from '../services/chat'
 
-const PrivateChat = () => {
+const PrivateChat: React.FC = () => {
   const {
     handleMessage,
     setConversationId,
