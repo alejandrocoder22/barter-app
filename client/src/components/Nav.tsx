@@ -1,10 +1,10 @@
 import { Link, useLocation, useNavigate } from 'react-router-dom'
-import { useContext } from 'react'
+import React, { useContext } from 'react'
 import { AuthContext } from '../context/authContext'
 import { logOutUser } from '../services/auth'
 import { AiOutlineLogout } from 'react-icons/ai'
 
-const Nav = () => {
+const Nav = (): React.ReactNode => {
   const location = useLocation()
   const navigate = useNavigate()
 
@@ -21,7 +21,7 @@ const Nav = () => {
         <li><Link to='/' className={getClassNameOnCurrentPage('/')}>Products</Link></li>
 
         {
-          authContext.user?.userName
+          authContext?.user?.userName
             ? (
               <>
                 <li><Link to='/product' className={getClassNameOnCurrentPage('/product')}>Add Product</Link></li>
