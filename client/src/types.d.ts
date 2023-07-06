@@ -1,4 +1,4 @@
-export interface Product {
+export interface IProduct {
   id: number
   productName: string
   user: string
@@ -9,6 +9,12 @@ export interface Product {
   location: string
   imageUrl: string
   category: string
-  createdAy: string
-  updatedAt: string
+  createdAy?: string
+  updatedAt?: string
+}
+
+export interface ILike {
+  id: number
+  productId: number
+  userId: number
 }
