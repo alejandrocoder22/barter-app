@@ -1,18 +1,18 @@
-import { useEffect, useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import { useParams, useNavigate } from 'react-router-dom'
 import { getLikes, getProductById, handleLike } from '../services/products'
 import { createConversation } from '../services/chat'
-import { IProduct } from '../types'
-const ProductInfo = ({}) => {
-  const [product, setProduct] = useState<IProduct[]>([])
-  const [likes, setLikes] = useState([])
-  const [isLiked, setIsLiked] = useState(false)
+import { ILike, IProduct } from '../types'
+const ProductInfo: React.FC = () => {
+  const [product, setProduct] = useState<IProduct | null>(null)
+  const [likes, setLikes] = useState <ILike[] | []>([])
+  const [isLiked, setIsLiked] = useState<boolean>(false)
 
   const { productId } = useParams()
 
   const navigate = useNavigate()
 
-  const isLikedByUser = () => {
+  const isLikedByUser = (): boolean => {
     const allLikes = likes?.map(like => like.productId)
     return allLikes.includes(Number(productId))
   }
