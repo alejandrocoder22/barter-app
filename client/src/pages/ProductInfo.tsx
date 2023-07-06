@@ -2,8 +2,9 @@ import { useEffect, useState } from 'react'
 import { useParams, useNavigate } from 'react-router-dom'
 import { getLikes, getProductById, handleLike } from '../services/products'
 import { createConversation } from '../services/chat'
+import { IProduct } from '../types'
 const ProductInfo = ({}) => {
-  const [product, setProduct] = useState([])
+  const [product, setProduct] = useState<IProduct[]>([])
   const [likes, setLikes] = useState([])
   const [isLiked, setIsLiked] = useState(false)
 
