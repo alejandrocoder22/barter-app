@@ -1,9 +1,10 @@
 import { useEffect, useState } from 'react'
 import Product from '../components/Product'
 import { getProductsLiked } from '../services/products'
+import { IProduct } from '../types'
 
 const LikedProducts = () => {
-  const [likedProducts, setLikedProducts] = useState([])
+  const [likedProducts, setLikedProducts] = useState<IProduct[] | []>([])
 
   useEffect(() => {
     getProductsLiked(setLikedProducts)
