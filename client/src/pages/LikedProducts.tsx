@@ -8,6 +8,7 @@ const LikedProducts = () => {
 
   useEffect(() => {
     getProductsLiked(setLikedProducts)
+      .catch(error => console.log(error))
   }, [])
   return (
     <>
