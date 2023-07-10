@@ -17,7 +17,7 @@ const AddProduct = () => {
           <label>Estimated Value</label>
           <input onChange={handleForm} className='border-2' type='number' name='estimatedValue' />
           <label>State</label>
-          <select onChange={handleForm} name='status'>
+          <select className='border-2' onChange={handleForm} name='status'>
             <option defaultChecked>Choose a state</option>
             <option value='secondhand'>Segunda mano</option>
             <option value='new'>Nuevo</option>

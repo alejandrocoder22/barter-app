@@ -1,7 +1,7 @@
 
 const SelectCategory = ({ handleForm }) => {
   return (
-    <select onChange={handleForm} name='category'>
+    <select className='border-2' onChange={handleForm} name='category'>
       <option defaultChecked>Choose an category</option>
       <option value='car'>Car</option>
       <option value='furnitures'>Furnitures</option>
