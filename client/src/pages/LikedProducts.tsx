@@ -1,9 +1,9 @@
-import { useEffect, useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import Product from '../components/Product'
 import { getProductsLiked } from '../services/products'
 import { IProduct } from '../types'
 
-const LikedProducts = () => {
+const LikedProducts: React.FC = () => {
   const [likedProducts, setLikedProducts] = useState<IProduct[] | []>([])
 
   useEffect(() => {
