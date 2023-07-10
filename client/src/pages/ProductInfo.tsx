@@ -47,7 +47,7 @@ const ProductInfo: React.FC = () => {
           <p onClick={async () => await handleLike(isLiked, setIsLiked, isLikedByUser, productId)} className={`text-xl cursor-pointer ${isLiked ? 'text-green-500' : ''}`}>Like</p>
         </div>
         <img className='max-w-3xl rounded-2xl' src={`http://localhost:3009/${product?.imageUrl}`} />
-        <p className=''>{'Added ' + getDaysSinceCreated(product?.createdAy) + ' days ago'}</p>
+        <p className=''>{`Added ${getDaysSinceCreated(product?.createdAy)} days ago`}</p>
         <p className=''>{product?.location}</p>
       </div>
       <div className=''>
