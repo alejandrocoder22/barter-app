@@ -51,7 +51,7 @@ const ProductInfo: React.FC = () => {
         <p className=''>{product?.location}</p>
       </div>
       <div className=''>
-        <p className=''>Lorem ipsum dolor sit amet consectetur adipisicing elit. Recusandae molestias optio quisquam sequi quo quaerat perspiciatis magni similique tempora eveniet, consequatur voluptas corporis reiciendis minus ut ad exercitationem repellat illum!</p>
+        <p className=''>{product?.description}</p>
         <button onClick={async () => await createConversation(product, navigate)} className='text-white font-bold bg-lime-500 p-2 rounded-md'>Send Message</button>
       </div>
     </section>
