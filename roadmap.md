@@ -6,5 +6,8 @@
   - [ ]  DELETE
   - [ ]  GET
   - [ ]  UPDATE
-
-  
+- [ ] Style singleProduct Page
+  - [ ] Added hearth with animation to like
+  - [ ] Put description at the top
+  - [ ] Add userName with profile Image
+  - [ ] Add logo to location
