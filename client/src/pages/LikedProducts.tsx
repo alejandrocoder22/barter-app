@@ -12,6 +12,7 @@ const LikedProducts: React.FC = () => {
   }, [])
   return (
     <>
+      {likedProducts.length === 0 && <p>No has dado me gusta a ningún producto</p>}
       <section className='grid grid-cols-3 gap-5 max-w-screen-2xl m-auto  p-2'>
         {likedProducts?.map(product => (
           <Product key={product.id} product={product.product} />
