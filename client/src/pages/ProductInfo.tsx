@@ -26,6 +26,17 @@ const ProductInfo: React.FC = () => {
     setIsLiked(isLikedByUser)
   }, [likes])
 
+  const getDaysSinceCreated = (createdDate) => {
+    const date = new Date()
+
+    const todayDate = date.toISOString()
+
+    const date1 = new Date(createdDate.split('T')[0])
+    const date2 = new Date(todayDate.split('T')[0])
+
+    return (date2 - date1) / (1000 * 3600 * 24)
+  }
+
   return (
     <section className='flex gap-5 items-center'>
       <div className=''>
@@ -36,8 +47,8 @@ const ProductInfo: React.FC = () => {
           <p onClick={async () => await handleLike(isLiked, setIsLiked, isLikedByUser, productId)} className={`text-xl cursor-pointer ${isLiked ? 'text-green-500' : ''}`}>Like</p>
         </div>
         <img className='max-w-3xl rounded-2xl' src={`http://localhost:3009/${product?.imageUrl}`} />
-        <p className=''>Date Added</p>
-        <p className=''>Location</p>
+        <p className=''>{'Added ' + getDaysSinceCreated(product?.createdAy) + ' days ago'}</p>
+        <p className=''>{product?.location}</p>
       </div>
       <div className=''>
         <p className=''>User rating</p>
