@@ -9,5 +9,5 @@ router.get('/likedProducts', protectedRoute, productsControllers.getLikedProduct
 router.get('/singleProduct/:productId', productsControllers.getSingleProduct)
 router.get('/:userId', protectedRoute, productsControllers.getProductsByUser)
 router.post('/', protectedRoute, upload.single('productImages'), productsControllers.createProduct)
-router.delete('/', productsControllers.deleteProduct)
-router.put('/', productsControllers.updateProduct)
+router.delete('/:productId', protectedRoute, productsControllers.deleteProduct)
+router.put('/', protectedRoute, productsControllers.updateProduct)
