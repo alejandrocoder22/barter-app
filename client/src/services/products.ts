@@ -1,3 +1,6 @@
+import React from 'react'
+import { IProduct } from '../types'
+
 export const getAllProducts = (setProducts, setIsLastItem, setLastId, setIsLoading, category: string | null) => {
   setLastId((lastValue: number) => {
     setIsLoading(true)
@@ -31,6 +34,13 @@ export const addProduct = async (e, form, file) => {
     method: 'POST',
     body: formData
   })
+}
+
+export const getProductsByUserId = async (userId: number, setProducts): Promise<void> => {
+  const petition = await fetch(`/api/products/${userId}`)
+  const response = await petition.json()
+
+  setProducts(response)
 }
 
 export const getProductById = async (productId, setProduct) => {
