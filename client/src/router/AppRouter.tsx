@@ -9,6 +9,7 @@ import Register from '../pages/Register'
 import ProductInfo from '../pages/ProductInfo'
 import PrivateChat from '../pages/PrivateChat'
 import LikedProducts from '../pages/LikedProducts'
+import UploadedProducts from '../pages/UploadedProducts'
 
 const AppRouter = () => {
   return (
@@ -26,6 +27,7 @@ const AppRouter = () => {
           <Route path='/product' element={<AddProduct />} />
           <Route path='/profile' element={<Profile />} />
           <Route path='/likes' element={<LikedProducts />} />
+          <Route path='/uploaded' element={<UploadedProducts />} />
         </Routes>
       </main>
       <Footer />

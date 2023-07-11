@@ -28,6 +28,7 @@ const Nav = (): React.ReactNode => {
                 <li><Link to='/profile' className={getClassNameOnCurrentPage('/profile')}>Profile</Link></li>
                 <li><Link to='/chat' className={getClassNameOnCurrentPage('/chat')}>Chat</Link></li>
                 <li><Link to='/likes' className={getClassNameOnCurrentPage('/likes')}>Likes</Link></li>
+                <li><Link to='/uploaded' className={getClassNameOnCurrentPage('/uploaded')}>My products</Link></li>
                 <li className='capitalize font-bold'>{authContext.user?.userName}</li>
                 <li className='flex items-center cursor-pointer' onClick={() => logOutUser(authContext.setUser, navigate)}><AiOutlineLogout className='text-lg' /></li>
               </>
@@ -36,7 +37,7 @@ const Nav = (): React.ReactNode => {
             : <>
               <li><Link to='/login' className={getClassNameOnCurrentPage('/login')}>Login</Link></li>
               <li><Link to='/register' className={getClassNameOnCurrentPage('/register')}>Register</Link></li>
-              </>
+            </>
         }
 
       </ul>
