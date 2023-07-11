@@ -55,19 +55,23 @@ export const createProduct = async (req: any, res: Response) => {
   }
 }
 
-export const updateProduct = (req: Request, res: Response) => {
+export const updateProduct = (req: any, res: Response) => {
   const product = req.body
   try {
-    productsServices.updateProduct(product)
-    res.status(200).send('Product updated')
+    if (Number(req.user.userId) === Number(product.userId)) {
+      productsServices.updateProduct(product)
+      res.status(200).send('Product updated')
+    } else {
+      throw new Error('You can only delete your products')
+    }
   } catch (error: any) {
     res.send(error.message)
   }
 }
 export const deleteProduct = async (req: Request, res: Response) => {
-  const { productId } = req.body
   try {
-    const productDeleted = await productsServices.deleteProduct(productId)
+
+    const productDeleted = await productsServices.deleteProduct(Number(req.params.productId))
 
     if (productDeleted) {
       fs.rm(productDeleted.imageUrl, (error) => {
