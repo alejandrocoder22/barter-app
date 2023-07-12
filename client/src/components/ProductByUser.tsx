@@ -10,7 +10,7 @@ const ProductByUser = ({ products }) => {
         <div className=''>{product.description}</div>
         <div className='flex gap-3'>
           <MdDelete className='text-3xl cursor-pointer' />
-          <Link to='/update'>
+          <Link to={`/update/${product.id}`}>
             <MdModeEditOutline className='text-3xl cursor-pointer' />
           </Link>
         </div>
