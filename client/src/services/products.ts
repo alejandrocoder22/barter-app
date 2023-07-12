@@ -44,6 +44,15 @@ export const getProductsByUserId = async (userId: number, setProducts): Promise<
     setProducts(response)
   }
 }
+export const updateProduct = async (product: IProduct): Promise<void> => {
+  const petition = await fetch('/api/products/', {
+    method: 'PUT',
+    headers: {
+      'Content-Type': 'application/json'
+    },
+    body: JSON.stringify(product)
+  })
+}
 
 export const getProductById = async (productId, setProduct) => {
   const petition = await fetch(`/api/products/singleProduct/${productId}`)
