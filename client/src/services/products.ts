@@ -36,12 +36,13 @@ export const addProduct = async (e, form, file) => {
   })
 }
 
-export const getProductsByUserId = async (userId: number, setProducts): Promise<void> => {
+export const getProductsByUserId = async (userId: number, setProducts, setTempProduct = null): Promise<void> => {
   if (userId) {
     const petition = await fetch(`/api/products/${userId}`)
     const response = await petition.json()
 
     setProducts(response)
+    setTempProduct(response)
   }
 }
 export const updateProduct = async (product: IProduct): Promise<void> => {
