@@ -54,6 +54,16 @@ export const updateProduct = async (product: IProduct): Promise<void> => {
   })
 }
 
+export const deleteProduct = async (productId: number): Promise<void> => {
+  await fetch(`/api/products/${productId}`, {
+    method: 'DELETE',
+    headers: {
+      'Content-Type': 'application/json'
+
+    }
+  })
+}
+
 export const getProductById = async (productId, setProduct) => {
   const petition = await fetch(`/api/products/singleProduct/${productId}`)
   const singleProduct = await petition.json()
