@@ -9,8 +9,6 @@ const UploadedProducts: React.FC = () => {
 
   const authContext = useContext(AuthContext)
 
-  console.log()
-
   useEffect(() => {
     getProductsByUserId(authContext?.user.userId, setProducts)
   }, [authContext])
