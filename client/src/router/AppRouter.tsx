@@ -10,6 +10,7 @@ import ProductInfo from '../pages/ProductInfo'
 import PrivateChat from '../pages/PrivateChat'
 import LikedProducts from '../pages/LikedProducts'
 import UploadedProducts from '../pages/UploadedProducts'
+import UpdatedProduct from '../pages/UpdateProduct'
 
 const AppRouter = () => {
   return (
@@ -28,6 +29,7 @@ const AppRouter = () => {
           <Route path='/profile' element={<Profile />} />
           <Route path='/likes' element={<LikedProducts />} />
           <Route path='/uploaded' element={<UploadedProducts />} />
+          <Route path='/update' element={<UpdatedProduct />} />
         </Routes>
       </main>
       <Footer />
