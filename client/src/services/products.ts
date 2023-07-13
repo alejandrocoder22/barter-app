@@ -1,4 +1,3 @@
-import React from 'react'
 import { IProduct } from '../types'
 
 export const getAllProducts = (setProducts, setIsLastItem, setLastId, setIsLoading, category: string | null) => {
