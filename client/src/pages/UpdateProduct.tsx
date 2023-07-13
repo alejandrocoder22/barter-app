@@ -29,7 +29,7 @@ const UpdatedProduct: React.FC = () => {
  isLoading
    ? <p className=''>Loading</p>
 
-   : <form className='flex flex-col max-w-xs gap-1' onSubmit={async () => await updateProduct(productId)}>
+   : <form className='flex flex-col max-w-xs gap-1' onSubmit={async () => await updateProduct(tempProduct)}>
      <label>Product Name</label>
      <input
        value={tempProduct?.productName}
