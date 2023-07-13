@@ -1,7 +1,7 @@
 import React, { useState } from 'react'
 
-const useForm = (): object => {
-  const [form, setForm] = useState({})
+const useForm = (initialState = {}): object => {
+  const [form, setForm] = useState(initialState)
 
   const handleForm = (e: React.ChangeEvent<HTMLInputElement>): void => {
     setForm({
