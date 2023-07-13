@@ -1,6 +1,6 @@
 import useForm from '../hooks/useForm'
 import { useState, useEffect } from 'react'
-import { getProductById } from '../services/products'
+import { getProductById, updateProduct } from '../services/products'
 import { useParams } from 'react-router-dom'
 const UpdatedProduct: React.FC = () => {
   const { form, handleForm } = useForm()
@@ -29,7 +29,7 @@ const UpdatedProduct: React.FC = () => {
  isLoading
    ? <p className=''>Loading</p>
 
-   : <form className='flex flex-col max-w-xs gap-1'>
+   : <form className='flex flex-col max-w-xs gap-1' onSubmit={async () => await updateProduct(productId)}>
      <label>Product Name</label>
      <input
        value={tempProduct?.productName}
@@ -91,7 +91,7 @@ const UpdatedProduct: React.FC = () => {
        name='description'
      />
      <button className='bg-indigo-500 mt-2 p-2 hover:bg-indigo-400' type='submit'>Update product</button>
-     </form>
+   </form>
 }
 
       </div>
