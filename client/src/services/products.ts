@@ -36,13 +36,12 @@ export const addProduct = async (e, form, file) => {
   })
 }
 
-export const getProductsByUserId = async (userId: number, setProducts, setTempProduct = null): Promise<void> => {
+export const getProductsByUserId = async (userId: number, setProducts): Promise<void> => {
   if (userId) {
     const petition = await fetch(`/api/products/${userId}`)
     const response = await petition.json()
 
     setProducts(response)
-    setTempProduct(response)
   }
 }
 export const updateProduct = async (product: IProduct): Promise<void> => {
@@ -65,11 +64,18 @@ export const deleteProduct = async (productId: number): Promise<void> => {
   })
 }
 
-export const getProductById = async (productId, setProduct) => {
-  const petition = await fetch(`/api/products/singleProduct/${productId}`)
-  const singleProduct = await petition.json()
+export const getProductById = async (productId, setProduct, setIsLoading) => {
+  setIsLoading(true)
 
-  setProduct(singleProduct)
+  try {
+    const petition = await fetch(`/api/products/singleProduct/${productId}`)
+    const singleProduct = await petition.json()
+    setProduct(singleProduct)
+  } catch (error) {
+    console.log(error)
+  } finally {
+    setIsLoading(false)
+  }
 }
 
 export const handleLike = async (isLiked, setIsLiked, isLikedByUser, productId) => {
