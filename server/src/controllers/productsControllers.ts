@@ -59,6 +59,9 @@ export const updateProduct = (req: any, res: Response) => {
   const product = req.body
   try {
     if (Number(req.user.userId) === Number(product.userId)) {
+
+      product.estimatedValue = Number(product.estimatedValue)
+
       productsServices.updateProduct(product)
       res.status(200).send('Product updated')
     } else {
