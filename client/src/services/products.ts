@@ -63,17 +63,13 @@ export const deleteProduct = async (productId: number): Promise<void> => {
   })
 }
 
-export const getProductById = async (productId, setProduct, setIsLoading) => {
-  setIsLoading(true)
-
+export const getProductById = async (productId, setProduct) => {
   try {
     const petition = await fetch(`/api/products/singleProduct/${productId}`)
     const singleProduct = await petition.json()
     setProduct(singleProduct)
   } catch (error) {
     console.log(error)
-  } finally {
-    setIsLoading(false)
   }
 }
 
