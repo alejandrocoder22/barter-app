@@ -89,6 +89,7 @@ io.on('connection', (socket: any) => {
 })
 
 app.use(customErrorHandler)
+
 httpServer.listen(process.env.PORT, () => console.log(`Listening on port ${process.env.PORT}`))
 
 module.exports = app
