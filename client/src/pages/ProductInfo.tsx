@@ -31,7 +31,7 @@ const ProductInfo: React.FC = () => {
 
     const todayDate = date.toISOString()
 
-    const date1 = new Date(createdDate.split('T')[0])
+    const date1 = new Date(createdDate?.split('T')[0])
     const date2 = new Date(todayDate.split('T')[0])
 
     return Math.floor((date2 - date1) / (1000 * 3600 * 24))
