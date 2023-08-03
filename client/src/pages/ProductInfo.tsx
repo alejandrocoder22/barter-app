@@ -40,6 +40,9 @@ const ProductInfo: React.FC = () => {
   return (
     <section className='flex flex-col gap-5 items-center'>
       <div className=''>
+
+        <img className='w-12 rounded-' src={`http://localhost:3009/${product?.user.profileImg}`} />
+        <span>{product?.user.userName}</span>
         <img className='max-w-3xl rounded-2xl' src={`http://localhost:3009/${product?.imageUrl}`} />
         <h1 className='text-4xl font-bold mb-5 '>{product?.productName}</h1>
         <p>{product?.status}</p>
