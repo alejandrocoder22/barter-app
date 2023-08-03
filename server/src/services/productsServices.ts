@@ -4,21 +4,18 @@ import { Product } from '../types'
 
 const prisma = new PrismaClient()
 export const getSingleProduct = async (productId: number) => await prisma.product.findUnique({
-   where: { id: productId },
-   include: {
+  where: { id: productId },
+  include: {
 
-     user: {
-       select: {
-         userName: true,
-         profileImg: true,
-        }
+    user: {
+      select: {
+        userName: true,
+        profileImg: true
       }
-   }
+    }
+  }
 
-  
- 
-   
-  })
+})
 export const getAllProducts = async (category: any, cursor: any) => {
   return cursor === 'null' || cursor === 'undefined' || !cursor
     ? await prisma.product.findMany({

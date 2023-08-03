@@ -7,7 +7,6 @@ export const createConversation = async (req: any, res: any) => {
 
     if (conversation.length > 0) throw new Error('This pair of users already exist')
 
-
     await chatServices.createConversation(req.user.userId, req.body.receiverId)
     res.status(200).send('Conversation created')
   } catch (error: any) {

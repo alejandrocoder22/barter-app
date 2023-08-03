@@ -59,7 +59,6 @@ export const updateProduct = (req: any, res: Response) => {
   const product = req.body
   try {
     if (Number(req.user.userId) === Number(product.userId)) {
-
       product.estimatedValue = Number(product.estimatedValue)
 
       productsServices.updateProduct(product)
@@ -72,9 +71,7 @@ export const updateProduct = (req: any, res: Response) => {
   }
 }
 export const deleteProduct = async (req: Request, res: Response) => {
-
   try {
-
     const productDeleted = await productsServices.deleteProduct(Number(req.params.productId))
 
     if (productDeleted) {
