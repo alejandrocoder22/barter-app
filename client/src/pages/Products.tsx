@@ -24,7 +24,7 @@ const Products = () => {
     }
       </ul>
 
-      <section className='grid grid-cols-3 gap-5 max-w-screen-2xl m-auto  p-2'>
+      <section className='grid grid-cols-3 auto-rows-max gap-5 max-w-screen-2xl m-auto p-4'>
 
         {
                     products?.map(product => (
