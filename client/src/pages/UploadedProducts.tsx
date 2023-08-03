@@ -15,7 +15,7 @@ const UploadedProducts: React.FC = () => {
 
   return (
     <section>
-      <ProductByUser products={products} />
+      <ProductByUser products={products} setProducts={setProducts} />
     </section>
   )
 }

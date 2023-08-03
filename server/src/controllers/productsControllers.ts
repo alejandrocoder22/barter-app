@@ -72,6 +72,7 @@ export const updateProduct = (req: any, res: Response) => {
   }
 }
 export const deleteProduct = async (req: Request, res: Response) => {
+
   try {
 
     const productDeleted = await productsServices.deleteProduct(Number(req.params.productId))
