@@ -38,17 +38,15 @@ const ProductInfo: React.FC = () => {
   }
 
   return (
-    <section className='flex gap-5 items-center'>
+    <section className='flex flex-col gap-5 items-center'>
       <div className=''>
-        <h1 className='text-4xl font-bold mb-5 '>{product?.productName}</h1>
-        <div className='flex gap-2'>
-          <p>{product?.status}</p>
-          <p>{product?.estimatedValue}</p>
-          <p onClick={async () => await handleLike(isLiked, setIsLiked, isLikedByUser, productId)} className={`text-xl cursor-pointer ${isLiked ? 'text-green-500' : ''}`}>Like</p>
-        </div>
         <img className='max-w-3xl rounded-2xl' src={`http://localhost:3009/${product?.imageUrl}`} />
+        <h1 className='text-4xl font-bold mb-5 '>{product?.productName}</h1>
+        <p>{product?.status}</p>
+        <p>{product?.estimatedValue}</p>
         <p className=''>{`Added ${getDaysSinceCreated(product?.createdAy)} days ago`}</p>
         <p className=''>{product?.location}</p>
+        <p onClick={async () => await handleLike(isLiked, setIsLiked, isLikedByUser, productId)} className={`text-xl cursor-pointer ${isLiked ? 'text-green-500' : ''}`}>Like</p>
       </div>
       <div className=''>
         <p className=''>{product?.description}</p>
