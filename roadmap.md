@@ -3,7 +3,7 @@
 - [ ]  Choose a color pallete
 - [ ]  Center "There are no products"
 - [ ]  My Uploaded products page
-  - [ ]  DELETE
+  - [X]  DELETE
   - [X]  GET
   - [X]  UPDATE
 - [ ] Style singleProduct Page
