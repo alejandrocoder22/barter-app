@@ -6,7 +6,7 @@
   - [X]  DELETE
   - [X]  GET
   - [X]  UPDATE
-- [ ] Style singleProduct Page
+- [ X] Style singleProduct Page
   - [ ] Added hearth with animation to like
   - [ ] Put description at the top
   - [ ] Add userName with profile Image
