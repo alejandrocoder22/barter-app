@@ -5,3 +5,10 @@
 * {
   box-sizing: border-box;
 }
+body {
+  font-family: "Roboto", sans-serif;
+}
+
+svg {
+  display: block;
+}
