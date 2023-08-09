@@ -4,6 +4,7 @@ import { AuthContext } from '../context/authContext'
 import { logOutUser } from '../services/auth'
 import { AiOutlineLogout } from 'react-icons/ai'
 import logo from '../assets/images/logo.png'
+import { PlusIcon } from './Icons'
 
 const Nav = (): React.ReactNode => {
   const location = useLocation()
@@ -21,18 +22,19 @@ const Nav = (): React.ReactNode => {
         <img className='w-28' src={logo} />
       </Link>
       <ul className='flex gap-5'>
-        <li><Link to='/' className={getClassNameOnCurrentPage('/')}>Products</Link></li>
-
         {
           authContext?.user?.userName
             ? (
               <>
-                <li><Link to='/product' className={getClassNameOnCurrentPage('/product')}>Add Product</Link></li>
-                <li><Link to='/profile' className={getClassNameOnCurrentPage('/profile')}>Profile</Link></li>
+                <li className='flex bg-cyan-500 p-2 rounded-2xl gap-1 cursor-pointer'>
+                  <Link to='/product' className={`${getClassNameOnCurrentPage('/product')} text-white `}>Upload Product</Link>
+                  <PlusIcon iconStyle='w-[1.5rem] ' />
+                </li>
+                {/* <li><Link to='/profile' className={getClassNameOnCurrentPage('/profile')}>Profile</Link></li>
                 <li><Link to='/chat' className={getClassNameOnCurrentPage('/chat')}>Chat</Link></li>
                 <li><Link to='/likes' className={getClassNameOnCurrentPage('/likes')}>Likes</Link></li>
                 <li><Link to='/uploaded' className={getClassNameOnCurrentPage('/uploaded')}>My products</Link></li>
-                <li className='capitalize font-bold'>{authContext.user?.userName}</li>
+                <li className='capitalize font-bold'>{authContext.user?.userName}</li> */}
                 <li className='flex items-center cursor-pointer' onClick={() => logOutUser(authContext.setUser, navigate)}><AiOutlineLogout className='text-lg' /></li>
               </>
 
