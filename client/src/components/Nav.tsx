@@ -21,7 +21,7 @@ const Nav = (): React.ReactNode => {
       <Link to='/'>
         <img className='w-28' src={logo} />
       </Link>
-      <ul className='flex gap-5'>
+      <ul className='flex gap-5 items-center'>
         {
           authContext?.user?.userName
             ? (
@@ -34,7 +34,9 @@ const Nav = (): React.ReactNode => {
                 <li><Link to='/chat' className={getClassNameOnCurrentPage('/chat')}>Chat</Link></li>
                 <li><Link to='/likes' className={getClassNameOnCurrentPage('/likes')}>Likes</Link></li>
                 <li><Link to='/uploaded' className={getClassNameOnCurrentPage('/uploaded')}>My products</Link></li>
-                <li className='capitalize font-bold'>{authContext.user?.userName}</li> */}
+                */
+            }
+                <li className='capitalize font-bold'>{authContext.user?.userName}</li>
                 <li className='flex items-center cursor-pointer' onClick={() => logOutUser(authContext.setUser, navigate)}><AiOutlineLogout className='text-lg' /></li>
               </>
 
