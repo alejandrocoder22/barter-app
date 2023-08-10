@@ -27,7 +27,7 @@ const Nav = (): React.ReactNode => {
             ? (
               <>
                 <li className='flex bg-cyan-500 p-2 rounded-2xl gap-1 cursor-pointer'>
-                  <Link to='/product' className={`${getClassNameOnCurrentPage('/product')} text-white `}>Upload Product</Link>
+                  <Link to='/product' className={`${getClassNameOnCurrentPage('/product')} text-white p-[0.25rem] `}>Upload Product</Link>
                   <PlusIcon iconStyle='w-[1.5rem] ' />
                 </li>
                 {/* <li><Link to='/profile' className={getClassNameOnCurrentPage('/profile')}>Profile</Link></li>
@@ -42,7 +42,7 @@ const Nav = (): React.ReactNode => {
             : <>
               <li><Link to='/login' className={getClassNameOnCurrentPage('/login')}>Login</Link></li>
               <li><Link to='/register' className={getClassNameOnCurrentPage('/register')}>Register</Link></li>
-              </>
+            </>
         }
 
       </ul>
