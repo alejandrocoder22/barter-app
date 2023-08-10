@@ -15,7 +15,7 @@ import UpdatedProduct from '../pages/UpdateProduct'
 const AppRouter = () => {
   return (
     <BrowserRouter>
-      <header className='mt-7'>
+      <header className='pt-4 '>
         <Nav />
       </header>
       <main className='min-h-[calc(100vh-10.6rem)] max-w-screen-2xl m-auto p-2'>
