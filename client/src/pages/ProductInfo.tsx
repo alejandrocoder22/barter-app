@@ -50,7 +50,7 @@ const ProductInfo: React.FC = () => {
             </div>
             <p className=''>{`Added ${getDaysSinceCreated(product?.createdAy)} days ago`}</p>
           </div>
-          <p className=''>{product?.description}</p>
+          <p className='leading-7'>{product?.description}</p>
           <div className='flex mt-5 items-center gap-5 justify-between'>
             <div className='flex gap-5'>
               <img className='w-12 rounded-full' src={`http://localhost:3009/${product?.user.profileImg}`} />
