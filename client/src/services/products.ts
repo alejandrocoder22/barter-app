@@ -1,6 +1,7 @@
 import { IProduct } from '../types'
 
 export const getAllProducts = (setProducts, setIsLastItem, setLastId, setIsLoading, category: string | null) => {
+  console.log(category)
   setLastId((lastValue: number) => {
     setIsLoading(true)
     fetch(`/api/products?categoryId=${category}&cursor=${lastValue}`)

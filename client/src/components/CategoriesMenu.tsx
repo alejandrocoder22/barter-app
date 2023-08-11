@@ -1,7 +1,7 @@
 
 const CategoriesMenu = ({ setCategory, singleCategory }) => {
-  const onSetCategory = ({ target: { textContent } }) => {
-    setCategory(textContent)
+  const onSetCategory = ({ target: { innerText } }) => {
+    setCategory(innerText.toLowerCase())
   }
   return (
 
