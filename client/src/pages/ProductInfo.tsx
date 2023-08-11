@@ -39,21 +39,30 @@ const ProductInfo: React.FC = () => {
 
   return (
     <section className='flex flex-col gap-5 items-center'>
-      <div className=''>
-
-        <img className='w-12 rounded-' src={`http://localhost:3009/${product?.user.profileImg}`} />
-        <span>{product?.user.userName}</span>
+      <div className='flex gap-10'>
         <img className='max-w-3xl rounded-2xl' src={`http://localhost:3009/${product?.imageUrl}`} />
-        <h1 className='text-4xl font-bold mb-5 '>{product?.productName}</h1>
-        <p>{product?.status}</p>
-        <p>{product?.estimatedValue}</p>
-        <p className=''>{`Added ${getDaysSinceCreated(product?.createdAy)} days ago`}</p>
-        <p className=''>{product?.location}</p>
-        <p onClick={async () => await handleLike(isLiked, setIsLiked, isLikedByUser, productId)} className={`text-xl cursor-pointer ${isLiked ? 'text-green-500' : ''}`}>Like</p>
-      </div>
-      <div className=''>
-        <p className=''>{product?.description}</p>
-        <button onClick={async () => await createConversation(product, navigate)} className='text-white font-bold bg-lime-500 p-2 rounded-md'>Send Message</button>
+        <div className=''>
+          <div className='flex items-center gap-1 w-full justify-between  mb-5 '>
+            <div className='flex items-center gap-3'>
+              <h1 className='text-4xl font-bold text-[30px] '>{product?.productName}</h1>
+              <p className='text-[28px] text-[#3E3B3B]'> {product?.estimatedValue}$</p>
+              <p onClick={async () => await handleLike(isLiked, setIsLiked, isLikedByUser, productId)} className={`text-xl cursor-pointer ${isLiked ? 'text-green-500' : ''}`}>Like</p>
+            </div>
+            <p className=''>{`Added ${getDaysSinceCreated(product?.createdAy)} days ago`}</p>
+          </div>
+          <p className=''>{product?.description}</p>
+          <div className='flex mt-5 items-center gap-5 justify-between'>
+            <div className='flex gap-5'>
+              <img className='w-12 rounded-full' src={`http://localhost:3009/${product?.user.profileImg}`} />
+              <span>{product?.user.userName}</span>
+              <p className=''>{product?.location}</p>
+            </div>
+            <div className='flex items-center gap-5'>
+              <p className=''>{product?.status}</p>
+              <button onClick={async () => await createConversation(product, navigate)} className='text-white font-bold bg-lime-500 p-2 rounded-md'>Send Message</button>
+            </div>
+          </div>
+        </div>
       </div>
     </section>
   )
