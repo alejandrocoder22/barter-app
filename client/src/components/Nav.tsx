@@ -17,7 +17,7 @@ const Nav = (): React.ReactNode => {
     }
   }
   return (
-    <nav className='flex justify-between items-center max-w-screen-2xl m-auto  p-2'>
+    <nav className='flex justify-between items-center max-w-[1720px]  m-auto  p-2'>
       <Link to='/'>
         <img className='w-28' src={logo} />
       </Link>
@@ -44,7 +44,7 @@ const Nav = (): React.ReactNode => {
             : <>
               <li><Link to='/login' className={getClassNameOnCurrentPage('/login')}>Login</Link></li>
               <li><Link to='/register' className={getClassNameOnCurrentPage('/register')}>Register</Link></li>
-            </>
+              </>
         }
 
       </ul>
