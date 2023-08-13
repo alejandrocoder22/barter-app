@@ -18,7 +18,7 @@ const AppRouter = () => {
       <header className='pt-4 '>
         <Nav />
       </header>
-      <main className='min-h-[calc(100vh-10.6rem)] max-w-screen-2xl m-auto p-2'>
+      <main className='min-h-[calc(100vh-10.6rem)] max-w-[1720px] m-auto p-2'>
         <Routes>
           <Route path='/' element={<Products />} />
           <Route path='/product/:productId' element={<ProductInfo />} />
