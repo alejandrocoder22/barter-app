@@ -15,10 +15,10 @@ import UpdatedProduct from '../pages/UpdateProduct'
 const AppRouter = () => {
   return (
     <BrowserRouter>
-      <header className='p-5 '>
+      <header className='p-4 '>
         <Nav />
       </header>
-      <main className='min-h-[calc(100vh-10.6rem)] max-w-[1720px] m-auto p-5'>
+      <main className='min-h-[calc(100vh-10.6rem)] max-w-[1720px] m-auto p-4'>
         <Routes>
           <Route path='/' element={<Products />} />
           <Route path='/product/:productId' element={<ProductInfo />} />
