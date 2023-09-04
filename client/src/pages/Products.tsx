@@ -16,7 +16,7 @@ const Products = () => {
 
   return (
     <>
-      <ul className='flex  gap-2 mt-2 sm:overflow-x-scroll'>
+      <ul className='flex justify-center gap-2 mt-2 sm:overflow-x-scroll sm:justify-start'>
         {
       categories?.map((singleCategory) => {
         return <CategoriesMenu key={singleCategory.name} setCategory={setCategory} singleCategory={singleCategory} />
