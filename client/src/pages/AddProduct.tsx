@@ -9,7 +9,7 @@ const AddProduct = () => {
   const { handleForm, form } = useForm()
 
   return (
-    <div className='flex flex-col min-h-screen justify-center items-center item '>
+    <div className='flex flex-col  justify-center items-center item '>
       <form onSubmit={async (e) => await addProduct(e, form, file)} className='flex flex-col max-w-xs gap-1'>
         <label>Product Name</label>
         <input onChange={handleForm} className='border-2' type='text' name='productName' />
