@@ -17,11 +17,11 @@ const Nav = (): React.ReactNode => {
     }
   }
   return (
-    <nav className='flex justify-between items-center max-w-[1720px]  m-auto  p-2'>
+    <nav className='flex justify-between items-center max-w-[1720px]  m-auto  p-2 sm:flex-col sm:items-start'>
       <Link to='/'>
-        <img className='w-28' src={logo} />
+        <img className='w-28 sm:m-auto' src={logo} />
       </Link>
-      <ul className='flex gap-5 items-center'>
+      <ul className='flex gap-5 items-center sm:justify-between sm:w-full'>
         {
           authContext?.user?.userName
             ? (
@@ -44,7 +44,7 @@ const Nav = (): React.ReactNode => {
             : <>
               <li><Link to='/login' className={getClassNameOnCurrentPage('/login')}>Login</Link></li>
               <li><Link to='/register' className={getClassNameOnCurrentPage('/register')}>Register</Link></li>
-              </>
+            </>
         }
 
       </ul>
